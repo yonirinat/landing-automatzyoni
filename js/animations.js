@@ -316,6 +316,52 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Fix for mobile menu - תיקון התפריט הנייד
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  
+  if (navbarToggler && navbarCollapse) {
+    // פתיחת וסגירת התפריט בלחיצה על הכפתור
+    navbarToggler.addEventListener('click', function(e) {
+      e.stopPropagation();
+      
+      if (navbarCollapse.classList.contains('show')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    
+    // סגירת התפריט בלחיצה על קישור
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        closeMenu();
+      });
+    });
+    
+    // סגירת התפריט בלחיצה על כל מקום במסך
+    document.addEventListener('click', function(e) {
+      if (navbarCollapse.classList.contains('show')) {
+        closeMenu();
+      }
+    });
+    
+    // מניעת סגירה בלחיצה בתוך התפריט עצמו
+    navbarCollapse.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    
+    // פונקציה לפתיחת התפריט
+    function openMenu() {
+      navbarCollapse.classList.add('show');
+      document.body.classList.add('menu-open');
+    }
+    
+    // פונקציה לסגירת התפריט
+    function closeMenu() {
+      navbarCollapse.classList.remove('show');
+      document.body.classList.remove('menu-open');
+    }
+  }
 
   // Performance optimization
   let ticking = false;

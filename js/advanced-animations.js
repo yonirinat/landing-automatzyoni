@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Smooth scroll for navigation links
+  // Smooth scroll for navigation links - Fixed implementation
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -172,14 +172,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const navbarHeight = document.querySelector('.navbar').offsetHeight;
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
         
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: {
-            y: targetPosition,
-            autoKill: false
-          },
-          ease: 'power3.inOut'
+        // Use standard window.scrollTo instead of GSAP's scrollTo plugin
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
         });
+        
+        // Close mobile menu if open
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+          navbarCollapse.classList.remove('show');
+          document.body.classList.remove('menu-open');
+        }
       }
     });
   });
