@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>אוטומציוני - אוטומציה לעסקים</title>
+  
+  <!-- Bootstrap CSS RTL -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- גופן Assistant -->
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="styles/main.css" rel="stylesheet">
+  <link href="styles/animations.css" rel="stylesheet">
+  
+  <!-- GSAP for advanced animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <style>
+    :root {
+      --primary-color: #0d6efd;
+      --dark-text: #212529;
+      --light-bg: #f8f9fa;
+      --white: #fff;
+      --primary-font: 'Assistant', sans-serif;
+      --navbar-height: 70px;
+    }
+    body {
+      font-family: var(--primary-font);
+      color: var(--dark-text);
+      margin: 0;
+      padding-top: var(--navbar-height);
+      scroll-behavior: smooth;
+    }
+    /* ניווט */
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .navbar-brand img {
+      height: 40px;
+      margin-left: 8px;
+    }
+    .nav-link {
+      font-weight: 600;
+      margin: 0 10px;
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    /* אזור גיבור עם אפקט Parallax */
+    .hero-section {
+  background: url('banner.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* Parallax effect */
+  min-height: 85vh; /* Changed from 100vh to 60vh to make banner shorter */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  transition: background 0.5s ease;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+  margin-top: -100px; /* העלאת התוכן למעלה */
+}
+.hero-content h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+  color: var(--white);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.hero-content h1:hover {
+  transform: scale(1.05);
+}
+.hero-content p.lead {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--white);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+    .btn-primary-custom {
+      background-color: var(--primary-color);
+      border: none;
+      padding: 12px 35px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary-custom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    /* Ripple effect on button */
+    .btn-primary-custom::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.3);
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: -100%;
+      transform: skewX(-45deg);
+      transition: left 0.5s ease;
+    }
+    .btn-primary-custom:hover::after {
+      left: 100%;
+    }
+    /* תיבה למבצע */
+    .special-offer-box {
+      background: var(--white);
+      color: var(--dark-text);
+      border: 1px solid var(--primary-color);
+      border-left: 5px solid var(--primary-color);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .special-offer-box:hover {
+      transform: scale(1.02);
+    }
+    /* כותרות סעיפים */
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    /* עיצוב סעיפים */
+    .section-content {
+      padding: 60px 0;
+      transition: opacity 0.5s ease;
+    }
+    .section-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* כרטיסים עם אפקט 3D */
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    .challenge-svg-container {
+      height: 200px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .challenge-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .card-body {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    .card-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--dark-text);
+      margin-bottom: 0;
+    }
+    .lucide-animated {
+      width: 48px;
+      height: 48px;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    /* אייקונים Lucide עם הנפשה */
+    .lucide-animated {
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+      stroke: var(--primary-color);
+      fill: none;
+      stroke-width: 2;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    /* טופס יצירת קשר */
+    .form-section {
+      background: var(--light-bg);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .form-section:hover {
+      transform: scale(1.02);
+    }
+    /* Custom alignment for form labels and inputs */
+    .form-section label.form-label {
+      text-align: right;
+      display: block;
+    }
+    .form-section .form-control {
+      direction: ltr;
+      text-align: right;
+    }
+    /* תחתית הדף */
+    footer {
+      background: var(--dark-text);
+      color: #adb5bd;
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    footer a {
+      color: var(--white);
+      text-decoration: none;
+    }
+    /* רספונסיביות */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      .navbar-brand img {
+        height: 35px;
+      }
+    }
+/* תמונת headshot */
+.headshot-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  padding-bottom: 20px;
+  margin-top: 20px; /* מרווח בין התמונה לרכיבים שמעליה */
+}
+.headshot-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+/* Make headshot 2x larger on desktop and reposition */
+@media (min-width: 992px) {
+  .headshot-container {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    right: auto;
+    left: 5%;
+    text-align: left;
+    padding-bottom: 0;
+    margin-top: 0; /* Remove margin for desktop view */
+  }
+  .headshot-image {
+    width: 300px;
+    height: 300px;
+    border-width: 6px; /* Slightly thicker border for larger image */
+  }
+}
+    /* תיקון חצי הקרוסלה */
+    .carousel-control-prev {
+      left: 0;
+      right: auto;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .carousel-control-next {
+      right: 0;
+      left: auto;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
+    /* עיצוב הקרוסלה */
+    #servicesCarousel {
+      position: relative;
+      padding: 0 40px;
+      margin: 40px 0;
+    }
+    .carousel-inner {
+      padding: 20px 0;
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .carousel-control-prev {
+      left: 10px;
+    }
+    .carousel-control-next {
+      right: 10px;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
+    .carousel-item {
+      transition: transform 0.6s ease-in-out;
+    }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+    .service-card i {
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      #servicesCarousel {
+      padding: 0 50px; /* Add padding for arrows on mobile */
+      }
+      .carousel-control-prev,
+      .carousel-control-next {
+      width: 36px;
+      height: 36px;
+      display: flex; /* Ensure arrows display on mobile */
+      align-items: center;
+      justify-content: center;
+      }
+      .service-card {
+      padding: 30px 20px;
+      }
+    }
+    /* אייקונים צפים */
+    .floating-icons {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .floating-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      opacity: 0.8;
+      will-change: transform, opacity;
+    }
+    .floating-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      opacity: 1;
+    }
+    .floating-icon i {
+      font-size: 24px;
+    }
+    .floating-icon.whatsapp {
+      background-color: #25D366;
+    }
+    .floating-icon.calendar {
+      background-color: #4285F4;
+    }
+    .floating-icon.contact {
+      background-color: #34A853;
+    }
+    /* תיקון תפריט נייד */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-top: 10px;
+      }
+      .navbar-nav {
+        text-align: center;
+      }
+      .nav-item {
+        margin: 8px 0;
+      }
+      .nav-link {
+        color: var(--dark-text) !important;
+        font-size: 1.1rem;
+      }
+      .nav-link.active {
+        color: var(--primary-color) !important;
+        font-weight: 700;
+      }
+    }
+    /* עיצוב כרטיסי אתגרים */
+    .challenge-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+    .challenge-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    .challenge-svg-container {
+      height: 200px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .challenge-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .challenge-card h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+    .challenge-card p {
+      margin-bottom: 20px;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress"></div>
+
+  <!-- ניווט -->
+  <nav class="navbar navbar-expand-lg bg-white fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">
+        <img src="images/logo.png" alt="לוגו אוטומציוני">
+        אוטומציוני
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#hero">ראשי</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pain">האתגרים</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">השירותים</a></li>
+          <li class="nav-item"><a class="nav-link" href="#benefits">היתרונות</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">אודות</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">יצירת קשר</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- אזור גיבור -->
+  <header id="hero" class="hero-section">
+    <div class="parallax-bg">
+      <div class="parallax-element"></div>
+      <div class="parallax-element"></div>
+      <div class="parallax-element"></div>
+    </div>
+    <div class="hero-content" data-aos="fade-up">
+      <h1>אוטומציוני</h1>
+      <p class="lead">אנחנו עוזרים לכם לעבוד במקצוע שלכם, את השאר תשאירו לנו</p>
+      
+      <div class="special-offer-box" data-aos="zoom-in" data-aos-delay="200">
+        <h3>פגישת אפיון במתנה!</h3>
+        <p>לרגל ההשקה, פגישת אפיון וייעוץ ראשונית (שווי 399 ₪)<br>ללא עלות וללא התחייבות!</p>
+      </div>
+      
+      <a href="https://calendly.com/yonirinat/30min" class="btn btn-primary-custom mt-4" data-aos="fade-up" data-aos-delay="300">
+        תאמו פגישת אפיון חינם
+      </a>
+    </div>
+    
+    <!-- תמונת headshot -->
+    <div class="headshot-container">
+      <img src="images/headshot.png" alt="יונתן רינת" class="headshot-image">
+    </div>
+  </header>
+
+  <main>
+    <!-- אתגרים -->
+    <section id="challenges" class="section-content">
+      <div class="container">
+        <h2 class="section-title">האם העסק מנהל אתכם במקום שאתם תנהלו אותו?</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- טובעים באדמיניסטרציה -->
+          <div class="col" data-aos="fade-up" data-aos-delay="100">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/administrative.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/administrative-fallback.png" alt="אדמיניסטרציה" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="settings" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">טובעים באדמיניסטרציה?</h4>
+                <p class="card-text">משימות חוזרות כמו מענה למיילים, תיאום פגישות,<br>ניהול לידים וחשבוניות גוזלות זמן יקר?</p>
+              </div>
+            </div>
+          </div>
+          <!-- טעויות יקרות קורות -->
+          <div class="col" data-aos="fade-up" data-aos-delay="150">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/mistakes.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/mistakes-fallback.png" alt="טעויות" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="alert-triangle" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">טעויות יקרות קורות?</h4>
+                <p class="card-text">תהליכים ידניים מובילים לטעויות שמעכבות צמיחה<br>ועולות כסף?</p>
+              </div>
+            </div>
+          </div>
+          <!-- לידים הולכים לאיבוד -->
+          <div class="col" data-aos="fade-up" data-aos-delay="200">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/lost-leads.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/lost-leads-fallback.png" alt="לידים" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="user-minus" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">לידים הולכים לאיבוד?</h4>
+                <p class="card-text">המעקב אחרי פניות ולקוחות לא יעיל מספיק<br>ופוגע במכירות?</p>
+              </div>
+            </div>
+          </div>
+          <!-- רוצים להתמקד במקצוע -->
+          <div class="col" data-aos="fade-up" data-aos-delay="250">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/focus-work.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/focus-work-fallback.png" alt="התמקדות" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="target" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">רוצים להתמקד במקצוע?</h4>
+                <p class="card-text">במקום להתעסק בבירוקרטיה, הייתם רוצים<br>להשקיע במה שאתם באמת אוהבים?</p>
+              </div>
+            </div>
+          </div>
+          <!-- שעות על גיליונות אקסל -->
+          <div class="col" data-aos="fade-up" data-aos-delay="300">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/excel-work.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/excel-work-fallback.png" alt="אקסל" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="file-text" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">שעות על גיליונות אקסל?</h4>
+                <p class="card-text">מבזבזים זמן יקר על עבודה ידנית באקסל<br>במקום לתת למערכות לעבוד?</p>
+              </div>
+            </div>
+          </div>
+          <!-- יש פתרון יעיל -->
+          <div class="col" data-aos="fade-up" data-aos-delay="350">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="challenge-svg-container">
+                <object data="images/efficient-solution.svg" type="image/svg+xml" class="challenge-svg">
+                  <img src="images/efficient-solution-fallback.png" alt="פתרון" class="challenge-svg">
+                </object>
+              </div>
+              <div class="card-body text-center">
+                <i data-lucide="zap" class="lucide-animated mb-3"></i>
+                <h4 class="card-title">יש פתרון יעיל!</h4>
+                <p class="card-text">אם עניתם "כן" אפילו פעם אחת - אוטומציה<br>יכולה לשנות את חיי העסק שלכם.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- שירותים -->
+    <section id="services" class="section-content bg-light">
+      <div class="container">
+        <h2 class="section-title">איך אוטומציוני עוזרת לעסק שלכם?</h2>
+        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="service-card">
+                <i data-lucide="user-check" class="lucide-animated mb-4"></i>
+                <h3>אוטומציה במכירות ו-CRM</h3>
+                <p>ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="service-card">
+                <i data-lucide="megaphone" class="lucide-animated mb-4"></i>
+                <h3>אוטומציה בשיווק</h3>
+                <p>ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="service-card">
+                <i data-lucide="headphones" class="lucide-animated mb-4"></i>
+                <h3>אוטומציה בשירות לקוחות</h3>
+                <p>מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="service-card">
+                <i data-lucide="clipboard" class="lucide-animated mb-4"></i>
+                <h3>אוטומציה בתפעול ואדמין</h3>
+                <p>הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">הקודם</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">הבא</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- יתרונות -->
+    <section id="benefits" class="section-content">
+      <div class="container">
+      <h2 class="section-title">הרווח הנקי שלכם מאוטומציה</h2>
+      <div class="row">
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="clock" class="lucide-animated"></i>
+          <h5><strong>חיסכון אדיר בזמן</strong></h5>
+        </div>
+        <p>שחררו את עצמכם ואת העובדים ממשימות ידניות מייגעות והתפנו לצמיחה.</p>
+        </div>
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="check-circle" class="lucide-animated"></i>
+          <h5><strong>הפחתת טעויות קריטיות</strong></h5>
+        </div>
+        <p>תהליכים אוטומטיים מבטיחים דיוק ועקביות, ומונעים טעויות יקרות.</p>
+        </div>
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="bar-chart-2" class="lucide-animated"></i>
+          <h5><strong>שיפור יעילות ופרודוקטיביות</strong></h5>
+        </div>
+        <p>הספיקו הרבה יותר בפחות זמן ומאמץ, תוך ניצול מקסימלי של משאבים.</p>
+        </div>
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="250">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="dollar-sign" class="lucide-animated"></i>
+          <h5><strong>גידול בהכנסות וברווח</strong></h5>
+        </div>
+        <p>שיפור תהליכי שיווק ומכירה והתייעלות תפעולית מתורגמים ליותר כסף.</p>
+        </div>
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="smile" class="lucide-animated"></i>
+          <h5><strong>לקוחות מרוצים יותר</strong></h5>
+        </div>
+        <p>זמינות גבוהה, תגובות מהירות ושירות עקבי משפרים את חווית הלקוח.</p>
+        </div>
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="350">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i data-lucide="shield" class="lucide-animated"></i>
+          <h5><strong>שקט נפשי לכם</strong></h5>
+        </div>
+        <p>דעו שהתהליכים הקריטיים מתנהלים ביעילות ברקע, גם כשאתם לא במשרד.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- אודות -->
+    <section id="about" class="section-content bg-light">
+      <div class="container">
+        <h2 class="section-title">מי עומד מאחורי אוטומציוני?</h2>
+        <div class="row align-items-center">
+          <div class="col-lg-7" data-aos="fade-right" data-aos-delay="100">
+            <h5><strong>יונתן רינת - מומחה לאוטומציה עסקית</strong></h5>
+            <p>
+              נעים מאוד! עם ניסיון עשיר במכירות, שיווק דיגיטלי, פיתוח מערכות מידע וניהול לקוחות, אני מביא הבנה עמוקה של האתגרים העומדים בפני עסקים קטנים ובינוניים.
+            </p>
+            <p>
+              הרקע הטכנולוגי שלי, כולל שליטה בכלים כמו Excel, מערכות CRM, קמפיינים ממומנים ופתרונות IT, מאפשר לי לזהות במדויק את צווארי הבקבוק בעסק שלכם ולהציע פתרונות אוטומציה יצירתיים ויעילים.
+            </p>
+            <p>
+              <strong>
+                המטרה שלי היא פשוטה: לעזור לכם להתמקד במה שאתם הכי טובים בו, ולתת לאוטומציה לעשות את העבודה השחורה. אני מאמין במקצועיות, שקיפות ותוצאות מדודות.
+              </strong>
+            </p>
+          </div>
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="150">
+            <div class="text-center">
+              <i data-lucide="cpu" class="lucide-animated" style="width:80px; height:80px;"></i>
+              <p class="mt-2 text-center">רקע טכנולוגי פוגש הבנה עסקית</p>
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- יצירת קשר -->
+    <section id="contact" class="section-content">
+      <div class="container">
+        <h2 class="section-title">מוכנים לקחת את העסק לשלב הבא?</h2>
+        <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+          הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.<br>
+          נצלו את מבצע ההשקה וקבעו פגישת אפיון (ב-Google Meet) ללא עלות וללא התחייבות (במקום 399 ₪).<br>
+          בואו נגלה יחד איך אוטומציה יכולה לחסוך לכם זמן וכסף, כבר מהיום הראשון.
+        </p>
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="150">
+          <div class="col-md-8 col-lg-6">
+            <div class="form-section">
+              <h5 class="mb-3 text-center">השאירו פרטים ונחזור אליכם בהקדם לתיאום הפגישה:</h5>
+                <form id="contact-form" action="your-form-handler.php" method="POST" dir="rtl"></form>
+                <div class="mb-3">
+                  <label for="fullname" class="form-label visually-hidden">שם מלא</label>
+                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="שם מלא *" required>
+                </div>
+                <div class="mb-3">
+                  <label for="businessname" class="form-label visually-hidden">שם העסק</label>
+                  <input type="text" class="form-control" id="businessname" name="businessname" placeholder="שם העסק">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label visually-hidden">דוא"ל</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="דוא''ל *" required>
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label visually-hidden">טלפון</label>
+                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="טלפון *" required>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary-custom">
+                    תאמו לי פגישת אפיון חינם עכשיו!
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- תחתית הדף -->
+  <footer>
+    <div class="container">
+      <p><strong>אוטומציוני</strong> | פתרונות אוטומציה לעסקים קטנים ובינוניים</p>
+      <p>יונתן רינת | <a href="mailto:yonirinat@gmail.com">yonirinat@gmail.com</a> | <a href="tel:052-6485138">052-6485138</a></p>
+      <p>&copy; 2025 כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+
+  <!-- אייקונים צפים -->
+  <div class="floating-icons py-6">
+    <a href="https://wa.me/972526485138" target="_blank" class="floating-icon whatsapp" title="צ'אט בוואטסאפ">
+      <i data-lucide="message-circle"></i>
+    </a>
+    <a href="https://calendly.com/your-calendly-link" target="_blank" class="floating-icon calendar" title="קביעת פגישה">
+      <i data-lucide="calendar"></i>
+    </a>
+    <a href="#contact" class="floating-icon contact" title="השארת פרטים">
+      <i data-lucide="user-plus"></i>
+    </a>
+  </div>
+
+  <!-- סקריפטים -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/advanced-animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      });
+      
+      // Initialize Lucide icons
+      lucide.createIcons();
+      
+      // Add loaded class to images
+      document.querySelectorAll('img').forEach(img => {
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', function() {
+            this.classList.add('loaded');
+          });
+        }
+      });
+      
+      // Mobile menu fix - שיפור התפריט הנייד
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+      
+      if (navbarToggler && navbarCollapse) {
+        // פתיחת התפריט בלחיצה על הכפתור
+        navbarToggler.addEventListener('click', function() {
+          navbarCollapse.classList.toggle('show');
+        });
+        
+        // סגירת התפריט בלחיצה על קישור
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            if (window.innerWidth < 992) {
+              navbarCollapse.classList.remove('show');
+            }
+          });
+        });
+        
+        // סגירת התפריט בלחיצה מחוץ לתפריט
+        document.addEventListener('click', function(event) {
+          const isClickInside = navbarCollapse.contains(event.target) || navbarToggler.contains(event.target);
+          
+          if (!isClickInside && navbarCollapse.classList.contains('show')) {
+            navbarCollapse.classList.remove('show');
+          }
+        });
+        
+        // מניעת סגירה אוטומטית של התפריט
+        navbarCollapse.addEventListener('hide.bs.collapse', function(event) {
+          // אם הסיבה לסגירה היא אוטומטית (לא לחיצה על קישור או מחוץ לתפריט)
+          if (event.type === 'hide.bs.collapse' && !event.clickEvent) {
+            event.preventDefault();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
