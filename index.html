@@ -68,48 +68,50 @@
     }
     /* אזור גיבור עם אפקט Parallax */
     .hero-section {
-  background: url('banner.jpg') no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed; /* Parallax effect */
-  min-height: 85vh; /* Changed from 100vh to 60vh to make banner shorter */
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--white);
-  transition: background 0.5s ease;
-}
-.hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.4);
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  padding: 20px;
-  margin-top: -100px; /* העלאת התוכן למעלה */
-}
-.hero-content h1 {
-  font-size: 4.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-  color: var(--white);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-.hero-content h1:hover {
-  transform: scale(1.05);
-}
-.hero-content p.lead {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: var(--white);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
+      background: url('banner.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed; /* Parallax effect */
+      min-height: 85vh; /* Changed from 100vh to 85vh */
+      position: relative;
+      display: flex;
+      flex-direction: column; /* Ensure proper stacking of elements */
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      padding: 20px; /* Add padding for spacing */
+      transition: background 0.5s ease;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+      margin-top: 0; /* Remove negative margin */
+    }
+    .hero-content h1 {
+      font-size: 3rem; /* Adjust font size for better visibility */
+      font-weight: 700;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+      color: var(--white);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .hero-content h1:hover {
+      transform: scale(1.05);
+    }
+    .hero-content p.lead {
+      font-size: 1.5rem; /* Adjust font size */
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
     .btn-primary-custom {
       background-color: var(--primary-color);
       border: none;
@@ -285,27 +287,34 @@
     }
     /* רספונסיביות */
     @media (max-width: 768px) {
+      .hero-section {
+        background-attachment: scroll; /* Disable parallax on mobile */
+        min-height: auto; /* Allow height to adjust dynamically */
+        padding: 40px 20px; /* Add padding for spacing */
+      }
       .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2rem; /* Further reduce font size for smaller screens */
+      }
+      .hero-content p.lead {
+        font-size: 1.2rem; /* Adjust font size */
       }
       .navbar-brand img {
         height: 35px;
       }
+      .headshot-image {
+        width: 100px; /* Smaller size for mobile */
+        height: 100px;
+      }
     }
 /* תמונת headshot */
 .headshot-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative; /* Change to relative for better placement */
+  margin-top: 20px; /* Add margin for spacing */
   text-align: center;
-  z-index: 2;
-  padding-bottom: 20px;
-  margin-top: 20px; /* מרווח בין התמונה לרכיבים שמעליה */
 }
 .headshot-image {
-  width: 150px;
-  height: 150px;
+  width: 120px; /* Adjust size for mobile */
+  height: 120px;
   border-radius: 50%;
   border: 4px solid var(--white);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -528,6 +537,90 @@
       line-height: 1.6;
     }
   </style>
+  <style>
+  /* Mobile styles (up to 768px) */
+  @media (max-width: 768px) {
+    .hero-section {
+      background-attachment: scroll; /* Disable parallax on mobile */
+      min-height: auto; /* Allow height to adjust dynamically */
+      padding: 40px 20px; /* Add padding for spacing */
+      display: flex;
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center;
+      text-align: center;
+    }
+    .hero-content {
+      margin-bottom: 20px; /* Add spacing between elements */
+    }
+    .hero-content h1 {
+      font-size: 2rem; /* Adjust font size */
+    }
+    .hero-content p.lead {
+      font-size: 1.2rem; /* Adjust font size */
+    }
+    .btn-primary-custom {
+      margin-top: 20px; /* Add spacing below the button */
+    }
+    .headshot-container {
+      margin-top: 20px; /* Add spacing above the image */
+    }
+    .headshot-image {
+      width: 100px; /* Smaller size for mobile */
+      height: 100px;
+    }
+  }
+
+  /* Desktop styles (above 768px) */
+  @media (min-width: 769px) {
+    .hero-section {
+      background: url('banner.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed; /* Parallax effect */
+      min-height: 85vh; /* Adjust height */
+      display: flex;
+      align-items: center; /* Center vertically */
+      justify-content: center; /* Center horizontally */
+      text-align: center;
+      padding: 20px; /* Even padding all around */
+      position: relative;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto; /* Center the content */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center all items */
+      justify-content: center;
+    }
+    .special-offer-box {
+      margin: 25px auto; /* Center and add vertical space */
+    }
+    .btn-primary-custom {
+      margin-top: 20px;
+    }
+    .headshot-container {
+      position: absolute;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+    }
+    .headshot-image {
+      width: 300px;
+      height: 300px;
+      border-width: 6px;
+    }
+  }
+</style>
 </head>
 <body>
   <!-- Scroll Progress Indicator -->
