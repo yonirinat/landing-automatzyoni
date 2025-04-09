@@ -82,24 +82,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   const lucideIcons = document.querySelectorAll('.lucide-animated');
-  lucideIcons.forEach(icon => {
-    icon.addEventListener('mouseenter', () => {
-      gsap.to(icon, {
-        scale: 1.2,
-        rotate: 5,
-        duration: 0.3,
-        ease: 'power1.out'
+
+  // אפקט ריחוף לאייקונים רק במכשירים תומכים
+  if (window.matchMedia('(hover: hover)').matches) {
+    lucideIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        gsap.to(icon, {
+          scale: 1.2,
+          rotate: 5,
+          duration: 0.3,
+          ease: 'power1.out'
+        });
+      });
+      icon.addEventListener('mouseleave', () => {
+        gsap.to(icon, {
+          scale: 1,
+          rotate: 0,
+          duration: 0.3,
+          ease: 'power1.in'
+        });
       });
     });
-    icon.addEventListener('mouseleave', () => {
-      gsap.to(icon, {
-        scale: 1,
-        rotate: 0,
-        duration: 0.3,
-        ease: 'power1.in'
-      });
-    });
-  });
+  }
+
   const floatingIcons = document.querySelectorAll('.floating-icon');
   const animateIcons = () => {
     floatingIcons.forEach((icon, index) => {
@@ -124,11 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   };
-  if (!document.body.classList.contains('reduce-motion')) {
+
+  // הפעל אנימציות צפות רק אם המשתמש לא ביקש הפחתת תנועה
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setTimeout(() => {
       animateIcons();
       animateFloatingButtons();
     }, 200);
   }
+
   console.log('Advanced animations initialized successfully');
 })();

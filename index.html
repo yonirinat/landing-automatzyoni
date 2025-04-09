@@ -89,7 +89,11 @@
           <li class="nav-item"><a class="nav-link active" href="#hero">ראשי</a></li>
           <li class="nav-item"><a class="nav-link" href="#challenges">האתגרים</a></li>
           <li class="nav-item"><a class="nav-link" href="#services">השירותים</a></li>
+          <li class="nav-item"><a class="nav-link" href="#process">התהליך</a></li>
           <li class="nav-item"><a class="nav-link" href="#benefits">היתרונות</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">עדויות</a></li>
+          <li class="nav-item"><a class="nav-link" href="#video-demo">סרטון הדגמה</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">שאלות נפוצות</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">אודות</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">יצירת קשר</a></li>
         </ul>
@@ -251,9 +255,6 @@
     <section id="process" class="section-content bg-light">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">איך מתבצע התהליך?</h2>
-        <p class="lead text-center mb-5" data-aos="fade-up" data-aos-delay="100">
-          כך אנחנו עובדים: אפיון ← הצעת מחיר ← הטמעה ← הדרכה ותמיכה. פשוט ויעיל.
-        </p>
         <div class="process-timeline">
           <div class="process-step" data-aos="fade-right" data-aos-delay="150">
             <div class="step-icon-wrapper">
@@ -454,37 +455,51 @@
     </section>
 
     <!-- יצירת קשר (Contact) -->
-    <section id="contact" class="section-content">
+    <section id="contact" class="section-content bg-primary text-white py-5">
       <div class="container">
-        <h2 class="section-title" data-aos="fade-up">מוכנים לקחת את העסק לשלב הבא?</h2>
-        <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
-          הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.<br>
-          נצלו את מבצע ההשקה וקבעו פגישת אפיון (ב-Google Meet) ללא עלות וללא התחייבות (במקום 399 ₪).<br>
+        <h2 class="section-title display-4 fw-bold text-center mb-4" data-aos="fade-up" style="color: white;">מוכנים לקחת את העסק לשלב הבא?</h2>
+        <p class="text-center mb-5 lead" data-aos="fade-up" data-aos-delay="100">
+          <strong>הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.</strong><br>
+          נצלו את מבצע ההשקה וקבעו פגישת אפיון (ב-Google Meet) ללא עלות וללא התחייבות<br>
+          <span class="badge bg-warning text-dark fs-6 my-2 position-relative">
+            במקום <span class="text-decoration-line-through text-danger">399 ₪</span>
+            <span class="badge bg-success blink-animation ms-2">חינם! (מבצע לזמן מוגבל)</span>
+          </span><br>
+          <style>
+            .blink-animation {
+              animation: blink 1s infinite;
+            }
+            @keyframes blink {
+              0% { opacity: 1; }
+              50% { opacity: 0.5; }
+              100% { opacity: 1; }
+            }
+          </style>
           בואו נגלה יחד איך אוטומציה יכולה לחסוך לכם זמן וכסף, כבר מהיום הראשון.
         </p>
         <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="150">
           <div class="col-md-8 col-lg-6">
-            <div class="form-section">
-              <h5 class="mb-3 text-center">השאירו פרטים ונחזור אליכם בהקדם לתיאום הפגישה:</h5>
+            <div class="form-section bg-white text-dark p-4 rounded-3 shadow-lg">
+              <h5 class="mb-4 text-center fw-bold">השאירו פרטים ונחזור אליכם בהקדם לתיאום הפגישה:</h5>
               <form id="contact-form" action="your-form-handler.php" method="POST" dir="rtl">
                 <div class="mb-3">
                   <label for="fullname" class="form-label visually-hidden">שם מלא</label>
-                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="שם מלא *" required>
+                  <input type="text" class="form-control form-control-lg" id="fullname" name="fullname" placeholder="שם מלא *" required>
                 </div>
                 <div class="mb-3">
                   <label for="businessname" class="form-label visually-hidden">שם העסק</label>
-                  <input type="text" class="form-control" id="businessname" name="businessname" placeholder="שם העסק">
+                  <input type="text" class="form-control form-control-lg" id="businessname" name="businessname" placeholder="שם העסק">
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label visually-hidden">דוא"ל</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="דוא''ל *" required>
+                  <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="דוא''ל *" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                   <label for="phone" class="form-label visually-hidden tex">טלפון</label>
-                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="טלפון *" required>
+                  <input type="tel" class="form-control form-control-lg" id="phone" name="phone" placeholder="טלפון *" required>
                 </div>
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary-custom ripple">תאמו לי פגישת אפיון חינם עכשיו!</button>
+                  <button type="submit" class="btn btn-primary-custom btn-lg ripple fw-bold">תאמו לי פגישת אפיון חינם עכשיו! 🚀</button>
                 </div>
               </form>
             </div>
@@ -517,7 +532,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       // אתחול AOS
       if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 800, once: true, offset: 100, disable: window.innerWidth < 768 });
+        AOS.init({ duration: 800, once: true, offset: 100 });
       } else {
         console.warn('AOS library not loaded');
       }
@@ -559,16 +574,16 @@
         });
       });
     });
-    // מניעת אנימציות במסכים קטנים מאוד (mobile)
-    const checkMobile = () => {
-      if (window.innerWidth < 768) {
-        document.body.classList.add('reduce-motion');
-      } else {
-        document.body.classList.remove('reduce-motion');
-      }
-    };
-    window.addEventListener('resize', checkMobile);
-    checkMobile();
   </script>
+
+  <!-- Floating Action Buttons -->
+  <div class="floating-buttons">
+    <a href="https://calendly.com/yonirinat/30min" target="_blank" rel="noopener noreferrer" class="float-button cal-button" aria-label="תאם פגישה ב-Calendly">
+      <i data-lucide="calendar-days"></i>
+    </a>
+    <a href="https://wa.me/972526485138" target="_blank" rel="noopener noreferrer" class="float-button wa-button" aria-label="צור קשר בוואטסאפ">
+      <i data-lucide="message-circle"></i> <!-- שימוש באייקון הודעה לוואטסאפ -->
+    </a>
+  </div>
 </body>
 </html>

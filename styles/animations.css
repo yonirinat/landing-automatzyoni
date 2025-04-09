@@ -28,7 +28,7 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
-  display: none;
+  display: block;
 }
 .parallax-element {
   position: absolute;
@@ -65,9 +65,7 @@ img {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
-.section-content[data-aos]:hover::before {
-  opacity: 1;
-}
+
 /* אפקט רחיפה (Hover) עדין לכרטיסים */
 .card::before {
   content: '';
@@ -80,9 +78,7 @@ img {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.card:hover::before {
-  opacity: 1;
-}
+
 /* אפקט רחיפה לכפתור ראשי (גלישת צבע) */
 .btn-primary-custom {
   position: relative;
@@ -98,9 +94,7 @@ img {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
 }
-.btn-primary-custom:hover::before {
-  left: 100%;
-}
+
 /* אנימציית ציפה (לרקע הפרלקס) */
 @keyframes float {
   0% {
@@ -113,14 +107,25 @@ img {
     transform: translateY(0px);
   }
 }
+
 /* התאמות למדיה - פרלקס ומצבי הפחתת אנימציה */
-@media (min-width: 768px) {
-  .parallax-bg {
-    display: block;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .parallax-element {
     animation: none !important;
+  }
+}
+
+/* אפקטי Hover למכשירים תומכי ריחוף */
+@media (hover: hover) {
+  .section-content[data-aos]:hover::before {
+    opacity: 1;
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .btn-primary-custom:hover::before {
+    left: 100%;
   }
 }
