@@ -4,637 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>אוטומציוני - אוטומציה לעסקים</title>
-  
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
   <!-- Bootstrap CSS RTL -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" crossorigin="anonymous">
+
   <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <!-- גופן Assistant -->
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <!-- Custom CSS -->
   <link href="styles/main.css" rel="stylesheet">
   <link href="styles/animations.css" rel="stylesheet">
-  
-  <!-- GSAP for advanced animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <style>
-    :root {
-      --primary-color: #0d6efd;
-      --dark-text: #212529;
-      --light-bg: #f8f9fa;
-      --white: #fff;
-      --primary-font: 'Assistant', sans-serif;
-      --navbar-height: 70px;
-    }
-    body {
-      font-family: var(--primary-font);
-      color: var(--dark-text);
-      margin: 0;
-      padding-top: var(--navbar-height);
-      scroll-behavior: smooth;
-    }
-    /* ניווט */
-    .navbar {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
-      height: 120px; /* Increased navbar height */
-    }
-    .navbar-brand img {
-      height: 100px; /* Increased logo height */
-      margin-left: 8px;
-    }
-    .nav-link {
-      font-weight: 600;
-      margin: 0 10px;
-      position: relative;
-    }
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary-color);
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    /* אזור גיבור עם אפקט Parallax */
-    .hero-section {
-      background: url('banner.jpg') no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed; /* Parallax effect */
-      min-height: 85vh; /* Changed from 100vh to 85vh */
-      position: relative;
-      display: flex;
-      flex-direction: column; /* Ensure proper stacking of elements */
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--white);
-      padding: 20px; /* Add padding for spacing */
-      transition: background 0.5s ease;
-    }
-    .hero-section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 20px;
-      margin-top: 0; /* Remove negative margin */
-    }
-    .hero-content h1 {
-      font-size: 3rem; /* Adjust font size for better visibility */
-      font-weight: 700;
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease;
-      color: var(--white);
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    .hero-content h1:hover {
-      transform: scale(1.05);
-    }
-    .hero-content p.lead {
-      font-size: 1.5rem; /* Adjust font size */
-      margin-bottom: 1.5rem;
-      color: var(--white);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
-    .btn-primary-custom {
-      background-color: var(--primary-color);
-      border: none;
-      padding: 12px 35px;
-      font-size: 1.1rem;
-      border-radius: 30px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary-custom:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    }
-    /* Ripple effect on button */
-    .btn-primary-custom::after {
-      content: "";
-      position: absolute;
-      background: rgba(255,255,255,0.3);
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: -100%;
-      transform: skewX(-45deg);
-      transition: left 0.5s ease;
-    }
-    .btn-primary-custom:hover::after {
-      left: 100%;
-    }
-    /* תיבה למבצע */
-    .special-offer-box {
-      background: var(--white);
-      color: var(--dark-text);
-      border: 1px solid var(--primary-color);
-      border-left: 5px solid var(--primary-color);
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 500px;
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .special-offer-box:hover {
-      transform: scale(1.02);
-    }
-    /* כותרות סעיפים */
-    .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      text-align: center;
-      position: relative;
-    }
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: var(--primary-color);
-      border-radius: 2px;
-    }
-    /* עיצוב סעיפים */
-    .section-content {
-      padding: 60px 0;
-      transition: opacity 0.5s ease;
-    }
-    .section-content p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      text-align: justify;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    /* כרטיסים עם אפקט 3D */
-    .card {
-      border: none;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      height: 100%;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    .challenge-svg-container {
-      height: 200px;
-      background-color: #f8f9fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .challenge-svg {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .card-body {
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .card-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-    }
-    .card-text {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: var(--dark-text);
-      margin-bottom: 0;
-    }
-    .lucide-animated {
-      width: 48px;
-      height: 48px;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-    /* אייקונים Lucide עם הנפשה */
-    .lucide-animated {
-      display: inline-block;
-      vertical-align: middle;
-      width: 40px;
-      height: 40px;
-      stroke: var(--primary-color);
-      fill: none;
-      stroke-width: 2;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    /* טופס יצירת קשר */
-    .form-section {
-      background: var(--light-bg);
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .form-section:hover {
-      transform: scale(1.02);
-    }
-    /* Custom alignment for form labels and inputs */
-    .form-section label.form-label {
-      text-align: right;
-      display: block;
-    }
-    .form-section .form-control {
-      direction: ltr;
-      text-align: right;
-    }
-    /* תחתית הדף */
-    footer {
-      background: var(--dark-text);
-      color: #adb5bd;
-      padding: 40px 0;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-    footer a {
-      color: var(--white);
-      text-decoration: none;
-    }
-    /* רספונסיביות */
-    @media (max-width: 768px) {
-      .hero-section {
-        background-attachment: scroll; /* Disable parallax on mobile */
-        min-height: auto; /* Allow height to adjust dynamically */
-        padding: 40px 20px; /* Add padding for spacing */
-      }
-      .hero-content h1 {
-        font-size: 2rem; /* Further reduce font size for smaller screens */
-      }
-      .hero-content p.lead {
-        font-size: 1.2rem; /* Adjust font size */
-      }
-      .navbar-brand img {
-        height: 35px;
-      }
-      .headshot-image {
-        width: 100px; /* Smaller size for mobile */
-        height: 100px;
-      }
-    }
-/* תמונת headshot */
-.headshot-container {
-  position: relative; /* Change to relative for better placement */
-  margin-top: 20px; /* Add margin for spacing */
-  text-align: center;
-}
-.headshot-image {
-  width: 120px; /* Adjust size for mobile */
-  height: 120px;
-  border-radius: 50%;
-  border: 4px solid var(--white);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  object-fit: cover;
-}
-/* Make headshot 2x larger on desktop and reposition */
-@media (min-width: 992px) {
-  .headshot-container {
-    bottom: auto;
-    top: 50%;
-    transform: translateY(-50%);
-    right: auto;
-    left: 5%;
-    text-align: left;
-    padding-bottom: 0;
-    margin-top: 0; /* Remove margin for desktop view */
-  }
-  .headshot-image {
-    width: 300px;
-    height: 300px;
-    border-width: 6px; /* Slightly thicker border for larger image */
-  }
-}
-    /* תיקון חצי הקרוסלה */
-    .carousel-control-prev {
-      left: 0;
-      right: auto;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
-    }
-    .carousel-control-next {
-      right: 0;
-      left: auto;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
-    }
-    .carousel-control-prev:hover,
-    .carousel-control-next:hover {
-      opacity: 1;
-    }
-    /* עיצוב הקרוסלה */
-    #servicesCarousel {
-      position: relative;
-      padding: 0 40px;
-      margin: 40px 0;
-    }
-    .carousel-inner {
-      padding: 20px 0;
-    }
-    .carousel-control-prev,
-    .carousel-control-next {
-      width: 40px;
-      height: 40px;
-      background-color: var(--primary-color);
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-    .carousel-control-prev {
-      left: 10px;
-    }
-    .carousel-control-next {
-      right: 10px;
-    }
-    .carousel-control-prev:hover,
-    .carousel-control-next:hover {
-      opacity: 1;
-    }
-    .carousel-item {
-      transition: transform 0.6s ease-in-out;
-    }
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-    }
-    .service-card i {
-      margin-bottom: 20px;
-    }
-    @media (max-width: 768px) {
-      #servicesCarousel {
-      padding: 0 50px; /* Add padding for arrows on mobile */
-      }
-      .carousel-control-prev,
-      .carousel-control-next {
-      width: 36px;
-      height: 36px;
-      display: flex; /* Ensure arrows display on mobile */
-      align-items: center;
-      justify-content: center;
-      }
-      .service-card {
-      padding: 30px 20px;
-      }
-    }
-    /* אייקונים צפים */
-    .floating-icons {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .floating-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-      cursor: pointer;
-      opacity: 0.8;
-      will-change: transform, opacity;
-    }
-    .floating-icon:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      opacity: 1;
-    }
-    .floating-icon i {
-      font-size: 24px;
-    }
-    .floating-icon.whatsapp {
-      background-color: #25D366;
-    }
-    .floating-icon.calendar {
-      background-color: #4285F4;
-    }
-    .floating-icon.contact {
-      background-color: #34A853;
-    }
-    /* תיקון תפריט נייד */
-    @media (max-width: 991.98px) {
-      .navbar-collapse {
-        background-color: white;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        margin-top: 10px;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        z-index: 1000;
-        width: 100%;
-        max-height: calc(100vh - 120px);
-        overflow-y: auto;
-      }
-      .navbar-nav {
-        text-align: center;
-      }
-      .nav-item {
-        margin: 12px 0;
-      }
-      .nav-link {
-        color: var(--dark-text) !important;
-        font-size: 1.1rem;
-        display: block;
-        padding: 8px 15px;
-      }
-      .nav-link.active {
-        color: var(--primary-color) !important;
-        font-weight: 700;
-      }
-      body.menu-open {
-        overflow: hidden;
-      }
-    }
-    /* עיצוב כרטיסי אתגרים */
-    .challenge-card {
-      border: none;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
-    .challenge-card:hover {
-      transform: translateY(-10px);
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .challenge-card h3 {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      color: var(--primary-color);
-      font-weight: 700;
-    }
-    .challenge-card p {
-      margin-bottom: 20px;
-      color: var (--dark-text);
-      line-height: 1.6;
-    }
-  </style>
-  <style>
-  /* Mobile styles (up to 768px) */
-  @media (max-width: 768px) {
-    .hero-section {
-      background-attachment: scroll; /* Disable parallax on mobile */
-      min-height: auto; /* Allow height to adjust dynamically */
-      padding: 40px 20px; /* Add padding for spacing */
-      display: flex;
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center;
-      text-align: center;
-    }
-    .hero-content {
-      margin-bottom: 20px; /* Add spacing between elements */
-    }
-    .hero-content h1 {
-      font-size: 2rem; /* Adjust font size */
-    }
-    .hero-content p.lead {
-      font-size: 1.2rem; /* Adjust font size */
-    }
-    .btn-primary-custom {
-      margin-top: 20px; /* Add spacing below the button */
-    }
-    .headshot-container {
-      margin-top: 20px; /* Add spacing above the image */
-    }
-    .headshot-image {
-      width: 100px; /* Smaller size for mobile */
-      height: 100px;
-    }
-  }
 
-  /* Desktop styles (above 768px) */
-  @media (min-width: 769px) {
-    .hero-section {
-      background: url('banner.jpg') no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed; /* Parallax effect */
-      min-height: 85vh; /* Adjust height */
-      display: flex;
-      align-items: center; /* Center vertically */
-      justify-content: center; /* Center horizontally */
-      text-align: center;
-      padding: 20px; /* Even padding all around */
-      position: relative;
-    }
-    .hero-section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto; /* Center the content */
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Center all items */
-      justify-content: center;
-    }
-    .special-offer-box {
-      margin: 25px auto; /* Center and add vertical space */
-    }
-    .btn-primary-custom {
-      margin-top: 20px;
-    }
-    .headshot-container {
-      position: absolute;
-      left: 5%;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-    }
-    .headshot-image {
-      width: 300px;
-      height: 300px;
-      border-width: 6px;
-    }
-  }
-</style>
+  <!-- JSON‑LD Structured Data for each section -->
+  <!-- 1. Hero Section (LandingPage) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "LandingPage","name": "אוטומציוני","url": "https://www.yourdomain.com","description": "אנחנו עוזרים לכם לעבוד במקצוע שלכם, את השאר תשאירו לנו","mainEntity": {"@type": "WebPageElement","cssSelector": "#hero"}}
+  </script>
+  <!-- 2. Challenges Section (ItemList) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "ItemList","name": "אתגרים – ניהול אדמיניסטרציה ובעיות","itemListElement": [{"@type": "ListItem","position": 1,"name": "טובעים באדמיניסטרציה","description": "משימות חוזרות כגון מענה למיילים, תיאום פגישות, ניהול לידים והוצאת חשבוניות גוזלות זמן יקר."},{"@type": "ListItem","position": 2,"name": "טעויות יקרות קורות","description": "תהליכים ידניים מובילים לטעויות שמעכבות צמיחה ועולות כסף."},{"@type": "ListItem","position": 3,"name": "לידים הולכים לאיבוד","description": "מעקב לא יעיל אחר פניות ולקוחות שמוביל להפסד הזדמנויות מכירה."}]}
+  </script>
+  <!-- 3. Services Section (ItemList of Service objects) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "ItemList","name": "שירותי אוטומציה","itemListElement": [{"@type": "ListItem","position": 1,"item": {"@type": "Service","name": "אוטומציה במכירות ו-CRM","description": "ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM."}},{"@type": "ListItem","position": 2,"item": {"@type": "Service","name": "אוטומציה בשיווק","description": "ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות."}},{"@type": "ListItem","position": 3,"item": {"@type": "Service","name": "אוטומציה בשירות לקוחות","description": "מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה."}},{"@type": "ListItem","position": 4,"item": {"@type": "Service","name": "אוטומציה בתפעול ואדמין","description": "הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות."}}]}
+  </script>
+  <!-- 4. Benefits Section (ItemList) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "ItemList","name": "היתרונות של אוטומציה","itemListElement": [{"@type": "ListItem","position": 1,"name": "חיסכון אדיר בזמן","description": "שחרור ממשימות ידניות מייגעות והתפנות לצמיחה."},{"@type": "ListItem","position": 2,"name": "הפחתת טעויות קריטיות","description": "תהליכים אוטומטיים מבטיחים דיוק, מונעים טעויות יקרות."},{"@type": "ListItem","position": 3,"name": "שיפור יעילות ופרודוקטיביות","description": "הספק גבוה יותר בפחות זמן, ניצול מקסימלי של משאבים."},{"@type": "ListItem","position": 4,"name": "גידול בהכנסות וברווח","description": "שיפור תהליכי שיווק ומכירה מוביל לעלייה בהכנסות."},{"@type": "ListItem","position": 5,"name": "לקוחות מרוצים יותר","description": "זמינות ותגובה מהירה משפרים את חוויית הלקוח."},{"@type": "ListItem","position": 6,"name": "שקט נפשי לכם","description": "תהליכים קריטיים מתנהלים ביעילות גם כשאינכם במשרד."}]}
+  </script>
+  <!-- 5. About Section (AboutPage) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "AboutPage","name": "אודות אוטומציוני","url": "https://www.yourdomain.com/about","description": "יונתן רינת - מומחה לאוטומציה עסקית עם ניסיון עשיר במכירות, שיווק דיגיטלי ופיתוח מערכות."}
+  </script>
+  <!-- 6. Process Section (HowTo) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "HowTo","name": "איך מתבצע תהליך האוטומציה?","step": [{"@type": "HowToStep","position": 1,"name": "קביעת פגישת אפיון","itemListElement": {"@type": "HowToDirection","position": 1,"text": "קובעים פגישה חינמית (ב-Google Meet) לניתוח המצב הקיים וזיהוי הזדמנויות לשיפור."}},{"@type": "HowToStep","position": 2,"name": "קבלת סיכום והצעת מחיר","itemListElement": {"@type": "HowToDirection","position": 2,"text": "תקבלו סיכום מקצועי של התובנות מהפגישה, כולל הצעת מחיר מפורטת ליישום האוטומציה."}},{"@type": "HowToStep","position": 3,"name": "הטמעת האוטומציה","itemListElement": {"@type": "HowToDirection","position": 3,"text": "מיישמים את פתרונות האוטומציה המתקדמים (Zapier, N8N וכו') בליווי צמוד, תוך התאמה לצרכי העסק."}},{"@type": "HowToStep","position": 4,"name": "הדרכה ותמיכה","itemListElement": {"@type": "HowToDirection","position": 4,"text": "לאחר ההטמעה, תקבלו הדרכה מלאה לשימוש בכלים החדשים ותמיכה שוטפת לפי הצורך."}}]}
+  </script>
+  <!-- 7. Video Section (VideoObject) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "VideoObject","name": "סרטון הדגמה - אוטומציוני","description": "סרטון המדגים כיצד אוטומציה יכולה לשנות את העסק – צפו כיצד התהליכים נעשים פשוטים ויעילים יותר.","thumbnailUrl": "https://img.youtube.com/vi/S3L1Kw087JI/maxresdefault.jpg","uploadDate": "2024-01-01","duration": "PT2M10S","embedUrl": "https://www.youtube.com/embed/S3L1Kw087JI","publisher": {"@type": "Organization","name": "אוטומציוני"}}
+  </script>
+  <!-- 8. FAQ Section (FAQPage) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "מה כוללת פגישת האפיון החינמית?","acceptedAnswer": {"@type": "Answer","text": "בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות."}},{"@type": "Question","name": "כמה זמן לוקח להטמיע אוטומציה בעסק?","acceptedAnswer": {"@type": "Answer","text": "פרויקטים קטנים נמשכים מספר ימים, ומורכבים יותר יכולים להימשך עד שבועיים – בהתאם למורכבות."}},{"@type": "Question","name": "האם נדרש ידע טכני להפעלת האוטומציות?","acceptedAnswer": {"@type": "Answer","text": "כלל לא. המערכות שלנו פועלות באופן אוטומטי ברקע, ואנו מספקים הדרכה מלאה לצוות שלכם."}},{"@type": "Question","name": "למה לבחור ב\"אוטומציוני\" ולא לעשות זאת בעצמי?","acceptedAnswer": {"@type": "Answer","text": "עבודת האוטומציה העצמאית דורשת עקומת למידה ארוכה, ואצלנו אתם זוכים לניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר."}}]}
+  </script>
+  <!-- 9. Contact Section (ContactPage) -->
+  <script type="application/ld+json">
+{"@context": "https://schema.org","@type": "ContactPage","name": "יצירת קשר עם אוטומציוני","url": "https://www.yourdomain.com/contact","description": "טופס יצירת קשר ופרטי התקשרות לקבלת פגישת אפיון חינמית.","contactOption": "TollFree","contactType": "customer service"}
+  </script>
+
+  <!-- Preload Critical JavaScript -->
+  <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
+  <link rel="preload" href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" as="script">
+
+  <!-- WebP detection script -->
+  <script src="js/webp-detection.js"></script>
 </head>
 <body>
-  <!-- Scroll Progress Indicator -->
+  <!-- מחוון התקדמות גלילה (פס צר בחלק העליון) -->
   <div class="scroll-progress"></div>
 
-  <!-- ניווט -->
+  <!-- ניווט עליון -->
   <nav class="navbar navbar-expand-lg bg-white fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#hero">
-        <img src="images/logo.png" alt="לוגו אוטומציוני">
-        אוטומציוני
+        <img loading="lazy" src="images/logo.webp" alt="לוגו אוטומציוני"> אוטומציוני
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -650,30 +97,30 @@
     </div>
   </nav>
 
-  <!-- אזור גיבור -->
+  <!-- אזור גיבור (Hero Section) -->
   <header id="hero" class="hero-section">
     <div class="parallax-bg">
       <div class="parallax-element"></div>
-      <div class="parallax-element"></div>
-      <div class="parallax-element"></div>
     </div>
-    <div class="hero-content" data-aos="fade-up">
-      <h1>אוטומציוני</h1>
-      <p class="lead">אנחנו עוזרים לכם לעבוד במקצוע שלכם, את השאר תשאירו לנו</p>
-      
+    <div class="hero-content-centered">
+      <h1 data-aos="fade-up">אוטומציוני</h1>
+      <p class="lead" data-aos="fade-up" data-aos-delay="100">
+        אנחנו עוזרים לכם לעבוד במקצוע שלכם,<br>
+        את השאר תשאירו לנו.
+      </p>
       <div class="special-offer-box" data-aos="zoom-in" data-aos-delay="200">
         <h3>פגישת אפיון במתנה!</h3>
-        <p>לרגל ההשקה, פגישת אפיון וייעוץ ראשונית (שווי 399 ₪)<br>ללא עלות וללא התחייבות!</p>
+        <p>
+          לרגל ההשקה, פגישת אפיון ראשונית<br>(בשווי 399 ₪)<br>
+          <strong>ללא עלות וללא התחייבות!</strong><br>
+        </p>
       </div>
-      
-      <a href="https://calendly.com/yonirinat/30min" class="btn btn-primary-custom mt-4" data-aos="fade-up" data-aos-delay="300">
+      <a href="https://calendly.com/yonirinat/30min" class="btn btn-primary-custom ripple mt-4" data-aos="fade-up" data-aos-delay="300">
         תאמו פגישת אפיון חינם
       </a>
     </div>
-    
-    <!-- תמונת headshot -->
-    <div class="headshot-container">
-      <img src="images/headshot.png" alt="יונתן רינת" class="headshot-image">
+    <div class="headshot-container" data-aos="fade-in" data-aos-delay="150">
+      <img loading="lazy" src="images/headshot.webp" alt="יונתן רינת" class="headshot-image">
     </div>
   </header>
 
@@ -681,95 +128,72 @@
     <!-- אתגרים -->
     <section id="challenges" class="section-content">
       <div class="container">
-        <h2 class="section-title">האם העסק מנהל אתכם במקום שאתם תנהלו אותו?</h2>
+        <h2 class="section-title" data-aos="fade-up">האם העסק מנהל אתכם במקום שאתם תנהלו אותו?</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <!-- טובעים באדמיניסטרציה -->
+          <!-- כרטיסי אתגר: טובעים באדמיניסטרציה, טעויות יקרות, ... -->
           <div class="col" data-aos="fade-up" data-aos-delay="100">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/administrative.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/administrative-fallback.png" alt="אדמיניסטרציה" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/administrative.webp" alt="טובעים באדמיניסטרציה - איור המתאר עומס משימות אדמיניסטרטיביות" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="settings" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">טובעים באדמיניסטרציה?</h4>
-                <p class="card-text">משימות חוזרות כמו מענה למיילים, תיאום פגישות,<br>ניהול לידים וחשבוניות גוזלות זמן יקר?</p>
+                <p class="card-text text-center">משימות חוזרות כגון מענה למיילים, תיאום פגישות, ניהול לידים והוצאת חשבוניות גוזלות זמן יקר.</p>
               </div>
             </div>
           </div>
-          <!-- טעויות יקרות קורות -->
           <div class="col" data-aos="fade-up" data-aos-delay="150">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/mistakes.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/mistakes-fallback.png" alt="טעויות" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/mistakes.webp" alt="טעויות יקרות קורות - איור המתאר טעויות בתהליכים עסקיים" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="alert-triangle" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">טעויות יקרות קורות?</h4>
-                <p class="card-text">תהליכים ידניים מובילים לטעויות שמעכבות צמיחה<br>ועולות כסף?</p>
+                <p class="card-text text-center">תהליכים ידניים מובילים לטעויות שמעכבות צמיחה ועולות כסף.</p>
               </div>
             </div>
           </div>
-          <!-- לידים הולכים לאיבוד -->
           <div class="col" data-aos="fade-up" data-aos-delay="200">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/lost-leads.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/lost-leads-fallback.png" alt="לידים" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/lost-leads.webp" alt="לידים הולכים לאיבוד - איור המתאר אובדן הזדמנויות עסקיות" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="user-minus" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">לידים הולכים לאיבוד?</h4>
-                <p class="card-text">המעקב אחרי פניות ולקוחות לא יעיל מספיק<br>ופוגע במכירות?</p>
+                <p class="card-text text-center">מעקב לא יעיל אחר פניות ולקוחות שמוביל להפסד הזדמנויות מכירה.</p>
               </div>
             </div>
           </div>
-          <!-- רוצים להתמקד במקצוע -->
           <div class="col" data-aos="fade-up" data-aos-delay="250">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/focus-work.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/focus-work-fallback.png" alt="התמקדות" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/focus-work.webp" alt="רוצים להתמקד במקצוע - איור המתאר התמקדות בליבת העסק" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="target" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">רוצים להתמקד במקצוע?</h4>
-                <p class="card-text">במקום להתעסק בבירוקרטיה, הייתם רוצים<br>להשקיע במה שאתם באמת אוהבים?</p>
+                <p class="card-text text-center">במקום לבזבז זמן על מטלות מנהלה, התמקדו במה שאתם טובים בו באמת.</p>
               </div>
             </div>
           </div>
-          <!-- שעות על גיליונות אקסל -->
           <div class="col" data-aos="fade-up" data-aos-delay="300">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/excel-work.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/excel-work-fallback.png" alt="אקסל" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/excel-work.webp" alt="שעות על גיליונות אקסל - איור המתאר עבודה מייגעת על גיליונות אקסל" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="file-text" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">שעות על גיליונות אקסל?</h4>
-                <p class="card-text">מבזבזים זמן יקר על עבודה ידנית באקסל<br>במקום לתת למערכות לעבוד?</p>
+                <p class="card-text text-center">מבזבזים זמן יקר על עבודה ידנית באקסל<br>במקום לתת למערכות לעבוד?</p>
               </div>
             </div>
           </div>
-          <!-- יש פתרון יעיל -->
           <div class="col" data-aos="fade-up" data-aos-delay="350">
             <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-svg-container">
-                <object data="images/efficient-solution.svg" type="image/svg+xml" class="challenge-svg">
-                  <img src="images/efficient-solution-fallback.png" alt="פתרון" class="challenge-svg">
-                </object>
+              <div class="challenge-image-container">
+                <img loading="lazy" src="images/efficient-solution.webp" alt="יש פתרון יעיל - איור המתאר פתרון אוטומציה יעיל לבעיות העסק" class="challenge-image">
               </div>
               <div class="card-body text-center">
-                <i data-lucide="zap" class="lucide-animated mb-3"></i>
                 <h4 class="card-title">יש פתרון יעיל!</h4>
-                <p class="card-text">אם עניתם "כן" אפילו פעם אחת - אוטומציה<br>יכולה לשנות את חיי העסק שלכם.</p>
+                <p class="card-text text-center">אם עניתם "כן" אפילו פעם אחת – אוטומציה<br>יכולה לשנות את חיי העסק שלכם.</p>
               </div>
             </div>
           </div>
@@ -777,137 +201,262 @@
       </div>
     </section>
 
-    <!-- שירותים -->
+    <!-- שירותים (Carousel) -->
     <section id="services" class="section-content bg-light">
       <div class="container">
-        <h2 class="section-title">איך אוטומציוני עוזרת לעסק שלכם?</h2>
-        <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="service-card">
-                <i data-lucide="user-check" class="lucide-animated mb-4"></i>
-                <h3>אוטומציה במכירות ו-CRM</h3>
-                <p>ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM.</p>
-              </div>
+      <h2 class="section-title" data-aos="fade-up">איך אוטומציוני עוזרת לעסק שלכם?</h2>
+      <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="service-card">
+          <i data-lucide="user-check" class="lucide-animated mb-4"></i>
+          <h3>אוטומציה במכירות ו-CRM</h3>
+          <p class="text-center">ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="service-card">
+          <i data-lucide="megaphone" class="lucide-animated mb-4"></i>
+          <h3>אוטומציה בשיווק</h3>
+          <p class="text-center">ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="service-card">
+          <i data-lucide="headphones" class="lucide-animated mb-4"></i>
+          <h3>אוטומציה בשירות לקוחות</h3>
+          <p class="text-center">מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="service-card">
+          <i data-lucide="clipboard" class="lucide-animated mb-4"></i>
+          <h3>אוטומציה בתפעול ואדמין</h3>
+          <p class="text-center">הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות.</p>
+          </div>
+        </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">הקודם</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">הבא</span>
+        </button>
+      </div>
+      </div>
+    </section>
+
+    <section id="process" class="section-content bg-light">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">איך מתבצע התהליך?</h2>
+        <p class="lead text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+          כך אנחנו עובדים: אפיון ← הצעת מחיר ← הטמעה ← הדרכה ותמיכה. פשוט ויעיל.
+        </p>
+        <div class="process-timeline">
+          <div class="process-step" data-aos="fade-right" data-aos-delay="150">
+            <div class="step-icon-wrapper">
+              <div class="step-number">1</div>
+              <i class="fas fa-calendar-alt fa-2x step-icon"></i>
             </div>
-            <div class="carousel-item">
-              <div class="service-card">
-                <i data-lucide="megaphone" class="lucide-animated mb-4"></i>
-                <h3>אוטומציה בשיווק</h3>
-                <p>ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="service-card">
-                <i data-lucide="headphones" class="lucide-animated mb-4"></i>
-                <h3>אוטומציה בשירות לקוחות</h3>
-                <p>מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="service-card">
-                <i data-lucide="clipboard" class="lucide-animated mb-4"></i>
-                <h3>אוטומציה בתפעול ואדמין</h3>
-                <p>הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות.</p>
-              </div>
+            <div class="step-content">
+              <h5>קביעת פגישת אפיון</h5>
+              <p>קובעים פגישה חינמית (ב-Google Meet) לניתוח המצב הקיים וזיהוי הזדמנויות לשיפור.</p>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">הקודם</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">הבא</span>
-          </button>
+          <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-icon-wrapper">
+              <div class="step-number">2</div>
+              <i class="fas fa-file-alt fa-2x step-icon"></i>
+            </div>
+            <div class="step-content">
+              <h5>קבלת סיכום והצעת מחיר</h5>
+              <p>בסיום הפגישה תקבלו סיכום מקצועי והצעה מותאמת אישית לצרכי העסק שלכם.</p>
+            </div>
+          </div>
+          <div class="process-step" data-aos="fade-up" data-aos-delay="250">
+            <div class="step-icon-wrapper">
+              <div class="step-number">3</div>
+              <i class="fas fa-cogs fa-2x step-icon"></i>
+            </div>
+            <div class="step-content">
+              <h5>הטמעת האוטומציה</h5>
+              <p>מיישמים את הפתרונות אוטומציה מתקדמים (באמצעות כלים כמו Zapier ו-N8N) תוך ליווי צמוד ומקצועי.</p>
+            </div>
+          </div>
+          <div class="process-step" data-aos="fade-left" data-aos-delay="300">
+            <div class="step-icon-wrapper">
+              <div class="step-number">4</div>
+              <i class="fas fa-hands-helping fa-2x step-icon"></i>
+            </div>
+            <div class="step-content">
+              <h5>הדרכה ותמיכה</h5>
+              <p>מקבלים הדרכה מלאה ותמיכה שוטפת לשימוש מיטבי בכל הפתרונות שהוטמיעו.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- יתרונות -->
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-content bg-light">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">עדויות לקוחות</h2>
+        <div class="row text-center">
+          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="p-4 bg-white border rounded shadow-sm h-100">
+              <img loading="lazy" src="https://i.pravatar.cc/100?img=8" alt="יוסי לוי" class="rounded-circle mb-3">
+              <h5>יוסי לוי</h5>
+              <p class="small text-secondary">בעלים, חנות מקוונת</p>
+              <p class="fst-italic">"אחרי הטמעת האוטומציה, חסכתי 15 שעות בשבוע והתמקדתי בהגדלת העסק."</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="p-4 bg-white border rounded shadow-sm h-100">
+              <img loading="lazy" src="https://i.pravatar.cc/100?img=32" alt="איילת כהן" class="rounded-circle mb-3">
+              <h5>איילת כהן</h5>
+              <p class="small text-secondary">מנהלת שיווק, סטארט־אפ</p>
+              <p class="fst-italic">"מערכת האוטומציה שיפרה את הטיפול בלידים והובילה לעלייה משמעותית בהמרות."</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="p-4 bg-white border rounded shadow-sm h-100">
+              <img loading="lazy" src="https://i.pravatar.cc/100?img=51" alt="דניאל רוזן" class="rounded-circle mb-3">
+              <h5>דניאל רוזן</h5>
+              <p class="small text-secondary">סמנכ"ל תפעול, חברת שירותים</p>
+              <p class="fst-italic">"האוטומציה הפחיתה טעויות אנוש והגביר את היעילות בתפעול העסק בצורה ניכרת."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- יתרונות (Benefits) -->
     <section id="benefits" class="section-content">
       <div class="container">
-      <h2 class="section-title">הרווח הנקי שלכם מאוטומציה</h2>
-      <div class="row">
-        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="clock" class="lucide-animated"></i>
-          <h5><strong>חיסכון אדיר בזמן</strong></h5>
-        </div>
-        <p>שחררו את עצמכם ואת העובדים ממשימות ידניות מייגעות והתפנו לצמיחה.</p>
-        </div>
-        <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="check-circle" class="lucide-animated"></i>
-          <h5><strong>הפחתת טעויות קריטיות</strong></h5>
-        </div>
-        <p>תהליכים אוטומטיים מבטיחים דיוק ועקביות, ומונעים טעויות יקרות.</p>
-        </div>
-        <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="bar-chart-2" class="lucide-animated"></i>
-          <h5><strong>שיפור יעילות ופרודוקטיביות</strong></h5>
-        </div>
-        <p>הספיקו הרבה יותר בפחות זמן ומאמץ, תוך ניצול מקסימלי של משאבים.</p>
-        </div>
-        <div class="col-md-6" data-aos="fade-left" data-aos-delay="250">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="dollar-sign" class="lucide-animated"></i>
-          <h5><strong>גידול בהכנסות וברווח</strong></h5>
-        </div>
-        <p>שיפור תהליכי שיווק ומכירה והתייעלות תפעולית מתורגמים ליותר כסף.</p>
-        </div>
-        <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="smile" class="lucide-animated"></i>
-          <h5><strong>לקוחות מרוצים יותר</strong></h5>
-        </div>
-        <p>זמינות גבוהה, תגובות מהירות ושירות עקבי משפרים את חווית הלקוח.</p>
-        </div>
-        <div class="col-md-6" data-aos="fade-left" data-aos-delay="350">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i data-lucide="shield" class="lucide-animated"></i>
-          <h5><strong>שקט נפשי לכם</strong></h5>
-        </div>
-        <p>דעו שהתהליכים הקריטיים מתנהלים ביעילות ברקע, גם כשאתם לא במשרד.</p>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <!-- אודות -->
-    <section id="about" class="section-content bg-light">
-      <div class="container">
-        <h2 class="section-title">מי עומד מאחורי אוטומציוני?</h2>
-        <div class="row align-items-center">
-          <div class="col-lg-7" data-aos="fade-right" data-aos-delay="100">
-            <h5><strong>יונתן רינת - מומחה לאוטומציה עסקית</strong></h5>
-            <p>
-              נעים מאוד! עם ניסיון עשיר במכירות, שיווק דיגיטלי, פיתוח מערכות מידע וניהול לקוחות, אני מביא הבנה עמוקה של האתגרים העומדים בפני עסקים קטנים ובינוניים.
-            </p>
-            <p>
-              הרקע הטכנולוגי שלי, כולל שליטה בכלים כמו Excel, מערכות CRM, קמפיינים ממומנים ופתרונות IT, מאפשר לי לזהות במדויק את צווארי הבקבוק בעסק שלכם ולהציע פתרונות אוטומציה יצירתיים ויעילים.
-            </p>
-            <p>
-              <strong>
-                המטרה שלי היא פשוטה: לעזור לכם להתמקד במה שאתם הכי טובים בו, ולתת לאוטומציה לעשות את העבודה השחורה. אני מאמין במקצועיות, שקיפות ותוצאות מדודות.
-              </strong>
-            </p>
+        <h2 class="section-title" data-aos="fade-up">הרווח הנקי שלכם מאוטומציה</h2>
+        <div class="row">
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="clock" class="lucide-animated"></i>
+              <h5><strong>חיסכון אדיר בזמן</strong></h5>
+            </div>
+            <p>שחררו את עצמכם ואת העובדים ממשימות ידניות מייגעות והתפנו לצמיחה.</p>
           </div>
-            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="150">
-            <div class="text-center">
-              <i data-lucide="cpu" class="lucide-animated" style="width:80px; height:80px;"></i>
-              <p class="mt-2 text-center">רקע טכנולוגי פוגש הבנה עסקית</p>
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="check-circle" class="lucide-animated"></i>
+              <h5><strong>הפחתת טעויות קריטיות</strong></h5>
             </div>
+            <p>תהליכים אוטומטיים מבטיחים דיוק ועקביות, ומונעים טעויות יקרות.</p>
+          </div>
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="bar-chart-2" class="lucide-animated"></i>
+              <h5><strong>שיפור יעילות ופרודוקטיביות</strong></h5>
             </div>
+            <p>הספיקו הרבה יותר בפחות זמן ומאמץ, תוך ניצול מקסימלי של משאבים.</p>
+          </div>
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="250">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="dollar-sign" class="lucide-animated"></i>
+              <h5><strong>גידול בהכנסות וברווח</strong></h5>
+            </div>
+            <p>שיפור תהליכי שיווק ומכירה והתייעלות תפעולית מתורגמים ליותר כסף.</p>
+          </div>
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="smile" class="lucide-animated"></i>
+              <h5><strong>לקוחות מרוצים יותר</strong></h5>
+            </div>
+            <p>זמינות גבוהה, תגובות מהירות ושירות עקבי משפרים את חווית הלקוח.</p>
+          </div>
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="350">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="shield" class="lucide-animated"></i>
+              <h5><strong>שקט נפשי לכם</strong></h5>
+            </div>
+            <p>דעו שהתהליכים הקריטיים מתנהלים ביעילות ברקע, גם כשאתם לא במשרד.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- יצירת קשר -->
+    <!-- סרטון הדגמה (Video Demo) -->
+    <section id="video-demo" class="section-content bg-light">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">סרטון הדגמה</h2>
+        <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+          צפו בסרטון המדגים כיצד האוטומציה משנה את חיי העסק – בצורה פשוטה וברורה.
+        </p>
+        <div class="ratio ratio-16x9" data-aos="fade-up" data-aos-delay="150">
+          <iframe loading="lazy" src="https://www.youtube.com/embed/S3L1Kw087JI?rel=0&amp;controls=0&amp;modestbranding=1" title="סרטון הדגמה" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- שאלות נפוצות (FAQ) -->
+    <section id="faq" class="section-content">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">שאלות נפוצות</h2>
+        <div class="accordion accordion-flush" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1-content" aria-expanded="false" aria-controls="faq1-content">
+                <strong>מה כוללת פגישת האפיון החינמית?</strong>
+              </button>
+            </h2>
+            <div id="faq1-content" class="accordion-collapse collapse" aria-labelledby="faq1-header" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-start">
+                בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content" aria-expanded="false" aria-controls="faq2-content">
+                <strong>כמה זמן לוקח להטמיע אוטומציה בעסק?</strong>
+              </button>
+            </h2>
+            <div id="faq2-content" class="accordion-collapse collapse" aria-labelledby="faq2-header" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-start text-start">
+                פרויקטים קטנים נמשכים מספר ימים, ופרויקטים מורכבים יותר יכולים להימשך עד שבועיים, בהתאם למורכבות התהליכים.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3-content" aria-expanded="false" aria-controls="faq3-content">
+                <strong>האם נדרש ידע טכני להפעלת האוטומציות?</strong>
+              </button>
+            </h2>
+            <div id="faq3-content" class="accordion-collapse collapse" aria-labelledby="faq3-header" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-start">
+                כלל לא. המערכות שלנו פועלות באופן אוטומטי ברקע, ואנו מספקים הדרכה מלאה לצוות שלכם.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq4-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4-content" aria-expanded="false" aria-controls="faq4-content">
+                <strong>למה לבחור ב"אוטומציוני" ולא לעשות זאת בעצמי?</strong>
+              </button>
+            </h2>
+            <div id="faq4-content" class="accordion-collapse collapse" aria-labelledby="faq4-header" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-start">
+                כלים קיימים דורשים עקומת למידה ארוכה – אצלנו אתם מקבלים ניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- יצירת קשר (Contact) -->
     <section id="contact" class="section-content">
       <div class="container">
-        <h2 class="section-title">מוכנים לקחת את העסק לשלב הבא?</h2>
+        <h2 class="section-title" data-aos="fade-up">מוכנים לקחת את העסק לשלב הבא?</h2>
         <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
           הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.<br>
           נצלו את מבצע ההשקה וקבעו פגישת אפיון (ב-Google Meet) ללא עלות וללא התחייבות (במקום 399 ₪).<br>
@@ -917,7 +466,7 @@
           <div class="col-md-8 col-lg-6">
             <div class="form-section">
               <h5 class="mb-3 text-center">השאירו פרטים ונחזור אליכם בהקדם לתיאום הפגישה:</h5>
-                <form id="contact-form" action="your-form-handler.php" method="POST" dir="rtl"></form>
+              <form id="contact-form" action="your-form-handler.php" method="POST" dir="rtl">
                 <div class="mb-3">
                   <label for="fullname" class="form-label visually-hidden">שם מלא</label>
                   <input type="text" class="form-control" id="fullname" name="fullname" placeholder="שם מלא *" required>
@@ -931,13 +480,11 @@
                   <input type="email" class="form-control" id="email" name="email" placeholder="דוא''ל *" required>
                 </div>
                 <div class="mb-3">
-                  <label for="phone" class="form-label visually-hidden">טלפון</label>
+                  <label for="phone" class="form-label visually-hidden tex">טלפון</label>
                   <input type="tel" class="form-control" id="phone" name="phone" placeholder="טלפון *" required>
                 </div>
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary-custom">
-                    תאמו לי פגישת אפיון חינם עכשיו!
-                  </button>
+                  <button type="submit" class="btn btn-primary-custom ripple">תאמו לי פגישת אפיון חינם עכשיו!</button>
                 </div>
               </form>
             </div>
@@ -947,95 +494,81 @@
     </section>
   </main>
 
-  <!-- תחתית הדף -->
+  <!-- תחתית הדף (Footer) -->
   <footer>
     <div class="container">
-      <p><strong>אוטומציוני</strong> | פתרונות אוטומציה לעסקים קטנים ובינוניים</p>
-      <p>יונתן רינת | <a href="mailto:yonirinat@gmail.com">yonirinat@gmail.com</a> | <a href="tel:052-6485138">052-6485138</a></p>
-      <p>&copy; 2025 כל הזכויות שמורות.</p>
+      <p><strong>אוטומציוני</strong> | פתרונות אוטומציה לעסקים קטנים ובינוניים © 2024</p>
     </div>
   </footer>
 
-  <!-- אייקונים צפים -->
-  <div class="floating-icons py-6">
-    <a href="https://wa.me/972526485138" target="_blank" class="floating-icon whatsapp" title="צ'אט בוואטסאפ">
-      <i data-lucide="message-circle"></i>
-    </a>
-    <a href="https://calendly.com/your-calendly-link" target="_blank" class="floating-icon calendar" title="קביעת פגישה">
-      <i data-lucide="calendar"></i>
-    </a>
-    <a href="#contact" class="floating-icon contact" title="השארת פרטים">
-      <i data-lucide="user-plus"></i>
-    </a>
-  </div>
-
   <!-- סקריפטים -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/advanced-animations.js"></script>
+  <!-- ספריות ליבה (Bootstrap JS) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <!-- ספריות אנימציה (GSAP, AOS, Lucide) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- אייקונים -->
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- סקריפטים מותאמים אישית -->
   <script>
+    // אתחול ספריות כשכל המסמך נטען
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100
-      });
-      
-      // Initialize Lucide icons
-      lucide.createIcons();
-      
-      // Add loaded class to images
-      document.querySelectorAll('img').forEach(img => {
-        if (img.complete) {
-          img.classList.add('loaded');
+      // אתחול AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 800, once: true, offset: 100, disable: window.innerWidth < 768 });
+      } else {
+        console.warn('AOS library not loaded');
+      }
+      // אתחול אייקוני Lucide
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      } else {
+        console.warn('Lucide library not loaded');
+      }
+      // אתחול GSAP ו-ScrollTrigger
+      if (typeof gsap !== 'undefined') {
+        if (typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          // אנימציית מחוון גלילה (פס העליון מתמלא בהתאם למיקום)
+          gsap.to('.scroll-progress', {
+            width: '100%',
+            scrollTrigger: { scrub: true, start: 'top top', end: 'bottom bottom' }
+          });
         } else {
-          img.addEventListener('load', function() {
-            this.classList.add('loaded');
-          });
+          console.warn('ScrollTrigger plugin not loaded');
         }
-      });
-      
-      // Mobile menu fix - שיפור התפריט הנייד
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      const navbarCollapse = document.querySelector('.navbar-collapse');
-      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-      
-      if (navbarToggler && navbarCollapse) {
-        // פתיחת התפריט בלחיצה על הכפתור
-        navbarToggler.addEventListener('click', function() {
-          navbarCollapse.classList.toggle('show');
-        });
-        
-        // סגירת התפריט בלחיצה על קישור
-        navLinks.forEach(link => {
-          link.addEventListener('click', function() {
-            if (window.innerWidth < 992) {
-              navbarCollapse.classList.remove('show');
-            }
-          });
-        });
-        
-        // סגירת התפריט בלחיצה מחוץ לתפריט
-        document.addEventListener('click', function(event) {
-          const isClickInside = navbarCollapse.contains(event.target) || navbarToggler.contains(event.target);
-          
-          if (!isClickInside && navbarCollapse.classList.contains('show')) {
-            navbarCollapse.classList.remove('show');
-          }
-        });
-        
-        // מניעת סגירה אוטומטית של התפריט
-        navbarCollapse.addEventListener('hide.bs.collapse', function(event) {
-          // אם הסיבה לסגירה היא אוטומטית (לא לחיצה על קישור או מחוץ לתפריט)
-          if (event.type === 'hide.bs.collapse' && !event.clickEvent) {
-            event.preventDefault();
-          }
-        });
+      } else {
+        console.warn('GSAP library not loaded');
       }
     });
+    // טעינת סקריפטי אנימציה מותאמים לאחר טעינת העמוד
+    window.addEventListener('load', function() {
+      function loadScript(src, callback) {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = callback;
+        script.onerror = function() { console.warn('Failed to load script: ' + src); };
+        document.body.appendChild(script);
+      }
+      // טוען animations.js ואז advanced-animations.js
+      loadScript('js/animations.js', function() {
+        loadScript('js/advanced-animations.js', function() {
+          console.log('All animation scripts loaded successfully');
+        });
+      });
+    });
+    // מניעת אנימציות במסכים קטנים מאוד (mobile)
+    const checkMobile = () => {
+      if (window.innerWidth < 768) {
+        document.body.classList.add('reduce-motion');
+      } else {
+        document.body.classList.remove('reduce-motion');
+      }
+    };
+    window.addEventListener('resize', checkMobile);
+    checkMobile();
   </script>
 </body>
 </html>
