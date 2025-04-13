@@ -17,6 +17,8 @@ styles/*
 !images/
 !images/**
 
+!admin/
+!admin/**
 # קבצים ספציפיים שוודאי אינם נדרשים
 .DS_Store
 .env

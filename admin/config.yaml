@@ -1,0 +1,112 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: "he"
+
+collections:
+  - name: "hero"
+    label: "אזור ראשי (Hero)"
+    files:
+      - file: "data/hero.yml"
+        label: "Hero Content"
+        name: "hero_content"
+        fields:
+          - { label: "כותרת", name: "title", widget: "string" }
+          - { label: "תיאור", name: "description", widget: "text" }
+          - {
+              label: "טקסט על הצעה מיוחדת",
+              name: "special_offer",
+              widget: "text",
+            }
+          - {
+              label: "כפתור - קישור לפגישה",
+              name: "cta_link",
+              widget: "string",
+            }
+          - { label: "תמונת ראש", name: "headshot_image", widget: "image" }
+
+  - name: "challenges"
+    label: "אתגרים (Challenges)"
+    folder: "data/challenges"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת", name: "title", widget: "string" }
+      - { label: "תיאור", name: "description", widget: "text" }
+      - { label: "תמונה", name: "image", widget: "image" }
+
+  - name: "services"
+    label: "שירותים (Services)"
+    folder: "data/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת שירות", name: "title", widget: "string" }
+      - { label: "תיאור שירות", name: "description", widget: "text" }
+      - { label: "אייקון (שם מתוך Lucide)", name: "icon", widget: "string" }
+
+  - name: "process"
+    label: "תהליך (Process Steps)"
+    folder: "data/process"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "שלב (מספר)", name: "step_number", widget: "number" }
+      - { label: "כותרת שלב", name: "step_title", widget: "string" }
+      - { label: "תיאור שלב", name: "step_description", widget: "text" }
+      - {
+          label: "אייקון (למשל calendar, file, cogs...)",
+          name: "step_icon",
+          widget: "string",
+        }
+
+  - name: "testimonials"
+    label: "עדויות (Testimonials)"
+    folder: "data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "שם לקוח", name: "client_name", widget: "string" }
+      - { label: "תפקיד לקוח", name: "client_role", widget: "string" }
+      - { label: "תמונה", name: "client_photo", widget: "image" }
+      - { label: "ציטוט", name: "testimonial", widget: "text" }
+
+  - name: "faq"
+    label: "שאלות נפוצות (FAQ)"
+    folder: "data/faq"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "שאלה", name: "question", widget: "string" }
+      - { label: "תשובה", name: "answer", widget: "text" }
+
+  - name: "video"
+    label: "סרטון הדגמה (Video Section)"
+    files:
+      - file: "data/video.yml"
+        label: "Video Content"
+        name: "video_content"
+        fields:
+          - {
+              label: "קישור לסרטון (YouTube Embed URL)",
+              name: "video_url",
+              widget: "string",
+            }
+          - { label: "תמונה מייצגת", name: "thumbnail", widget: "image" }
+
+  - name: "contact"
+    label: "יצירת קשר (Contact Info)"
+    files:
+      - file: "data/contact.yml"
+        label: "Contact Content"
+        name: "contact_content"
+        fields:
+          - {
+              label: "תיאור יצירת קשר",
+              name: "contact_description",
+              widget: "text",
+            }
