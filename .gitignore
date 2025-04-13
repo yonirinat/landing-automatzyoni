@@ -8,17 +8,13 @@
 !favicon.ico
 
 # החרגת תיקיית styles עם הקבצים הספציפיים שאנחנו רוצים
-!styles/
-styles/*
-!styles/purged.css
-!styles/animations.css
+!dist/
+!dist/** 
 
 # החרגת כל תיקיית images
 !images/
 !images/**
 
-!admin/
-!admin/**
 # קבצים ספציפיים שוודאי אינם נדרשים
 .DS_Store
 .env
@@ -29,7 +25,6 @@ Thumbs.db
 
 # תיקיות נפוצות שלא ברשימה
 node_modules/
-dist/
 build/
 .vscode/
 .idea/
