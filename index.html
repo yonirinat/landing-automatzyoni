@@ -2,588 +2,1251 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>אוטומציוני - אוטומציה לעסקים</title>
-
-  <!-- Favicon -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אוטומציוני - פתרונות אוטומציה וחכמת עסקית לעסקים</title>
+  <meta name="description" content="אוטומציוני מתמחה בפיתוח פתרונות אוטומציה וחכמה עסקית המותאמים אישית לעסקים קטנים ובינוניים. שפרו את היעילות והרווחיות שלכם באמצעות הכלים המתקדמים שלנו.">
+  
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:title" content="אוטומציוני - פתרונות אוטומציה לעסקים">
+  <meta property="og:description" content="פתרונות אוטומציה וחכמה עסקית המותאמים אישית לעסקים קטנים ובינוניים. שפרו את היעילות והרווחיות שלכם.">
+  <meta property="og:image" content="https://example.com/images/og-image.jpg">
+  <meta property="og:site_name" content="אוטומציוני">
+  <meta property="og:locale" content="he_IL">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="אוטומציוני - פתרונות אוטומציה לעסקים">
+  <meta name="twitter:description" content="פתרונות אוטומציה וחכמה עסקית המותאמים אישית לעסקים קטנים ובינוניים. שפרו את היעילות והרווחיות שלכם.">
+  <meta name="twitter:image" content="https://example.com/images/og-image.jpg">
+  
+  <!-- Search Engine Optimization Tags -->
+  <meta name="author" content="יונתן רינת">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="אוטומציה, אוטומציה עסקית, חכמה עסקית, אוטומטיזציה, יעילות עסקית, עסקים קטנים, בינוניים">
+  <link rel="canonical" href="https://example.com/">
+  
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Bootstrap CSS RTL -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" crossorigin="anonymous">
-
-  <!-- AOS Animations -->
+  
+  <!-- CSS Files -->
+  <!-- שימוש בשני קבצי CSS - הראשון המטוהר לטעינה מהירה, והשני המלא לתמיכה בכל הפונקציונליות -->
+  <link href="styles/purged.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <!-- Google Fonts Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link href="styles/main.css" rel="stylesheet">
-  <link href="styles/animations.css" rel="stylesheet">
-
-  <!-- JSON‑LD Structured Data for each section -->
-  <!-- 1. Hero Section (LandingPage) -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- animations.css כבר נכלל בקובץ purged.css -->
+  <link rel="stylesheet" href="styles/animations.css">
+  
+  <!-- Preload hero image for better LCP -->
+  <link rel="preload" href="images/mobile-hero.webp" as="image" media="(max-width: 767px)">
+  <link rel="preload" href="images/logo.webp" as="image">
+  
+  <!-- JSON-LD לשיפור SEO -->
   <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "LandingPage","name": "אוטומציוני","url": "https://www.yourdomain.com","description": "אנחנו עוזרים לכם לעבוד במקצוע שלכם, את השאר תשאירו לנו","mainEntity": {"@type": "WebPageElement","cssSelector": "#hero"}}
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "אוטומציוני",
+          "url": "https://example.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://example.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "אוטומציוני",
+          "url": "https://example.com",
+          "logo": "https://example.com/images/logo.webp",
+          "image": "https://example.com/images/headshot.webp",
+          "description": "אוטומציוני מתמחה בפיתוח פתרונות אוטומציה וחכמה עסקית המותאמים אישית לעסקים קטנים ובינוניים.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "רחוב הדוגמה 123",
+            "addressLocality": "תל אביב",
+            "postalCode": "6100000",
+            "addressCountry": "IL"
+          },
+          "telephone": "+972526485138",
+          "email": "yonirinat@gmail.com",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+972526485138",
+              "contactType": "customer support",
+              "email": "yonirinat@gmail.com",
+              "availableLanguage": ["Hebrew", "English"]
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+972526485138",
+              "contactType": "sales",
+              "email": "yonirinat@gmail.com",
+              "availableLanguage": ["Hebrew", "English"]
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/automatzyoni",
+            "https://www.linkedin.com/company/automatzyoni",
+            "https://www.instagram.com/automatzyoni"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "יונתן רינת",
+            "jobTitle": "מומחה לאוטומציה עסקית",
+            "image": "https://example.com/images/headshot.webp",
+            "email": "yonirinat@gmail.com"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "מה כוללת פגישת האפיון החינמית?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "כמה זמן לוקח להטמיע אוטומציה בעסק?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "פרויקטים קטנים נמשכים מספר ימים, ופרויקטים מורכבים יותר יכולים להימשך עד שבועיים, בהתאם למורכבות התהליכים."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "האם נדרש ידע טכני להפעלת האוטומציות?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "לא נדרש ידע טכני - כל הפתרונות מופעלים ברקע ואנו מספקים הדרכה מלאה לצוות שלכם."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "למה לבחור ב'אוטומציוני' ולא לעשות זאת בעצמי?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "כלים קיימים דורשים עקומת למידה ארוכה – אצלנו אתם מקבלים ניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "מהי עלות שירותי האוטומציה?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "העלות משתנה בהתאם לגודל והמורכבות של העסק. לאחר פגישת האפיון, נוכל לספק הצעת מחיר מותאמת אישית."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "האם ניתן לשלב את האוטומציה עם מערכות קיימות?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "כן! כל הפתרונות שלנו גמישים ומאפשרים אינטגרציה עם מערכות קיימות כמו CRM, דוא\"ל, רשתות חברתיות ועוד."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "איך מתחילים את התהליך?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "התחילו בפגישת אפיון חינמית! נשמח ללמוד על העסק שלכם ולראות איך אוטומציה יכולה לשפר את התהליכים."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "מה יתרון האוטומציה לעסק קטן?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "אוטומציה מאפשרת לעסק קטן להתמודד עם יותר עבודה ומורכבות, מבלי להגדיל את הצוות או להחמיץ הזדמנויות."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "האם יש תמיכה אחרי ההטמעה?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "בהחלט! אנו מספקים תמיכה שוטפת והדרכה לצוות שלכם לאחר ההטמעה, להבטחת שימוש מיטבי במערכות."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "איך אני יכול להתחיל לעבוד עם אוטומציוני?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "פשוט קבעו פגישת אפיון חינמית עם אחד מהמומחים שלנו, ומיד לאחר מכן נתחיל לתכנן את הפתרון המתאים ביותר לעסק שלכם."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
+  <!-- Facebook Pixel Code -->
+  <script>
+  /* 
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'PageView');
+  */
   </script>
-  <!-- 2. Challenges Section (ItemList) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "ItemList","name": "אתגרים – ניהול אדמיניסטרציה ובעיות","itemListElement": [{"@type": "ListItem","position": 1,"name": "טובעים באדמיניסטרציה","description": "משימות חוזרות כגון מענה למיילים, תיאום פגישות, ניהול לידים והוצאת חשבוניות גוזלות זמן יקר."},{"@type": "ListItem","position": 2,"name": "טעויות יקרות קורות","description": "תהליכים ידניים מובילים לטעויות שמעכבות צמיחה ועולות כסף."},{"@type": "ListItem","position": 3,"name": "לידים הולכים לאיבוד","description": "מעקב לא יעיל אחר פניות ולקוחות שמוביל להפסד הזדמנויות מכירה."}]}
+  <noscript>
+  <!-- <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/> -->
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+  
+  <!-- Google Tag Manager -->
+  <script>
+  /*
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  */
   </script>
-  <!-- 3. Services Section (ItemList of Service objects) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "ItemList","name": "שירותי אוטומציה","itemListElement": [{"@type": "ListItem","position": 1,"item": {"@type": "Service","name": "אוטומציה במכירות ו-CRM","description": "ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM."}},{"@type": "ListItem","position": 2,"item": {"@type": "Service","name": "אוטומציה בשיווק","description": "ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות."}},{"@type": "ListItem","position": 3,"item": {"@type": "Service","name": "אוטומציה בשירות לקוחות","description": "מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה."}},{"@type": "ListItem","position": 4,"item": {"@type": "Service","name": "אוטומציה בתפעול ואדמין","description": "הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות."}}]}
+  <!-- End Google Tag Manager -->
+  
+  <!-- TikTok Pixel Code -->
+  <script>
+  /*
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+    ttq.load('YOUR_PIXEL_ID');
+    ttq.page();
+  }(window, document, 'ttq');
+  */
   </script>
-  <!-- 4. Benefits Section (ItemList) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "ItemList","name": "היתרונות של אוטומציה","itemListElement": [{"@type": "ListItem","position": 1,"name": "חיסכון אדיר בזמן","description": "שחרור ממשימות ידניות מייגעות והתפנות לצמיחה."},{"@type": "ListItem","position": 2,"name": "הפחתת טעויות קריטיות","description": "תהליכים אוטומטיים מבטיחים דיוק, מונעים טעויות יקרות."},{"@type": "ListItem","position": 3,"name": "שיפור יעילות ופרודוקטיביות","description": "הספק גבוה יותר בפחות זמן, ניצול מקסימלי של משאבים."},{"@type": "ListItem","position": 4,"name": "גידול בהכנסות וברווח","description": "שיפור תהליכי שיווק ומכירה מוביל לעלייה בהכנסות."},{"@type": "ListItem","position": 5,"name": "לקוחות מרוצים יותר","description": "זמינות ותגובה מהירה משפרים את חוויית הלקוח."},{"@type": "ListItem","position": 6,"name": "שקט נפשי לכם","description": "תהליכים קריטיים מתנהלים ביעילות גם כשאינכם במשרד."}]}
-  </script>
-  <!-- 5. About Section (AboutPage) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "AboutPage","name": "אודות אוטומציוני","url": "https://www.yourdomain.com/about","description": "יונתן רינת - מומחה לאוטומציה עסקית עם ניסיון עשיר במכירות, שיווק דיגיטלי ופיתוח מערכות."}
-  </script>
-  <!-- 6. Process Section (HowTo) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "HowTo","name": "איך מתבצע תהליך האוטומציה?","step": [{"@type": "HowToStep","position": 1,"name": "קביעת פגישת אפיון","itemListElement": {"@type": "HowToDirection","position": 1,"text": "קובעים פגישה חינמית (ב-Google Meet) לניתוח המצב הקיים וזיהוי הזדמנויות לשיפור."}},{"@type": "HowToStep","position": 2,"name": "קבלת סיכום והצעת מחיר","itemListElement": {"@type": "HowToDirection","position": 2,"text": "תקבלו סיכום מקצועי של התובנות מהפגישה, כולל הצעת מחיר מפורטת ליישום האוטומציה."}},{"@type": "HowToStep","position": 3,"name": "הטמעת האוטומציה","itemListElement": {"@type": "HowToDirection","position": 3,"text": "מיישמים את פתרונות האוטומציה המתקדמים (Zapier, N8N וכו') בליווי צמוד, תוך התאמה לצרכי העסק."}},{"@type": "HowToStep","position": 4,"name": "הדרכה ותמיכה","itemListElement": {"@type": "HowToDirection","position": 4,"text": "לאחר ההטמעה, תקבלו הדרכה מלאה לשימוש בכלים החדשים ותמיכה שוטפת לפי הצורך."}}]}
-  </script>
-  <!-- 7. Video Section (VideoObject) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "VideoObject","name": "סרטון הדגמה - אוטומציוני","description": "סרטון המדגים כיצד אוטומציה יכולה לשנות את העסק – צפו כיצד התהליכים נעשים פשוטים ויעילים יותר.","thumbnailUrl": "https://img.youtube.com/vi/S3L1Kw087JI/maxresdefault.jpg","uploadDate": "2024-01-01","duration": "PT2M10S","embedUrl": "https://www.youtube.com/embed/S3L1Kw087JI","publisher": {"@type": "Organization","name": "אוטומציוני"}}
-  </script>
-  <!-- 8. FAQ Section (FAQPage) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "FAQPage","mainEntity": [{"@type": "Question","name": "מה כוללת פגישת האפיון החינמית?","acceptedAnswer": {"@type": "Answer","text": "בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות."}},{"@type": "Question","name": "כמה זמן לוקח להטמיע אוטומציה בעסק?","acceptedAnswer": {"@type": "Answer","text": "פרויקטים קטנים נמשכים מספר ימים, ומורכבים יותר יכולים להימשך עד שבועיים – בהתאם למורכבות."}},{"@type": "Question","name": "האם נדרש ידע טכני להפעלת האוטומציות?","acceptedAnswer": {"@type": "Answer","text": "כלל לא. המערכות שלנו פועלות באופן אוטומטי ברקע, ואנו מספקים הדרכה מלאה לצוות שלכם."}},{"@type": "Question","name": "למה לבחור ב\"אוטומציוני\" ולא לעשות זאת בעצמי?","acceptedAnswer": {"@type": "Answer","text": "עבודת האוטומציה העצמאית דורשת עקומת למידה ארוכה, ואצלנו אתם זוכים לניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר."}}]}
-  </script>
-  <!-- 9. Contact Section (ContactPage) -->
-  <script type="application/ld+json">
-{"@context": "https://schema.org","@type": "ContactPage","name": "יצירת קשר עם אוטומציוני","url": "https://www.yourdomain.com/contact","description": "טופס יצירת קשר ופרטי התקשרות לקבלת פגישת אפיון חינמית.","contactOption": "TollFree","contactType": "customer service"}
-  </script>
-
-  <!-- Preload Critical JavaScript -->
-  <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
-  <link rel="preload" href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" as="script">
-
-  <!-- WebP detection script -->
-  <script src="js/webp-detection.js"></script>
+  <!-- End TikTok Pixel Code -->
 </head>
-<body>
-  <!-- מחוון התקדמות גלילה (פס צר בחלק העליון) -->
-  <div class="scroll-progress"></div>
 
-  <!-- ניווט עליון -->
-  <nav class="navbar navbar-expand-lg bg-white fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#hero">
-        <img loading="lazy" src="images/logo.webp" alt="לוגו אוטומציוני"> אוטומציוני
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="#hero">ראשי</a></li>
-          <li class="nav-item"><a class="nav-link" href="#challenges">האתגרים</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">השירותים</a></li>
-          <li class="nav-item"><a class="nav-link" href="#process">התהליך</a></li>
-          <li class="nav-item"><a class="nav-link" href="#benefits">היתרונות</a></li>
-          <li class="nav-item"><a class="nav-link" href="#testimonials">עדויות</a></li>
-          <li class="nav-item"><a class="nav-link" href="#video-demo">סרטון הדגמה</a></li>
-          <li class="nav-item"><a class="nav-link" href="#faq">שאלות נפוצות</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">אודות</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">יצירת קשר</a></li>
-        </ul>
+<body class="bg-white">
+  <!-- Google Tag Manager (noscript) -->
+  <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <!-- Spacer div to compensate for fixed nav height -->
+  <div class="h-[72px]"></div>
+  
+  <!-- Scroll Progress Indicator (ניתן לעצב בהמשך במידת הצורך) -->
+  <div class="scroll-progress fixed top-0 left-0 h-1 bg-blue-600" style="width: 0;"></div>
+  
+  <!-- Navigation -->
+  <nav class="bg-white shadow fixed w-full z-50 top-0">
+    <div class="container mx-auto px-4 flex justify-between items-center py-4">
+      <div class="flex items-center">
+        
+        <a href="#hero" class="flex items-center">
+          <img src="images/logo.webp" alt="לוגו אוטומציוני" class="h-10 w-auto mr-2">
+          <span class="font-bold text-xl">אוטומציוני</span>
+        </a>
+        
+      </div>
+      <div x-data="{ open: false }" x-init="open = false">
+        <button id="menu-button" @click="open = !open" class="focus:outline-none ml-2 order-first" aria-label="תפריט ניווט">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <div x-show="open" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform -translate-y-2"
+             x-transition:enter-end="opacity-100 transform translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 transform translate-y-0"
+             x-transition:leave-end="opacity-0 transform -translate-y-2"
+             @click.away="open = false" 
+             class="absolute left-0 ml-4 mt-2 w-64 bg-white rounded-lg shadow-lg">
+          <ul class="py-2 px-3 space-y-2">
+            <li><a href="#hero" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">ראשי</a></li>
+            <li><a href="#challenges" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">האתגרים</a></li>
+            <li><a href="#services" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">השירותים</a></li>
+            <li><a href="#about" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">אודות</a></li>
+            <li><a href="#process" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">התהליך</a></li>
+            <li><a href="#testimonials" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">עדויות</a></li>
+            <li><a href="#benefits" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">יתרונות</a></li>
+            <li><a href="#video-demo" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">סרטון הדגמה</a></li>
+            <li><a href="#faq" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">שאלות נפוצות</a></li>
+            <li><a href="#contact" @click="open = false" class="block py-1 hover:text-blue-600 transition-colors duration-200">יצירת קשר</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
-
-  <!-- אזור גיבור (Hero Section) -->
-  <header id="hero" class="hero-section">
-    <div class="parallax-bg">
-      <div class="parallax-element"></div>
-    </div>
-    <div class="hero-content-centered">
-      <h1 data-aos="fade-up">אוטומציוני</h1>
-      <p class="lead" data-aos="fade-up" data-aos-delay="100">
-        אנחנו עוזרים לכם לעבוד במקצוע שלכם,<br>
-        את השאר תשאירו לנו.
-      </p>
-      <div class="special-offer-box" data-aos="zoom-in" data-aos-delay="200">
-        <h3>פגישת אפיון במתנה!</h3>
-        <p>
-          לרגל ההשקה, פגישת אפיון ראשונית<br>(בשווי 399 ₪)<br>
-          <strong>ללא עלות וללא התחייבות!</strong><br>
-        </p>
-      </div>
-      <a href="https://calendly.com/yonirinat/30min" class="btn btn-primary-custom ripple mt-4" data-aos="fade-up" data-aos-delay="300">
-        תאמו פגישת אפיון חינם
-      </a>
-    </div>
-    <div class="headshot-container" data-aos="fade-in" data-aos-delay="150">
-      <img loading="lazy" src="images/headshot.webp" alt="יונתן רינת" class="headshot-image">
-    </div>
-  </header>
-
-  <main>
-    <!-- אתגרים -->
-    <section id="challenges" class="section-content">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">האם העסק מנהל אתכם במקום שאתם תנהלו אותו?</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <!-- כרטיסי אתגר: טובעים באדמיניסטרציה, טעויות יקרות, ... -->
-          <div class="col" data-aos="fade-up" data-aos-delay="100">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/administrative.webp" alt="טובעים באדמיניסטרציה - איור המתאר עומס משימות אדמיניסטרטיביות" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">טובעים באדמיניסטרציה?</h4>
-                <p class="card-text text-center">משימות חוזרות כגון מענה למיילים, תיאום פגישות, ניהול לידים והוצאת חשבוניות גוזלות זמן יקר.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col" data-aos="fade-up" data-aos-delay="150">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/mistakes.webp" alt="טעויות יקרות קורות - איור המתאר טעויות בתהליכים עסקיים" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">טעויות יקרות קורות?</h4>
-                <p class="card-text text-center">תהליכים ידניים מובילים לטעויות שמעכבות צמיחה ועולות כסף.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col" data-aos="fade-up" data-aos-delay="200">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/lost-leads.webp" alt="לידים הולכים לאיבוד - איור המתאר אובדן הזדמנויות עסקיות" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">לידים הולכים לאיבוד?</h4>
-                <p class="card-text text-center">מעקב לא יעיל אחר פניות ולקוחות שמוביל להפסד הזדמנויות מכירה.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col" data-aos="fade-up" data-aos-delay="250">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/focus-work.webp" alt="רוצים להתמקד במקצוע - איור המתאר התמקדות בליבת העסק" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">רוצים להתמקד במקצוע?</h4>
-                <p class="card-text text-center">במקום לבזבז זמן על מטלות מנהלה, התמקדו במה שאתם טובים בו באמת.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col" data-aos="fade-up" data-aos-delay="300">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/excel-work.webp" alt="שעות על גיליונות אקסל - איור המתאר עבודה מייגעת על גיליונות אקסל" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">שעות על גיליונות אקסל?</h4>
-                <p class="card-text text-center">מבזבזים זמן יקר על עבודה ידנית באקסל<br>במקום לתת למערכות לעבוד?</p>
-              </div>
-            </div>
-          </div>
-          <div class="col" data-aos="fade-up" data-aos-delay="350">
-            <div class="card shadow-sm border-0 h-100">
-              <div class="challenge-image-container">
-                <img loading="lazy" src="images/efficient-solution.webp" alt="יש פתרון יעיל - איור המתאר פתרון אוטומציה יעיל לבעיות העסק" class="challenge-image">
-              </div>
-              <div class="card-body text-center">
-                <h4 class="card-title">יש פתרון יעיל!</h4>
-                <p class="card-text text-center">אם עניתם "כן" אפילו פעם אחת – אוטומציה<br>יכולה לשנות את חיי העסק שלכם.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- שירותים (Carousel) -->
-    <section id="services" class="section-content bg-light">
-      <div class="container">
-      <h2 class="section-title" data-aos="fade-up">איך אוטומציוני עוזרת לעסק שלכם?</h2>
-      <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="service-card">
-          <i data-lucide="user-check" class="lucide-animated mb-4"></i>
-          <h3>אוטומציה במכירות ו-CRM</h3>
-          <p class="text-center">ניהול לידים חכם, תזכורות אוטומטיות, תיאום פגישות, עדכון CRM.</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="service-card">
-          <i data-lucide="megaphone" class="lucide-animated mb-4"></i>
-          <h3>אוטומציה בשיווק</h3>
-          <p class="text-center">ניהול קמפיינים, סגמנטציה, דיוור אוטומטי, חיבור לרשתות חברתיות.</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="service-card">
-          <i data-lucide="headphones" class="lucide-animated mb-4"></i>
-          <h3>אוטומציה בשירות לקוחות</h3>
-          <p class="text-center">מענה אוטומטי לפניות, ניתוב חכם, איסוף משובים, תמיכה יעילה.</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="service-card">
-          <i data-lucide="clipboard" class="lucide-animated mb-4"></i>
-          <h3>אוטומציה בתפעול ואדמין</h3>
-          <p class="text-center">הפקת מסמכים, סנכרון יומנים, ניהול משימות, הנהלת חשבונות.</p>
-          </div>
-        </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">הקודם</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">הבא</span>
-        </button>
-      </div>
-      </div>
-    </section>
-
-    <section id="process" class="section-content bg-light">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">איך מתבצע התהליך?</h2>
-        <div class="process-timeline">
-          <div class="process-step" data-aos="fade-right" data-aos-delay="150">
-            <div class="step-icon-wrapper">
-              <div class="step-number">1</div>
-              <i class="fas fa-calendar-alt fa-2x step-icon"></i>
-            </div>
-            <div class="step-content">
-              <h5>קביעת פגישת אפיון</h5>
-              <p>קובעים פגישה חינמית (ב-Google Meet) לניתוח המצב הקיים וזיהוי הזדמנויות לשיפור.</p>
-            </div>
-          </div>
-          <div class="process-step" data-aos="fade-up" data-aos-delay="200">
-            <div class="step-icon-wrapper">
-              <div class="step-number">2</div>
-              <i class="fas fa-file-alt fa-2x step-icon"></i>
-            </div>
-            <div class="step-content">
-              <h5>קבלת סיכום והצעת מחיר</h5>
-              <p>בסיום הפגישה תקבלו סיכום מקצועי והצעה מותאמת אישית לצרכי העסק שלכם.</p>
-            </div>
-          </div>
-          <div class="process-step" data-aos="fade-up" data-aos-delay="250">
-            <div class="step-icon-wrapper">
-              <div class="step-number">3</div>
-              <i class="fas fa-cogs fa-2x step-icon"></i>
-            </div>
-            <div class="step-content">
-              <h5>הטמעת האוטומציה</h5>
-              <p>מיישמים את הפתרונות אוטומציה מתקדמים (באמצעות כלים כמו Zapier ו-N8N) תוך ליווי צמוד ומקצועי.</p>
-            </div>
-          </div>
-          <div class="process-step" data-aos="fade-left" data-aos-delay="300">
-            <div class="step-icon-wrapper">
-              <div class="step-number">4</div>
-              <i class="fas fa-hands-helping fa-2x step-icon"></i>
-            </div>
-            <div class="step-content">
-              <h5>הדרכה ותמיכה</h5>
-              <p>מקבלים הדרכה מלאה ותמיכה שוטפת לשימוש מיטבי בכל הפתרונות שהוטמיעו.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section-content bg-light">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">עדויות לקוחות</h2>
-        <div class="row text-center">
-          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="p-4 bg-white border rounded shadow-sm h-100">
-              <img loading="lazy" src="https://i.pravatar.cc/100?img=8" alt="יוסי לוי" class="rounded-circle mb-3">
-              <h5>יוסי לוי</h5>
-              <p class="small text-secondary">בעלים, חנות מקוונת</p>
-              <p class="fst-italic">"אחרי הטמעת האוטומציה, חסכתי 15 שעות בשבוע והתמקדתי בהגדלת העסק."</p>
-            </div>
-          </div>
-          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="p-4 bg-white border rounded shadow-sm h-100">
-              <img loading="lazy" src="https://i.pravatar.cc/100?img=32" alt="איילת כהן" class="rounded-circle mb-3">
-              <h5>איילת כהן</h5>
-              <p class="small text-secondary">מנהלת שיווק, סטארט־אפ</p>
-              <p class="fst-italic">"מערכת האוטומציה שיפרה את הטיפול בלידים והובילה לעלייה משמעותית בהמרות."</p>
-            </div>
-          </div>
-          <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="p-4 bg-white border rounded shadow-sm h-100">
-              <img loading="lazy" src="https://i.pravatar.cc/100?img=51" alt="דניאל רוזן" class="rounded-circle mb-3">
-              <h5>דניאל רוזן</h5>
-              <p class="small text-secondary">סמנכ"ל תפעול, חברת שירותים</p>
-              <p class="fst-italic">"האוטומציה הפחיתה טעויות אנוש והגביר את היעילות בתפעול העסק בצורה ניכרת."</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- יתרונות (Benefits) -->
-    <section id="benefits" class="section-content">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">הרווח הנקי שלכם מאוטומציה</h2>
-        <div class="row">
-          <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="clock" class="lucide-animated"></i>
-              <h5><strong>חיסכון אדיר בזמן</strong></h5>
-            </div>
-            <p>שחררו את עצמכם ואת העובדים ממשימות ידניות מייגעות והתפנו לצמיחה.</p>
-          </div>
-          <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="check-circle" class="lucide-animated"></i>
-              <h5><strong>הפחתת טעויות קריטיות</strong></h5>
-            </div>
-            <p>תהליכים אוטומטיים מבטיחים דיוק ועקביות, ומונעים טעויות יקרות.</p>
-          </div>
-          <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="bar-chart-2" class="lucide-animated"></i>
-              <h5><strong>שיפור יעילות ופרודוקטיביות</strong></h5>
-            </div>
-            <p>הספיקו הרבה יותר בפחות זמן ומאמץ, תוך ניצול מקסימלי של משאבים.</p>
-          </div>
-          <div class="col-md-6" data-aos="fade-left" data-aos-delay="250">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="dollar-sign" class="lucide-animated"></i>
-              <h5><strong>גידול בהכנסות וברווח</strong></h5>
-            </div>
-            <p>שיפור תהליכי שיווק ומכירה והתייעלות תפעולית מתורגמים ליותר כסף.</p>
-          </div>
-          <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="smile" class="lucide-animated"></i>
-              <h5><strong>לקוחות מרוצים יותר</strong></h5>
-            </div>
-            <p>זמינות גבוהה, תגובות מהירות ושירות עקבי משפרים את חווית הלקוח.</p>
-          </div>
-          <div class="col-md-6" data-aos="fade-left" data-aos-delay="350">
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i data-lucide="shield" class="lucide-animated"></i>
-              <h5><strong>שקט נפשי לכם</strong></h5>
-            </div>
-            <p>דעו שהתהליכים הקריטיים מתנהלים ביעילות ברקע, גם כשאתם לא במשרד.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- סרטון הדגמה (Video Demo) -->
-    <section id="video-demo" class="section-content bg-light">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">סרטון הדגמה</h2>
-        <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
-          צפו בסרטון המדגים כיצד האוטומציה משנה את חיי העסק – בצורה פשוטה וברורה.
-        </p>
-        <div class="ratio ratio-16x9" data-aos="fade-up" data-aos-delay="150">
-          <iframe loading="lazy" src="https://www.youtube.com/embed/S3L1Kw087JI?rel=0&amp;controls=0&amp;modestbranding=1" title="סרטון הדגמה" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- שאלות נפוצות (FAQ) -->
-    <section id="faq" class="section-content">
-      <div class="container">
-        <h2 class="section-title" data-aos="fade-up">שאלות נפוצות</h2>
-        <div class="accordion accordion-flush" id="faqAccordion" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq1-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1-content" aria-expanded="false" aria-controls="faq1-content">
-                <strong>מה כוללת פגישת האפיון החינמית?</strong>
-              </button>
-            </h2>
-            <div id="faq1-content" class="accordion-collapse collapse" aria-labelledby="faq1-header" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-start">
-                בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq2-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content" aria-expanded="false" aria-controls="faq2-content">
-                <strong>כמה זמן לוקח להטמיע אוטומציה בעסק?</strong>
-              </button>
-            </h2>
-            <div id="faq2-content" class="accordion-collapse collapse" aria-labelledby="faq2-header" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-start text-start">
-                פרויקטים קטנים נמשכים מספר ימים, ופרויקטים מורכבים יותר יכולים להימשך עד שבועיים, בהתאם למורכבות התהליכים.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq3-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3-content" aria-expanded="false" aria-controls="faq3-content">
-                <strong>האם נדרש ידע טכני להפעלת האוטומציות?</strong>
-              </button>
-            </h2>
-            <div id="faq3-content" class="accordion-collapse collapse" aria-labelledby="faq3-header" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-start">
-                כלל לא. המערכות שלנו פועלות באופן אוטומטי ברקע, ואנו מספקים הדרכה מלאה לצוות שלכם.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq4-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4-content" aria-expanded="false" aria-controls="faq4-content">
-                <strong>למה לבחור ב"אוטומציוני" ולא לעשות זאת בעצמי?</strong>
-              </button>
-            </h2>
-            <div id="faq4-content" class="accordion-collapse collapse" aria-labelledby="faq4-header" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-start">
-                כלים קיימים דורשים עקומת למידה ארוכה – אצלנו אתם מקבלים ניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- יצירת קשר (Contact) -->
-    <section id="contact" class="section-content bg-primary text-white py-5">
-      <div class="container">
-        <h2 class="section-title display-4 fw-bold text-center mb-4" data-aos="fade-up" style="color: white;">מוכנים לקחת את העסק לשלב הבא?</h2>
-        <p class="text-center mb-5 lead" data-aos="fade-up" data-aos-delay="100">
-          <strong>הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.</strong><br>
-          נצלו את מבצע ההשקה וקבעו פגישת אפיון (ב-Google Meet) ללא עלות וללא התחייבות<br>
-          <span class="badge bg-warning text-dark fs-6 my-2 position-relative">
-            במקום <span class="text-decoration-line-through text-danger">399 ₪</span>
-            <span class="badge bg-success blink-animation ms-2">חינם! (מבצע לזמן מוגבל)</span>
-          </span><br>
-          <style>
-            .blink-animation {
-              animation: blink 1s infinite;
-            }
-            @keyframes blink {
-              0% { opacity: 1; }
-              50% { opacity: 0.5; }
-              100% { opacity: 1; }
-            }
-          </style>
-          בואו נגלה יחד איך אוטומציה יכולה לחסוך לכם זמן וכסף, כבר מהיום הראשון.
-        </p>
-        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="150">
-          <div class="col-md-8 col-lg-6">
-            <div class="form-section bg-white text-dark p-4 rounded-3 shadow-lg">
-              <h5 class="mb-4 text-center fw-bold">השאירו פרטים ונחזור אליכם בהקדם לתיאום הפגישה:</h5>
-              <form id="contact-form" action="your-form-handler.php" method="POST" dir="rtl">
-                <div class="mb-3">
-                  <label for="fullname" class="form-label visually-hidden">שם מלא</label>
-                  <input type="text" class="form-control form-control-lg" id="fullname" name="fullname" placeholder="שם מלא *" required>
-                </div>
-                <div class="mb-3">
-                  <label for="businessname" class="form-label visually-hidden">שם העסק</label>
-                  <input type="text" class="form-control form-control-lg" id="businessname" name="businessname" placeholder="שם העסק">
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label visually-hidden">דוא"ל</label>
-                  <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="דוא''ל *" required>
-                </div>
-                <div class="mb-4">
-                  <label for="phone" class="form-label visually-hidden tex">טלפון</label>
-                  <input type="tel" class="form-control form-control-lg" id="phone" name="phone" placeholder="טלפון *" required>
-                </div>
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary-custom btn-lg ripple fw-bold">תאמו לי פגישת אפיון חינם עכשיו! 🚀</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- תחתית הדף (Footer) -->
-  <footer>
-    <div class="container">
-      <p><strong>אוטומציוני</strong> | פתרונות אוטומציה לעסקים קטנים ובינוניים © 2024</p>
-    </div>
-  </footer>
-
-  <!-- סקריפטים -->
-  <!-- ספריות ליבה (Bootstrap JS) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <!-- ספריות אנימציה (GSAP, AOS, Lucide) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- אייקונים -->
-  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-
-  <!-- סקריפטים מותאמים אישית -->
-  <script>
-    // אתחול ספריות כשכל המסמך נטען
-    document.addEventListener('DOMContentLoaded', function() {
-      // אתחול AOS
-      if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 800, once: true, offset: 100 });
-      } else {
-        console.warn('AOS library not loaded');
-      }
-      // אתחול אייקוני Lucide
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      } else {
-        console.warn('Lucide library not loaded');
-      }
-      // אתחול GSAP ו-ScrollTrigger
-      if (typeof gsap !== 'undefined') {
-        if (typeof ScrollTrigger !== 'undefined') {
-          gsap.registerPlugin(ScrollTrigger);
-          // אנימציית מחוון גלילה (פס העליון מתמלא בהתאם למיקום)
-          gsap.to('.scroll-progress', {
-            width: '100%',
-            scrollTrigger: { scrub: true, start: 'top top', end: 'bottom bottom' }
-          });
-        } else {
-          console.warn('ScrollTrigger plugin not loaded');
-        }
-      } else {
-        console.warn('GSAP library not loaded');
-      }
-    });
-    // טעינת סקריפטי אנימציה מותאמים לאחר טעינת העמוד
-    window.addEventListener('load', function() {
-      function loadScript(src, callback) {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = callback;
-        script.onerror = function() { console.warn('Failed to load script: ' + src); };
-        document.body.appendChild(script);
-      }
-      // טוען animations.js ואז advanced-animations.js
-      loadScript('js/animations.js', function() {
-        loadScript('js/advanced-animations.js', function() {
-          console.log('All animation scripts loaded successfully');
-        });
-      });
-    });
-  </script>
-
-  <!-- Floating Action Buttons -->
-  <div class="floating-buttons">
-    <a href="https://calendly.com/yonirinat/30min" target="_blank" rel="noopener noreferrer" class="float-button cal-button" aria-label="תאם פגישה ב-Calendly">
-      <i data-lucide="calendar-days"></i>
+<!-- HERO SECTION למובייל -->
+<section id="hero-mobile" class="relative md:hidden bg-gradient-to-r from-[rgba(10,20,40,1)] via-[rgba(10,20,40,0.85)] to-[rgba(220,220,220,1)]">
+  <!-- רקע: תמונה מלאה המכסה את כל המסך -->
+  <img src="images/mobile-hero.webp" 
+       alt="רקע למובייל" 
+       fetchpriority="high"
+       width="100%" 
+       height="100%"
+       class="absolute inset-0 object-cover w-full h-full">
+  <!-- תוכן HERO למובייל -->
+  <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center py-12">
+    <!-- רווח עבור ה-NAVBAR -->
+    <div class="h-12 mb-6"></div>
+    <!-- כותרת ראשית -->
+    <h2 class="text-3xl font-bold mb-4">הפתרון החכם לצמיחה מהירה</h2>
+    <!-- תיאור קצר -->
+    <p class="text-base mb-8">
+      חסכו זמן, צמצמו טעויות והגדילו את המכירות בעזרת פתרונות אוטומציה לעסק,<br> המותאמים במיוחד לצרכים של עסקים קטנים ובינוניים.    </p>
+    <!-- כפתור קריאה לפעולה -->
+    <a href="https://calendly.com/yonirinat/30min" 
+       class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-8 animate-pulse">
+      מבצע השקה- פגישת אפיון ללא עלות (בשווי 399 ש"ח)
     </a>
-    <a href="https://wa.me/972526485138" target="_blank" rel="noopener noreferrer" class="float-button wa-button" aria-label="צור קשר בוואטסאפ">
-      <i data-lucide="message-circle"></i> <!-- שימוש באייקון הודעה לוואטסאפ -->
+    <!-- תמונת HERO (דוגמה: תמונת איש) -->
+    <img src="images/headshot.webp" alt="יונתן רינת" width="128" height="128" class="w-32 h-32 mx-auto rounded-lg shadow-lg absolute -bottom-16">
+  </div>
+</section>
+
+<!-- HERO SECTION לדסקטופ -->
+<section id="hero-desktop" class="relative hidden overflow-hidden md:block lg:min-h-full bg-gradient-to-r from-[rgba(10,20,40,1)] via-[rgba(10,20,40,0.85)] to-[rgba(220,220,220,1)] py-20">
+  <!-- רקע: תמונה מלאה -->
+  <img src="images/banner.webp" alt="רקע HERO" class="absolute inset-0 object-cover object-center w-full h-full">
+  <!-- תוכן HERO לדסקטופ -->
+  <div class="relative pt-16 mx-4 md:mx-6 lg:max-w-[76rem] lg:mx-auto xl:max-w-[82rem] 2xl:max-w-[94rem]">
+    <div class="grid grid-cols-3 gap-8 items-center">
+      <!-- טקסט ראשי -->
+      <div class="z-10 text-right pr-8">
+        <h2 class="text-xl font-semibold ">הפתרון החכם לצמיחה מהירה</h2>
+        <h3 class="text-4xl md:text-5xl font-bold my-6">אוטומציה לעסק שלך</h3>
+        <p class="text-base md:text-lg">
+          חסכו זמן, צמצמו טעויות והגדילו את המכירות בעזרת פתרונות אוטומציה לעסק, המותאמים במיוחד לצרכים של עסקים קטנים ובינוניים.    
+        </p>
+      </div>
+
+
+
+      <!-- תיבת קריאה לפעולה -->
+      <div class="z-30">
+        <div class="w-full rounded-2xl bg-white p-6 animate-pulse">
+          <h3 class="text-gray-900 text-xl mb-6 text-center font-medium animate-pulse">מבצע מיוחד - ייעוץ ראשוני חינם!</h3>
+          <div class="space-y-4">
+            <a href="https://calendly.com/yonirinat/30min" 
+               class="block w-full py-3 bg-blue-600 text-white rounded text-center hover:bg-blue-700 transition animate-pulse" 
+               aria-label="קבע פגישת ייעוץ חינם">
+              קבע/י פגישת איפיון חינם
+            </a>
+            <a href="https://wa.me/+972501234567" 
+               class="block w-full py-3 bg-green-600 text-white rounded text-center hover:bg-green-700 transition animate-pulse" 
+               aria-label="שליחת הודעת וואטסאפ">
+              שלח/י הודעת וואטסאפ
+            </a>
+          </div>
+        </div>
+      </div>
+            <!-- תמונה במרכז -->
+            <div class="flex justify-center items-center">
+              <img src="images/headshot.webp" alt="תמונת הדגמה" class="w-48 h-48 rounded-full border-4 border-white shadow-lg object-cover">
+            </div>
+    </div>
+</section>
+  <!-- Challenges Section -->
+  <section id="challenges" class="py-16 px-4 md:px-8">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">
+        העסק שלכם מנהל אתכם,<br> במקום שאתם תנהלו אותו?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="100"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/administrative.webp" alt="טובעים באדמיניסטרציה" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">טובעים באדמיניסטרציה?</h3>
+            <p class="text-gray-600">משימות חוזרות כגון מענה למיילים, תיאום פגישות, ניהול לידים והוצאת חשבוניות גוזלות זמן יקר.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו</h4>
+              <p>אוטומציה מלאה לתהליכים מנהלתיים חוזרים. תנו למחשבים לעשות את העבודה במקומכם.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="150"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/mistakes.webp" alt="טעויות יקרות קורות" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">טעויות יקרות קורות?</h3>
+            <p class="text-gray-600">תהליכים ידניים מובילים לטעויות שמעכבות צמיחה ועולות כסף.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו</h4>
+              <p>הטמעת תהליכים אוטומטיים חכמים שמונעים טעויות ומבטיחים עקביות בכל פעולה.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="200"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/lost-leads.webp" alt="לידים הולכים לאיבוד" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">לידים הולכים לאיבוד?</h3>
+            <p class="text-gray-600">מעקב לא יעיל אחר פניות ולקוחות שמוביל להפסד הזדמנויות מכירה.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו</h4>
+              <p>בוט AI שאוסף את המידע מהלקוחות ומעביר לכם אותו, כאילו כבר עשו לו שיחת מכירה ראשונית. נשמע טוב, לא?</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="250"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/focus-work.webp" alt="רוצים להתמקד במקצוע" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">רוצים להתמקד במקצוע?</h3>
+            <p class="text-gray-600">במקום לבזבז זמן על מטלות מנהלה, התמקדו במה שאתם טובים בו באמת.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו</h4>
+              <p>אוטומציות שלוקחות על עצמן את כל משימות המנהלה והתפעול, כדי שתוכלו להתמקד במקצוע שלכם.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="300"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/excel-work.webp" alt="שעות על גיליונות אקסל" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">שעות על גיליונות אקסל?</h3>
+            <p class="text-gray-600">מבזבזים זמן יקר על עבודה ידנית באקסל במקום לתת למערכות לעבוד.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו</h4>
+              <p>אוטומציות לעיבוד נתונים, ניתוח והפקת דוחות בלחיצת כפתור - בלי לבזבז שעות יקרות על אקסל.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6 (Lorem Ipsum) -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer" 
+             data-aos="fade-up" data-aos-delay="350"
+             x-data="{ activeImage: false }"
+             @mouseenter="activeImage = true" 
+             @mouseleave="activeImage = false">
+          <div class="aspect-w-16 aspect-h-9">
+            <img loading="lazy" src="images/efficient-solution.webp" alt="Lorem Ipsum" class="w-full h-full object-cover">
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-semibold mb-2">המידע העסקי מפוזר בין מערכות שונות?</h3>
+            <p class="text-gray-600">איסוף נתונים ידני מכל מערכת ומערכת גוזל זמן יקר, מעכב תהליכי עבודה ומקשה לקבל החלטות בזמן אמת.</p>
+          </div>
+          <div x-show="activeImage" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform scale-95"
+               x-transition:enter-end="opacity-100 transform scale-100"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform scale-100"
+               x-transition:leave-end="opacity-0 transform scale-95"
+               class="absolute inset-0 bg-blue-600 bg-opacity-80 flex items-center justify-center text-white p-6 text-center">
+            <div>
+              <h4 class="text-xl font-bold mb-3">הפתרון שלנו?</h4>
+              <p>הטמעת מערכת CRM מרכזית שמאפשרת מעקב אוטומטי אחר לידים, ניהול מלא של לקוחות וניתוח נתונים במקום אחד – בלי לבזבז שעות יקרות על מעקב ידני.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12 bg-blue-600 text-white p-8 rounded-lg shadow-lg" data-aos="fade-up">
+        <h4 class="text-2xl font-bold mb-4">אם עניתם "כן" אפילו פעם אחת <br> אוטומציה יכולה לשנות את חיי העסק שלכם.</h3>
+        <p class="text-lg"> קבלו פגישת ייעוץ חינמית וגלו כיצד אוטומציה יכולה לפתור את כל האתגרים התפעוליים של העסק שלכם.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- כפתורים צפים בתחתית המסך -->
+  <div class="fixed bottom-6 left-6 z-50 flex flex-col space-y-3">
+    <!-- כפתור וואטסאפ -->
+    <a href="http://localhost:5500/webhook/whatsapp-bot-start" target="_blank" rel="noopener noreferrer" 
+       class="flex items-center justify-center bg-green-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-green-700 transition transform hover:scale-110"
+       x-data="{showTooltip: false}"
+       @mouseenter="showTooltip = true"
+       @mouseleave="showTooltip = false"
+       aria-label="שלח הודעת וואטסאפ">
+      <i class="fab fa-whatsapp text-2xl"></i>
+      <span x-show="showTooltip" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform -translate-x-2"
+            x-transition:enter-end="opacity-100 transform translate-x-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-x-0"
+            x-transition:leave-end="opacity-0 transform -translate-x-2"
+            class="absolute right-full mr-2 bg-white text-gray-900 rounded py-1 px-2 text-sm whitespace-nowrap shadow-md">
+        שלח הודעת וואטסאפ
+      </span>
+    </a>
+
+    <!-- כפתור פגישה -->
+    <a href="https://calendly.com/yonirinat/30min" target="_blank" rel="noopener noreferrer" 
+       class="flex items-center justify-center bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 transition transform hover:scale-110"
+       x-data="{showTooltip: false}"
+       @mouseenter="showTooltip = true"
+       @mouseleave="showTooltip = false"
+       aria-label="קבע פגישת ייעוץ חינם">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <span x-show="showTooltip" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform -translate-x-2"
+            x-transition:enter-end="opacity-100 transform translate-x-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-x-0"
+            x-transition:leave-end="opacity-0 transform -translate-x-2"
+            class="absolute right-full mr-2 bg-white text-gray-900 rounded py-1 px-2 text-sm whitespace-nowrap shadow-md">
+        קבע פגישת ייעוץ חינם
+      </span>
     </a>
   </div>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 px-4 md:px-8 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">
+        כיצד אוטומציוני מסייעת לעסק שלכם?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="100">
+        
+        <!-- אוטומציה במכירות ו-CRM -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+          <div class="bg-blue-600 text-white p-4">
+            <h3 class="text-xl font-semibold text-center">אוטומציה במכירות ו-CRM</h3>
+          </div>
+          <div class="p-6">
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>ניהול לידים חכם</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>תזכורות אוטומטיות</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>תיאום פגישות</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>עדכון CRM</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- אוטומציה בשיווק -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+          <div class="bg-green-600 text-white p-4">
+            <h3 class="text-xl font-semibold text-center">אוטומציה בשיווק</h3>
+          </div>
+          <div class="p-6">
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>ניהול קמפיינים</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>סגמנטציה</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>דיוור אוטומטי</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>חיבור לרשתות חברתיות</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- אוטומציה בשירות לקוחות -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+          <div class="bg-purple-600 text-white p-4">
+            <h3 class="text-xl font-semibold text-center">אוטומציה בשירות לקוחות</h3>
+          </div>
+          <div class="p-6">
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>מענה אוטומטי לפניות</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>ניתוב חכם</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>איסוף משובים</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>תמיכה יעילה</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- אוטומציה בתפעול ואדמיניסטרציה -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+          <div class="bg-red-600 text-white p-4">
+            <h3 class="text-xl font-semibold text-center">אוטומציה בתפעול שוטף</h3>
+          </div>
+          <div class="p-6">
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>הפקת מסמכים</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>סנכרון יומנים</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>ניהול משימות</span>
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 ml-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>הנהלת חשבונות</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 mb-8"></div>
+
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+      <h3 class="text-xl md:text-xl font-bold mb-6">מה אפשר לייצר באופן אוטומטי בעסק שלי?</h3>
+      <h4 class="text-xl md:text-2xl font-semibold mb-4">בקצרה? הכל!</h4>
+      <p class="text-gray-700 mb-8">
+        כל פעולה עסקית הקשורה לניהול השוטף של העסק.<br>
+        קבעו עכשיו פגישת אפיון חינם ונעבור יחד על הצרכים שלכם. <br> אני אציע את הפתרונות האוטומטיים היעילים ביותר לעסק שלכם.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/yonirinat/30min" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition" data-aos="fade-up" data-aos-delay="300">תאמו פגישת אפיון חינם</a>
+        <a href="https://wa.me/972526485138" class="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 transition" data-aos="fade-up" data-aos-delay="300">
+          <i class="fab fa-whatsapp inline mr-2"></i> שלחו לנו הודעה בוואטסאפ
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="py-16 px-4 md:px-8 bg-blue-900 text-white">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center">
+      <div class="md:w-2/3" data-aos="fade-right">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">מי עומד מאחורי אוטומציוני?</h2>
+        <h3 class="text-xl font-semibold mb-4">יונתן רינת - מומחה לאוטומציה עסקית</h3>
+        <p class="mb-4">
+          נעים מאוד! עם ניסיון עשיר במכירות, שיווק דיגיטלי, פיתוח מערכות מידע וניהול לקוחות, אני מביא הבנה עמוקה של האתגרים העומדים בפני עסקים קטנים ובינוניים.
+        </p>
+        <p class="mb-4">
+          הרקע הטכנולוגי שלי, כולל שליטה בכלים כמו Excel, מערכות CRM, קמפיינים ממומנים ופתרונות IT, מאפשר לי לזהות במדויק את צווארי הבקבוק בעסק שלכם ולהציע פתרונות אוטומציה יצירתיים ויעילים.
+        </p>
+        <p class="font-bold">
+          המטרה שלי היא פשוטה: לעזור לכם להתמקד במה שאתם הכי טובים בו, ולתת לאוטומציה לעשות את העבודה השחורה.
+        </p>
+      </div>
+      <div class="md:w-1/3 mt-8 md:mt-0 flex justify-center" data-aos="fade-left">
+        <img loading="lazy" src="images/headshot.webp" alt="יונתן רינת" class="w-2/3 rounded-lg shadow-lg">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Process Section -->
+  <section id="process" class="py-16 px-4 md:px-8 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">איך מתבצע התהליך?</h2>
+      <div class="space-y-8">
+        <!-- שלב 1 -->
+        <div class="bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="flex items-center justify-center mb-4">
+            <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold ml-4">1</div>
+            <h3 class="text-xl font-semibold">קביעת פגישת אפיון</h3>
+          </div>
+          <p class="text-center">קובעים פגישה חינמית לניתוח המצב הקיים וזיהוי הזדמנויות לשיפור.</p>
+        </div>
+        
+        <div class="flex justify-center">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+        
+        <!-- שלב 2 -->
+        <div class="bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center justify-center mb-4">
+            <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold ml-4">2</div>
+            <h3 class="text-xl font-semibold">קבלת סיכום והצעת מחיר</h3>
+          </div>
+          <p class="text-center">בסיום הפגישה תקבלו סיכום מקצועי והצעה מותאמת אישית לצרכי העסק שלכם.</p>
+        </div>
+        
+        <div class="flex justify-center">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+        
+        <!-- שלב 3 -->
+        <div class="bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-delay="250">
+          <div class="flex items-center justify-center mb-4">
+            <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold ml-4">3</div>
+            <h3 class="text-xl font-semibold">הטמעת האוטומציה</h3>
+          </div>
+          <p class="text-center">מיישמים את הפתרונות אוטומציה מתקדמים (באמצעות כלים כמו Zapier ו-N8N) תוך ליווי צמוד ומקצועי.</p>
+        </div>
+        
+        <div class="flex justify-center">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+        
+        <!-- שלב 4 -->
+        <div class="bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-center justify-center mb-4">
+            <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold ml-4">4</div>
+            <h3 class="text-xl font-semibold">הדרכה ותמיכה</h3>
+          </div>
+          <p class="text-center">מקבלים הדרכה מלאה ותמיכה שוטפת לשימוש מיטבי בכל הפתרונות שהוטמיעו.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-16 px-4 md:px-8 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12" data-aos="fade-up">עדויות לקוחות</h2>
+      
+      <div class="relative" 
+           x-data="{ 
+              activeSlide: 0, 
+              totalSlides: 4,
+              autoplay: true,
+              slideInterval: 5000,
+              interval: null,
+              
+              startAutoplay() {
+                if (this.autoplay) {
+                  this.interval = setInterval(() => {
+                    this.nextSlide();
+                  }, this.slideInterval);
+                }
+              },
+              
+              stopAutoplay() {
+                clearInterval(this.interval);
+              },
+              
+              nextSlide() {
+                this.activeSlide = this.activeSlide === this.totalSlides - 1 ? 0 : this.activeSlide + 1;
+              },
+              
+              prevSlide() {
+                this.activeSlide = this.activeSlide === 0 ? this.totalSlides - 1 : this.activeSlide - 1;
+              },
+              
+              goToSlide(index) {
+                this.activeSlide = index;
+              }
+           }" 
+           x-init="startAutoplay()" 
+           @mouseover="stopAutoplay()" 
+           @mouseleave="startAutoplay()">
+        <!-- Carousel Container -->
+        <div class="overflow-hidden relative">
+          <div class="flex transition-transform duration-500 ease-in-out" 
+               :style="'transform: translateX(' + (activeSlide * 100) + '%)'">
+            
+            <!-- Testimonial 1 -->
+            <div class="w-full flex-shrink-0 px-4">
+              <div class="bg-white p-6 rounded-lg shadow-md mx-auto max-w-lg">
+                <img loading="lazy" src="https://i.pravatar.cc/100?img=32" alt="איילת כהן" class="w-16 h-16 rounded-full mx-auto mb-4">
+                <h3 class="text-xl font-semibold">איילת כהן</h3>
+                <p class="text-gray-500 text-sm mb-2">מנהלת שיווק, סטארט־אפ</p>
+                <p class="italic">"מערכת האוטומציה שיפרה את הטיפול בלידים והובילה לעלייה משמעותית בהמרות."</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="w-full flex-shrink-0 px-4">
+              <div class="bg-white p-6 rounded-lg shadow-md mx-auto max-w-lg">
+                <img loading="lazy" src="https://i.pravatar.cc/100?img=5" alt="דפנה תמרי" class="w-16 h-16 rounded-full mx-auto mb-4">
+                <h3 class="text-xl font-semibold">דפנה תמרי</h3>
+                <p class="text-gray-500 text-sm mb-2">בעלים, חנות מקוונת</p>
+                <p class="italic">"אחרי הטמעת האוטומציה, חסכתי 15 שעות בשבוע והתמקדתי בהגדלת העסק."</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="w-full flex-shrink-0 px-4">
+              <div class="bg-white p-6 rounded-lg shadow-md mx-auto max-w-lg">
+                <img loading="lazy" src="https://i.pravatar.cc/100?img=51" alt="דניאל רוזן" class="w-16 h-16 rounded-full mx-auto mb-4">
+                <h3 class="text-xl font-semibold">דניאל רוזן</h3>
+                <p class="text-gray-500 text-sm mb-2">סמנכ"ל תפעול, חברת שירותים</p>
+                <p class="italic">"האוטומציה הפחיתה טעויות אנוש והגביר את היעילות בתפעול העסק בצורה ניכרת."</p>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="w-full flex-shrink-0 px-4">
+              <div class="bg-white p-6 rounded-lg shadow-md mx-auto max-w-lg">
+                <img loading="lazy" src="https://i.pravatar.cc/100?img=8" alt="מושיקו עמבר" class="w-16 h-16 rounded-full mx-auto mb-4">
+                <h3 class="text-xl font-semibold">מושיקו עמבר</h3>
+                <p class="text-gray-500 text-sm mb-2">עצמאי בתחום הנדסאות, אדריכלות נוף</p>
+                <p class="italic">"יוני הקים לי את כל המערך הדיגיטלי מא' ועד ת'. בלעדיו לא הייתי מצליח להקים את העסק."</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button @click="prevSlide(); stopAutoplay(); setTimeout(() => startAutoplay(), 10000)" 
+                  class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 focus:outline-none" aria-label="עבור לשקופית הקודמת">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button @click="nextSlide(); stopAutoplay(); setTimeout(() => startAutoplay(), 10000)"
+                  class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 focus:outline-none" aria-label="עבור לשקופית הבאה">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+  <!-- Video Demo Section -->
+  <section id="video-demo" class="py-16 px-4 md:px-8 bg-gray-50">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">סרטון הדגמה</h2>
+      <p class="text-gray-700 mb-8" data-aos="fade-up" data-aos-delay="100">
+        צפו בסרטון המדגים כיצד האוטומציה משנה את חיי העסק – בצורה פשוטה וברורה.
+      </p>
+      <div class="w-full" style="aspect-ratio: 16/9;" data-aos="fade-up" data-aos-delay="150">
+        <iframe loading="lazy" src="https://www.youtube.com/embed/S3L1Kw087JI?rel=0&amp;controls=0&amp;modestbranding=1" title="סרטון הדגמה" allowfullscreen class="w-full h-full"></iframe>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 px-4 md:px-8">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">שאלות נפוצות</h2>
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="100">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">מה כוללת פגישת האפיון החינמית?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">בפגישה ננתח את תהליכי העסק, נזהה הזדמנויות לאוטומציה ונכין סיכום מקצועי עם המלצות – ללא עלות וללא התחייבות.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 2 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="150">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">כמה זמן לוקח להטמיע אוטומציה בעסק?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">פרויקטים קטנים נמשכים מספר ימים, ופרויקטים מורכבים יותר יכולים להימשך עד שבועיים, בהתאם למורכבות התהליכים.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 3 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="200">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">האם נדרש ידע טכני להפעלת האוטומציות?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">לא נדרש ידע טכני - כל הפתרונות מופעלים ברקע ואנו מספקים הדרכה מלאה לצוות שלכם.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 4 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="250">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">למה לבחור ב"אוטומציוני" ולא לעשות זאת בעצמי?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">כלים קיימים דורשים עקומת למידה ארוכה – אצלנו אתם מקבלים ניסיון מוכח, פתרונות מותאמים וליווי צמוד שמביאים תוצאות מהר יותר.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 5 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="300">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">מהי עלות שירותי האוטומציה?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">העלות משתנה בהתאם לגודל והמורכבות של העסק. לאחר פגישת האפיון, נוכל לספק הצעת מחיר מותאמת אישית.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 6 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="350">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">האם ניתן לשלב את האוטומציה עם מערכות קיימות?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">כן! כל הפתרונות שלנו גמישים ומאפשרים אינטגרציה עם מערכות קיימות כמו CRM, דוא\"ל, רשתות חברתיות ועוד.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 7 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="400">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">איך מתחילים את התהליך?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">התחילו בפגישת אפיון חינמית! נשמח ללמוד על העסק שלכם ולראות איך אוטומציה יכולה לשפר את התהליכים.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 8 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="450">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">מה יתרון האוטומציה לעסק קטן?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">אוטומציה מאפשרת לעסק קטן להתמודד עם יותר עבודה ומורכבות, מבלי להגדיל את הצוות או להחמיץ הזדמנויות.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 9 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="500">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">האם יש תמיכה אחרי ההטמעה?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">בהחלט! אנו מספקים תמיכה שוטפת והדרכה לצוות שלכם לאחר ההטמעה, להבטחת שימוש מיטבי במערכות.</p>
+          </div>
+        </div>
+        <!-- FAQ Item 10 -->
+        <div class="border-b border-gray-200" x-data="{ open: false }" data-aos="fade-up" data-aos-delay="550">
+          <button @click="open = !open" class="w-full text-right flex justify-between items-center py-4 focus:outline-none" aria-label="הצג/הסתר פרטים">
+            <span class="font-semibold">איך אני יכול להתחיל לעבוד עם אוטומציוני?</span>
+            <svg :class="{'rotate-180': open}" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div x-show="open" 
+               x-transition:enter="transition ease-out duration-300" 
+               x-transition:enter-start="opacity-0 transform scale-y-90" 
+               x-transition:enter-end="opacity-100 transform scale-y-100" 
+               x-transition:leave="transition ease-in duration-300" 
+               x-transition:leave-start="opacity-100 transform scale-y-100" 
+               x-transition:leave-end="opacity-0 transform scale-y-90" 
+               class="text-right pb-4">
+            <p class="text-gray-600">פשוט קבעו פגישת אפיון חינמית עם אחד מהמומחים שלנו, ומיד לאחר מכן נתחיל לתכנן את הפתרון המתאים ביותר לעסק שלכם.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-4 md:px-8 bg-blue-900 text-white">
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">מוכנים לקחת את העסק לשלב הבא?</h2>
+      <p class="mb-8 leading-relaxed">
+        <strong>הזמן שלכם יקר. אל תבזבזו אותו על משימות שאפשר להפוך לאוטומטיות.</strong><br>
+        נצלו את מבצע ההשקה וקבעו פגישת אפיון<br>
+        <span class="inline-block bg-yellow-400 text-black px-2 py-1 rounded mt-2 animate-pulse">במקום 399 ₪ חינם! (מבצע לזמן מוגבל)</span>
+      </p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/yonirinat/30min" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">קבעו פגישת אפיון חינם</a>
+        <a href="https://wa.me/972526485138" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 transition">
+          <i class="fab fa-whatsapp inline mr-2"></i> שלחו לנו הודעה בוואטסאפ
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="mb-2"><strong class="text-white">אוטומציוני</strong> | פתרונות אוטומציה לעסקים קטנים ובינוניים</p>
+      <p class="mb-2">יונתן רינת | <a href="mailto:yonirinat@gmail.com" class="underline">yonirinat@gmail.com</a> | <a href="tel:052-6485138" class="underline">052-6485138</a></p>
+      <p class="text-sm">&copy; <span id="currentYear"></span> כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  
+  <!-- Mobile Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuButton = document.getElementById('menu-button');
+      // אם יש סגירה של התפריט בלחיצה מחוץ לתפריט, AlpineJS מנהל את זה
+      // אנחנו יכולים להוסיף פה כל לוגיקה נוספת שתידרש לניהול תפריט המובייל
+    });
+  </script>
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- FAQ Toggle Function -->
+  <script>
+    /*
+    function toggleFaq(element) {
+      const content = element.nextElementSibling;
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        element.querySelector('svg').classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        element.querySelector('svg').classList.remove('rotate-180');
+      }
+    }
+    */
+  </script>
+  
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({ once: true, duration: 800, easing: 'ease-in-out' });
+    });
+  </script>
+  
+  <!-- GSAP and ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to('.scroll-progress', {
+          width: '100%',
+          scrollTrigger: { scrub: true, start: 'top top', end: 'bottom bottom' }
+        });
+      }
+    });
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+    });
+  </script>
+  
+  <!-- Current Year Update -->
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+  
 </body>
 </html>
