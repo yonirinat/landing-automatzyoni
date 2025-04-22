@@ -1,0 +1,57 @@
+# התחלה עם כל הקבצים
+*
+# התיקיות
+*/
+
+# החרגת הקבצים שאנחנו רוצים לשמור
+!index.html
+!favicon.ico
+
+
+
+
+# החרגת כל תיקיית images
+!images/
+!images/**
+
+!dist/
+!dist/**
+
+# החרגת קבצים ספציפיים שאנחנו לא רוצים
+survey_popup*
+
+# קבצים ספציפיים שוודאי אינם נדרשים
+.DS_Store
+.env
+.env.*
+.cache
+*.log
+Thumbs.db
+
+# תיקיות נפוצות שלא ברשימה
+node_modules/
+build/
+.vscode/
+.idea/
+.git/
+
+# משתני סביבה
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# קבצי לוג
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# מדריכים שאין להעלות
+# dist/
+
+# קבצים זמניים
+.DS_Store
+Thumbs.db
