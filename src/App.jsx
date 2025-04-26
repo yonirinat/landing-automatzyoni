@@ -1,0 +1,30 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import Tools from './pages/Tools';
+import Blog from './pages/Blog';
+import About from './pages/About';
+import BlogPost from './pages/BlogPost';
+import { ChatbotProvider } from './context/ChatbotContext';
+
+function App() {
+  return (
+    <ChatbotProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blogpost" element={<BlogPost />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ChatbotProvider>
+  );
+}
+
+export default App; 
