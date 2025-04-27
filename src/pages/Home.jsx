@@ -38,7 +38,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-right space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                נמאס לך שהעסק <span className="text-[#1E5FA8]">&apos;מנהל&apos;</span> אותך במקום שאתה תנהל אותו?
+                מרגיש/ה שהעסק שלך מנהל אותך?
               </h1>
               <p className="text-xl text-gray-600">
                 תכיר את ה&apos;טייס האוטומטי&apos; שיכול לעשות בשבילך חלק גדול מהעבודה המשעממת והגוזלת זמן.
