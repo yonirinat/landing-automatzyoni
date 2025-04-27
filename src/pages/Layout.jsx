@@ -204,7 +204,7 @@ export default function Layout({ children }) {
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-blue-400 text-sm text-blue-200">
-          <p>© 2023 אוטומציה עסקית. כל הזכויות שמורות.</p>
+          <p>© 2024 יונתן רינת - אוטומציה לעסקים. כל הזכויות שמורות.</p>
         </div>
       </footer>
 

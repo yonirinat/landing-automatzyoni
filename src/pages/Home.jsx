@@ -465,7 +465,7 @@ export default function Home() {
               variant="outline"
               size="lg"
               className="bg-transparent border-white text-white hover:bg-white hover:text-[#1E5FA8] text-lg px-8 py-6 rounded-xl transition-colors"
-              onClick={() => window.location.href = `https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER || '972XXXXXXXXX'}`}
+              onClick={() => window.location.href = `https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER || '972526485138'}`}
             >
               פנה אליי בוואטסאפ
             </Button>

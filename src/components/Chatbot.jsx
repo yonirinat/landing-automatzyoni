@@ -63,33 +63,33 @@ const chatbotFlow = {
   },
   STEP_4_TASKS: {
     messages: [
-      "איפה אתה מרגיש שאתה מבזבז הכי הרבה זמן על משימות שחוזרות על עצמן? (אפשר לפרט בפורמט חופשי)"
-    ],
-    input: {
-      type: "text",
-      variable: "task_areas",
-      nextBlock: "STEP_5_TOOLS"
-    }
-  },
-  STEP_5_TOOLS: {
-    messages: [
       "אתה משתמש בתוכנות כלשהן היום? לדוגמה: תוכנה להוצאת חשבוניות, CRM, יומן גוגל וכד׳."
     ],
     input: {
       type: "text",
       variable: "current_tools",
-      nextBlock: "STEP_5_VOLUME"
+      nextBlock: "STEP_5_TOOLS"
     }
   },
+  STEP_5_TOOLS: {
+  messages: [
+    "איפה אתה מרגיש שאתה מבזבז הכי הרבה זמן על משימות שחוזרות על עצמן? (אפשר לפרט בפורמט חופשי)"
+  ],
+  input: {
+    type: "text",
+    variable: "task_areas",
+    nextBlock: "STEP_5_VOLUME"
+  }
+},
   STEP_5_VOLUME: {
     messages: [
       "כמה אירועים כאלה קורים בחודש? תן הערכה גסה."
     ],
     options: [
-      { text: "פחות מ-10", value: "פחות מ-10", nextBlock: "STEP_6_RESULTS" },
+      { text: "פחות מ-10", value: "Less than 10", nextBlock: "STEP_6_RESULTS" },
       { text: "10-50", value: "10-50", nextBlock: "STEP_6_RESULTS" },
       { text: "50-100", value: "50-100", nextBlock: "STEP_6_RESULTS" },
-      { text: "יותר מ-100", value: "יותר מ-100", nextBlock: "STEP_6_RESULTS" }
+      { text: "יותר מ-100", value: "More than 100", nextBlock: "STEP_6_RESULTS" }
     ]
   },
   STEP_6_RESULTS: {
@@ -135,8 +135,8 @@ const chatbotFlow = {
       "האם תרצה לקבל סיכום של השיחה לכתובת האימייל שלך?"
     ],
     options: [
-      { text: "כן, אשמח לקבל סיכום", value: "כן", nextBlock: "STEP_7_EMAIL" },
-      { text: "לא, תודה", value: "לא", nextBlock: "STEP_7_FINAL" }
+      { text: "כן, אשמח לקבל סיכום", value: "Yes", nextBlock: "STEP_7_EMAIL" },
+      { text: "לא, תודה", value: "No", nextBlock: "STEP_7_FINAL" }
     ]
   },
   STEP_7_EMAIL: {
