@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import Chatbot from "@/components/Chatbot";
 import { useChatbot } from "@/context/ChatbotContext";
 
+import AccessibilityWidget from "@/components/ui/negish";
+
+
 export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { chatOpen, openChat, closeChat } = useChatbot();
@@ -220,6 +223,8 @@ export default function Layout({ children }) {
       )}
       
       <Chatbot isOpen={chatOpen} onClose={closeChat} />
+      <AccessibilityWidget />
+
     </div>
   );
 }

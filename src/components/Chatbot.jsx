@@ -255,7 +255,7 @@ export default function Chatbot({ isOpen, onClose }) {
     try {
       console.log('מתחיל שליחה ל-Webhook...');
       setLoading(true);
-      const webhookUrl = 'https://automatzyoni.app.n8n.cloud/webhook-test/3af81add-7eb6-45f3-98c3-c82b0ed6a5a1';
+      const webhookUrl = 'https://automatzyoni.app.n8n.cloud/webhook/3af81add-7eb6-45f3-98c3-c82b0ed6a5a1';
       
       const payload = {
         name: responses.full_name || 'לא צוין',
@@ -294,7 +294,7 @@ export default function Chatbot({ isOpen, onClose }) {
       }
     } catch (error) {
       console.error('שגיאה בשליחת נתוני השיחה:', error);
-      sendWithXMLHttpRequest('https://automatzyoni.app.n8n.cloud/webhook-test/3af81add-7eb6-45f3-98c3-c82b0ed6a5a1', {
+      sendWithXMLHttpRequest('https://automatzyoni.app.n8n.cloud/webhook/3af81add-7eb6-45f3-98c3-c82b0ed6a5a1', {
         data: JSON.stringify(responses),
         conversation: JSON.stringify(conversation)
       });
