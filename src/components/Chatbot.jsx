@@ -143,9 +143,6 @@ const chatbotFlow = {
       { text: "Fireberry", value: "Fireberry", nextBlock: "STEP_4_INVOICES" },
       { text: "Powerlink CRM", value: "Powerlink CRM", nextBlock: "STEP_4_INVOICES" },
       { text: "Pipedrive", value: "Pipedrive", nextBlock: "STEP_4_INVOICES" },
-      { text: "ZenDesk", value: "ZenDesk", nextBlock: "STEP_4_INVOICES" },
-      { text: "Origami", value: "Origami", nextBlock: "STEP_4_INVOICES" },
-      { text: "SAP Business One", value: "SAP Business One", nextBlock: "STEP_4_INVOICES" },
       { text: "אחר", value: "אחר", nextBlock: "STEP_4_CRM_TYPE_OTHER" }
     ]
   },
