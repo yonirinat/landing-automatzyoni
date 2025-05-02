@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 import logo from "../images/logo.webp";
+import "../styles/global.css";
 
 import { createPageUrl } from "@/utils";
 import { Menu, X, MessageCircle } from "lucide-react";
@@ -46,15 +48,24 @@ export default function Layout({ children }) {
       `}</style>
 
       {/* Header */}
-      <header className="bg-white shadow-sm py-4 px-6 relative z-50 sticky top-0">
+      <header className="bg-white shadow-sm py-4 px-6 relative z-50 sticky top-0" role="banner">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to={createPageUrl("Home")} className="text-2xl font-bold text-primary flex items-center gap-2">
-            <img src={logo} alt="לוגו אוטומציה עסקית" className="h-10 w-10" />
-            <span className="text-[#1E5FA8]">יונתן רינת - אוטומציה לעסקים</span>
+          <Link 
+            to={createPageUrl("Home")} 
+            className="text-2xl font-bold text-primary flex items-center gap-2"
+            aria-label="דף הבית - יונתן רינת אוטומציה לעסקים"
+          >
+            <img 
+              src={logo} 
+              alt="לוגו אוטומציה עסקית" 
+              className="h-10 w-10"
+              loading="eager"
+            />
+            <span className="text-[#1E5FA8] text-lg">יונתן רינת - אוטומציה לעסקים</span>
           </Link>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6" role="navigation" aria-label="תפריט ראשי">
             <Link to={createPageUrl("Home")} className="font-medium hover:text-[#1E5FA8] transition-colors">
               ראשי
             </Link>
@@ -71,6 +82,7 @@ export default function Layout({ children }) {
             <Button 
               className="bg-[#FF9900] hover:bg-[#E68A00] text-white" 
               onClick={openChat}
+              aria-label="פתח צ'אט"
             >
               בוא נדבר
             </Button>
@@ -81,13 +93,19 @@ export default function Layout({ children }) {
             className="md:hidden p-2 text-gray-600" 
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "סגור תפריט" : "פתח תפריט"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden absolute top-full right-0 left-0 bg-white shadow-md transition-all duration-300 ${menuOpen ? 'max-h-screen py-4' : 'max-h-0 overflow-hidden'}`}>
+        <div 
+          id="mobile-menu"
+          className={`md:hidden absolute top-full right-0 left-0 bg-white shadow-md transition-all duration-300 ${menuOpen ? 'max-h-screen py-4' : 'max-h-0 overflow-hidden'}`}
+          aria-hidden={!menuOpen}
+        >
           <div className="max-w-7xl mx-auto px-6 flex flex-col gap-4">
             <Link 
               to={createPageUrl("Home")} 
@@ -132,12 +150,12 @@ export default function Layout({ children }) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 bg-[--background]">
+      <main className="flex-1 bg-[--background]" role="main">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#1E5FA8] text-white py-12 px-6">
+      <footer className="bg-[#1E5FA8] text-white py-12 px-6" role="contentinfo">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <h3 className="text-xl font-bold">אוטומציה עסקית</h3>
@@ -218,7 +236,7 @@ export default function Layout({ children }) {
           onClick={openChat}
           aria-label="פתח צ'אט"
         >
-          <MessageCircle size={24} />
+          <MessageCircle size={24} aria-hidden="true" />
         </button>
       )}
       
@@ -228,4 +246,8 @@ export default function Layout({ children }) {
     </div>
   );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};
 

@@ -7,12 +7,12 @@ import heroBanner from '../images/heroBanner.avif';
 import coPilot from '../images/coPilot.avif';
 import { useChatbot } from "@/context/ChatbotContext";
 import OrbitCapabilitiesSimplified from "@/components/CapabilitiesWheel";
-import { 
-  Clock, 
-  Calendar, 
-  CreditCard, 
-  Mail, 
-  Users, 
+import {
+  Clock,
+  Calendar,
+  CreditCard,
+  Mail,
+  Users,
   Briefcase,
   CheckCircle,
   Target,
@@ -23,7 +23,7 @@ import {
 
 export default function Home() {
   const { openChat } = useChatbot();
-  
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -33,15 +33,16 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-yellow-100 rounded-full opacity-30"></div>
           <div className="absolute bottom-12 right-12 w-48 h-48 bg-blue-50 rounded-full opacity-40"></div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-right space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                מרגיש/ה שהעסק שלך מנהל אותך?
+                העסק שלכם מנהל אתכם? {/* Changed */}
               </h1>
               <p className="text-xl text-gray-600">
-                תכיר את ה&apos;טייס האוטומטי&apos; שיכול לעשות בשבילך חלק גדול מהעבודה המשעממת והגוזלת זמן.
+                {/* Changed */}
+                תחשבו על זה רגע. במקום שאתם תרדפו אחרי המשימות, יש דרך לגרום לחלק גדול מהן לקרות לבד, כמו &apos;טייס אוטומטי&apos; שמקל עליכם.
               </p>
               <div>
                 <Button
@@ -49,17 +50,18 @@ export default function Home() {
                   size="lg"
                   className="bg-[#FF9900] hover:bg-[#E68A00] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
-                  רוצה לשחרר לעצמך זמן? בוא נדבר
-                </Button>
+                  {/* Changed */}
+דברו עם העוזר שלי, הוא יסדר לכם את העסק               </Button>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl">
-                <img 
+                <img
                   src={heroBanner}
-                  alt="אוטומציה עסקית"
+                  alt="אוטומציה עסקית - 'טייס אוטומטי' לעסק" // Changed alt text
                   className="rounded-xl w-full"
+                  loading="eager"
                 />
                 <div className="absolute top-4 right-4 bg-white bg-opacity-90 backdrop-blur-sm p-3 rounded-lg shadow-md">
                   <Clock className="w-6 h-6 text-[#1E5FA8]" />
@@ -68,60 +70,62 @@ export default function Home() {
                   <Zap className="w-6 h-6 text-[#FF9900]" />
                 </div>
               </div>
-              
+
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#1E5FA8] rounded-full opacity-10 z-0"></div>
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#FF9900] rounded-full opacity-10 z-0"></div>
             </div>
           </div>
         </div>
       </section>
-      
+
       {/* Pain Points Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">
-              אם אחד או יותר מהדברים האלה נשמעים לך מוכר...
+              {/* Changed */}
+              אם אפילו אחד מהדברים הבאים נשמע לכם מוכר...
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
-              סימן שאתה יכול להרוויח הרבה מאוד מאוטומציה של תהליכים בעסק שלך
+              {/* Changed */}
+              סימן שאני יכול לעזור לכם מאוד בעזרת &apos;אוטומציה&apos;, כלומר, לגרום לתהליכים בעסק לקרות לבד:
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: <Clock className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "אין לך מספיק זמן",
-                description: "אתה מרגיש שלא משנה כמה שעות אתה עובד, תמיד יש עוד משימות בתור."
+                title: "מרגישים שאין לכם דקה לנשום?", // Changed
+                description: "שהיום נגמר ותמיד נשאר עוד משהו לעשות?" // Changed
               },
               {
                 icon: <Calendar className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "ניהול פגישות",
-                description: "אתה מבזבז זמן רב על תיאומים, תזכורות ומעקב אחר פגישות."
+                title: "קביעת פגישות ותזכורות?", // Changed
+                description: "כל התיאומים והטלפונים האלה לוקחים לכם שעות יקרות?" // Changed
               },
               {
                 icon: <CreditCard className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "ניירת ומסמכים",
-                description: "הוצאת חשבוניות, קבלות והנהלת חשבונות גוזלים ממך זמן יקר."
+                title: "חשבוניות, קבלות, ניירת?", // Changed
+                description: "כל ההתעסקות הזו היא כאב ראש שגוזל זמן שאפשר להשקיע בדברים חשובים יותר?" // Changed
               },
               {
                 icon: <Mail className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "המון מיילים",
-                description: "אתה מוצף במיילים ומתקשה לנהל תקשורת יעילה עם לקוחות וספקים."
+                title: "מוצפים בהודעות ומיילים?", // Changed
+                description: "קשה לכם לעקוב אחרי כל הפניות מלקוחות וספקים?" // Changed
               },
               {
                 icon: <Users className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "ניהול לקוחות",
-                description: "המעקב אחרי לקוחות קיימים ופוטנציאליים הופך למשימה מורכבת ומתישה."
+                title: "לזכור מה כל לקוח צריך?", // Changed
+                description: "המעקב אחרי כולם, מתי דיברתם איתם לאחרונה – זה נהיה מסובך ומתיש?" // Changed
               },
               {
                 icon: <Briefcase className="w-10 h-10 text-[#1E5FA8]" />,
-                title: "עבודה חוזרת",
-                description: "אתה מבצע שוב ושוב אותן פעולות שגרתיות שאינן דורשות חשיבה יצירתית."
+                title: "עושים שוב ושוב את אותן פעולות?", // Changed
+                description: "דברים משעממים שלא באמת דורשים מכם לחשוב, סתם עבודה טכנית שחוזרת על עצמה?" // Changed
               }
             ].map((pain, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group"
               >
@@ -135,17 +139,18 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Solution Section */}
       <section className="py-16 bg-gradient-to-b from-[#F8FAFC] to-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="relative">
-                <img 
+                <img
                   src={coPilot}
-                  alt="טייס אוטומטי לעסק"
+                  alt="ה'עוזר האוטומטי' בפעולה" // Changed alt text
                   className="rounded-xl shadow-lg"
+                  loading="lazy"
                 />
                 <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-white rounded-full p-4 shadow-lg">
                   <Zap className="w-8 h-8 text-[#FF9900]" />
@@ -155,7 +160,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="order-1 lg:order-2 text-center lg:text-right">
               <h2 className="text-3xl font-bold mb-6">
                 תכירו את ה&apos;עוזר האוטומטי&apos; לעסק שלכם
@@ -164,65 +169,69 @@ export default function Home() {
                 בדיוק כמו שבמטוס יש טייס אוטומטי שמסוגל לבצע חלק גדול מהטיסה, כך גם בעסק - אפשר להגדיר &quot;טייס אוטומטי&quot; שיקח על עצמו את המשימות השגרתיות.
               </p>
               <p className="text-lg text-gray-700 mb-8">
-                ה&apos;עוזר האוטומטי&apos; הוא מערכת אוטומציה מותאמת לעסק שלך, שמחברת בין כל הכלים והתוכנות שאתה משתמש בהם ומבצעת עבורך משימות באופן אוטומטי.
+                {/* Changed */}
+                ה&apos;עוזר&apos; הזה הוא בעצם תוכנה חכמה שאני מתאים בדיוק לעסק שלכם. היא יודעת לגרום לדברים שאתם עושים ידנית (כמו לשלוח תזכורת ללקוח, או לרשום הכנסה) לקרות מעצמם, ברקע. זה פשוט עובד.
               </p>
               <Button
                 onClick={openChat}
                 className="bg-[#1E5FA8] hover:bg-blue-700 text-lg"
               >
-                רוצה לשמוע עוד?
+                {/* Changed */}
+                רוצים לשמוע איך זה יכול לעבוד בעסק שלכם?
               </Button>
             </div>
           </div>
         </div>
       </section>
-      
+
       {/* Benefits Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center justify-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-center">
-              היתרונות של אוטומציה עסקית
+              {/* Changed */}
+              למה זה טוב לכם? היתרונות של ה&apos;עוזר האוטומטי&apos;
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl text-center">
-              כשחלק מהעבודה שלך נעשית באופן אוטומטי, הרווחים מורגשים כמעט מיד
+              {/* Changed */}
+              כשחלק מהעבודה קורית מעצמה, אתם מרגישים את ההקלה כמעט מיד:
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: <Clock className="w-10 h-10 text-white" />,
-                title: "חיסכון משמעותי בזמן",
-                description: "שחרור של עשרות שעות בחודש שתוכל להשקיע בצמיחה במקום בניירת."
+                title: "פתאום יש לכם עוד זמן", // Changed
+                description: "עשרות שעות בחודש יכולות להתפנות. זמן שתוכלו להשקיע בלקוחות, בפיתוח העסק, או פשוט במשפחה ובשקט הנפשי שלכם." // Changed
               },
               {
                 icon: <Target className="w-10 h-10 text-white" />,
-                title: "פחות טעויות",
-                description: "מערכות אוטומטיות מבצעות משימות בעקביות ובדיוק, ללא טעויות אנוש."
+                title: "פחות טעויות", // Kept
+                description: "כשמכונה עושה משהו שוב ושוב, היא לא מתבלבלת, לא שוכחת ולא עייפה. זה מונע טעויות קטנות ומעצבנות." // Changed
               },
               {
                 icon: <DollarSign className="w-10 h-10 text-white" />,
-                title: "הגדלת רווחיות",
-                description: "ניצול יעיל יותר של המשאבים שלך, כולל הזמן היקר שלך והצוות שלך."
+                title: "יותר רווח", // Changed
+                description: "כשהזמן שלכם ושל העובדים (אם יש) מנוצל בצורה חכמה יותר, העסק יכול להרוויח יותר בלי שתצטרכו לעבוד קשה יותר." // Changed
               },
               {
                 icon: <Award className="w-10 h-10 text-white" />,
-                title: "שיפור השירות",
-                description: "תגובות מהירות יותר ללקוחות ומעקב מדויק יותר אחרי צרכיהם."
+                title: "שירות טוב יותר ללקוחות", // Changed
+                description: "לקוחות מקבלים מענה מהיר יותר, תזכורות בזמן, ואתם לא שוכחים לטפל בפניות שלהם." // Changed
               },
               {
                 icon: <Zap className="w-10 h-10 text-white" />,
-                title: "גמישות וצמיחה",
-                description: "יכולת להתרחב ללא צורך בהגדלה מיידית של כוח האדם."
+                title: "קל יותר לגדול", // Changed
+                description: "העסק יכול להתמודד עם יותר לקוחות או יותר עבודה בלי שתצטרכו מיד לגייס עוד עובדים שיעשו את העבודה השחורה." // Changed
               },
               {
                 icon: <CheckCircle className="w-10 h-10 text-white" />,
-                title: "שקט נפשי",
-                description: "ביטחון שהדברים החשובים לא נופלים בין הכיסאות ושהכל מתועד."
+                title: "שקט נפשי", // Kept
+                description: "אתם יכולים להיות רגועים שהדברים החשובים לא נופלים בין הכיסאות, שהכול מטופל ומסודר." // Changed
               }
             ].map((benefit, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-gradient-to-br from-[#1E5FA8] to-[#1C4F8A] rounded-xl p-6 shadow-md text-white group hover:shadow-lg transition-shadow"
               >
@@ -236,33 +245,33 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Capabilities Section */}
       <section className="py-16 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 ">
-              אז מה בעצם ה&apos;עוזר האוטומטי&apos; הזה יכול לעשות?
+              אז מה בעצם ה&apos;עוזר האוטומטי&apos; הזה יכול לעשות? {/* Kept */}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
-              הנה רק חלק מהפעולות שאפשר לבצע באופן אוטומטי
+              הנה רק חלק מהפעולות שאפשר לבצע באופן אוטומטי {/* Kept */}
             </p>
           </div>
-          
+
           <OrbitCapabilitiesSimplified />
-          
+
           <div className="text-center mt-12">
               <Button
                 onClick={openChat}
                 size="lg"
-                className="bg-[#FF9900] hover:bg-[#E68A00] text-white text-lg px-8 whitespace-normal text-center"
+                className="bg-[#FF9900] hover:bg-[#E68A00] text-white text-base md:text-lg px-4 md:px-8 py-4 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all w-full md:w-auto"
               >
-                רוצה לבדוק אילו תהליכים כדאי לאטמץ בעסק שלך?
-              </Button>
+                {/* Changed */}
+יוני, תאטמץ לי את העסק              </Button>
           </div>
         </div>
       </section>
-      
+
       {/* About Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -270,158 +279,160 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="bg-[#1E5FA8] rounded-3xl p-1 inline-block mb-8">
                 <div className="bg-white rounded-3xl p-1">
-                  {/* Replace with actual image when available */}
-                  <img 
-                    src={headshot} 
-                    alt="יונתן רינת"
+                  <img
+                    src={headshot}
+                    alt="יונתן רינת - מומחה לאוטומציה עסקית" // Kept
                     className="w-72 h-72 rounded-3xl object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>
             </div>
-            
+
             <div className="text-center lg:text-right">
               <h2 className="text-3xl font-bold mb-6">
-                אודות יונתן רינת
+                {/* Changed */}
+                נעים מאוד, אני יונתן רינת – המומחה שלכם ל&apos;עוזר האוטומטי&apos;
               </h2>
               <p className="text-lg text-gray-700 mb-4">
-                היי, אני יונתן. אני מתמחה בבניית פתרונות אוטומציה לעסקים קטנים ובינוניים שרוצים להתייעל ולשחרר זמן יקר לבעלים ולצוות.
+                {/* Changed */}
+                היי, אני יונתן. אני מתמחה בלמצוא פתרונות פשוטים וחכמים לעסקים קטנים ובינוניים שרוצים לעבוד בצורה יעילה יותר ולפנות זמן יקר לבעלים ולצוות.
               </p>
               <p className="text-lg text-gray-700 mb-4">
-                במשך יותר מעשור עבדתי עם מאות עסקים וגיליתי שרובם מתמודדים עם אותן בעיות בדיוק: עומס משימות, ניירת אינסופית, ותחושה שהעסק מנהל אותם במקום שהם ינהלו את העסק.
+                {/* Changed */}
+                במשך יותר מעשר שנים עבדתי עם מאות בעלי עסקים כמוכם. גיליתי שרובם נאבקים באותם קשיים: עומס מטורף של משימות, הרים של ניירת, ותחושה מתמדת שהם רודפים אחרי הזנב של עצמם והעסק מנהל אותם.
               </p>
               <p className="text-lg text-gray-700 mb-6">
-                הגישה שלי מעשית ומותאמת לצרכים האמיתיים של העסק שלך. אני לא מאמין בפתרונות מסובכים או יקרים מדי, אלא בפתרונות שעובדים ומביאים תוצאות מיידיות.
+                {/* Changed */}
+                הגישה שלי היא מעשית ופשוטה. אני לא מאמין בפתרונות מסובכים שידרשו מכם ללמוד דברים חדשים או להוציא הון. אני מתמקד במה שכואב לכם *עכשיו* ובונה פתרונות שעובדים מהר ומביאים תוצאות שאפשר להרגיש מיד ביומיום. אני פה כדי להוריד מכם את כאב הראש הטכנולוגי.
               </p>
               <Button
                 onClick={openChat}
                 className="bg-[#1E5FA8] hover:bg-blue-700"
               >
-                רוצה לדבר איתי?
+                {/* Changed */}
+                רוצים לדבר איתי על איך אני יכול לעזור לעסק שלכם?
               </Button>
             </div>
           </div>
         </div>
       </section>
-      
-{/* Process Section */}
-<section className="py-16 bg-[#F8FAFC]">
-  <div className="max-w-7xl mx-auto px-6">
-    {/* Header */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl font-bold mb-4">איך זה עובד?</h2>
-      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-        תהליך העבודה פשוט, יעיל ומותאם לצרכים שלך
-      </p>
-    </div>
 
-    {/* Steps + Connectors */}
-    <div className="relative">
-      {/* Horizontal line — מוצג בדסקטופ, מוסתר במובייל */}
-      <div
-        className="absolute top-1/2 left-0 right-0 h-1 bg-[#1E5FA8] transform -translate-y-1/2 hidden md:block z-0"
-        aria-hidden="true"
-      />
-
-      {/* Grid of steps */}
-      <div className="grid grid-cols-1 gap-y-12 md:grid-cols-4 md:gap-y-0 md:gap-x-8 relative z-10">
-        {[
-          {
-            number: "1",
-            title: "אבחון ראשוני",
-            description:
-              "נבין ביחד מהם הכאבים והצרכים העיקריים של העסק שלך."
-          },
-          {
-            number: "2",
-            title: "בניית תכנית",
-            description:
-              "נגדיר את התהליכים שכדאי לאמץ ובאיזה כלים נשתמש."
-          },
-          {
-            number: "3",
-            title: "יישום והטמעה",
-            description:
-              "נקים את המערכות ונוודא שהכל עובד חלק ומחובר כראוי."
-          },
-          {
-            number: "4",
-            title: "ליווי ושיפור",
-            description:
-              "נמשיך ללוות את העסק, לשפר ולהוסיף אוטומציות לפי הצורך."
-          }
-        ].map((step, idx, arr) => (
-          <div
-            key={idx}
-            className="relative flex flex-col items-center text-center"
-          >
-            {/* Vertical connector between steps — מוצג במובייל בלבד */}
-            {idx < arr.length - 1 && (
-              <div
-                className="absolute top-16 bottom-0 left-1/2 w-1 bg-[#1E5FA8] 
-                           transform -translate-x-1/2 md:hidden z-0"
-                aria-hidden="true"
-              />
-            )}
-
-            {/* Numbered circle */}
-            <div className="relative z-20 w-16 h-16 rounded-full bg-[#1E5FA8] 
-                            text-white flex items-center justify-center 
-                            text-2xl font-bold mb-4 shadow-md">
-              {step.number}
-            </div>
-
-            <h3 className="text-xl font-bold mb-2 relative z-10 bg-[#F8FAFC] px-2">{step.title}</h3>
-            <p className="text-gray-600 relative z-10 bg-[#F8FAFC] px-2">{step.description}</p>
+      {/* Process Section */}
+      <section className="py-16 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">איך זה עובד? פשוט וקל</h2> {/* Changed */}
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
+              {/* Changed */}
+              התהליך שלנו ביחד יהיה פשוט ויעיל:
+            </p>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+
+          {/* Steps + Connectors */}
+          <div className="relative">
+            {/* Horizontal line — מוצג בדסקטופ, מוסתר במובייל */}
+            <div
+              className="absolute top-1/2 left-0 right-0 h-1 bg-[#1E5FA8] transform -translate-y-1/2 hidden md:block z-0"
+              aria-hidden="true"
+            />
+
+            {/* Grid of steps */}
+            <div className="grid grid-cols-1 gap-y-12 md:grid-cols-4 md:gap-y-0 md:gap-x-8 relative z-10">
+              {[
+                {
+                  number: "1",
+                  title: "נדבר ונבין", // Changed
+                  description: "נשב יחד (או נדבר בטלפון) ואתם תספרו לי מה הכי מציק לכם בעסק, איפה אתם מרגישים שאתם מבזבזים הכי הרבה זמן." // Changed
+                },
+                {
+                  number: "2",
+                  title: "נמצא פתרון", // Changed
+                  description: "אני אחשוב על הדרך הכי טובה ופשוטה לעזור לכם, ואסביר לכם מה אני מציע. נחליט ביחד מה עושים." // Changed
+                },
+                {
+                  number: "3",
+                  title: "אני אדאג להכול", // Changed
+                  description: "אני אקים ואסדר את כל מה שצריך מאחורי הקלעים. אתם לא צריכים להתעסק עם שום דבר טכני. זה פשוט יתחיל לעבוד." // Changed
+                },
+                {
+                  number: "4",
+                  title: "נשארים בקשר", // Changed
+                  description: "אני לא נעלם. אהיה שם כדי לוודא שהכול עובד כמו שצריך, לענות על שאלות, ולעזור אם צריך. אם תרצו, נוכל גם למצוא עוד דברים שנוכל להפוך לאוטומטיים בהמשך." // Changed
+                }
+              ].map((step, idx, arr) => (
+                <div
+                  key={idx}
+                  className="relative flex flex-col items-center text-center"
+                >
+                  {/* Vertical connector between steps — מוצג במובייל בלבד */}
+                  {idx < arr.length - 1 && (
+                    <div
+                      className="absolute top-16 bottom-0 left-1/2 w-1 bg-[#1E5FA8]
+                                   transform -translate-x-1/2 md:hidden z-0"
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {/* Numbered circle */}
+                  <div className="relative z-20 w-16 h-16 rounded-full bg-[#1E5FA8]
+                                   text-white flex items-center justify-center
+                                   text-2xl font-bold mb-4 shadow-md">
+                    {step.number}
+                  </div>
+
+                  <h3 className="text-xl font-bold mb-2 relative z-10 bg-[#F8FAFC] px-2">{step.title}</h3>
+                  <p className="text-gray-600 relative z-10 bg-[#F8FAFC] px-2">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
 
-      
       {/* FAQs Section */}
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">
-              שאלות נפוצות
+              {/* Changed */}
+              שאלות שאולי יש לכם
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
-              התשובות לשאלות הנפוצות ביותר על אוטומציה עסקית
+              התשובות לשאלות הנפוצות ביותר על אוטומציה עסקית {/* Kept */}
             </p>
           </div>
-          
+
           <div className="space-y-4">
             {[
               {
-                question: "למה אני צריך אוטומציה בעסק שלי?",
-                answer: "אוטומציה חוסכת לך זמן, כסף ומשאבים. היא מפחיתה טעויות אנוש, משפרת את איכות השירות ללקוחות ומאפשרת לך להתמקד בצמיחה ובפיתוח העסק במקום בניהול שוטף ומשימות שגרתיות."
+                question: "למה העסק שלי בכלל צריך את זה?", // Changed
+                answer: "כי זה יחסוך לכם המון זמן וכאב ראש, יעזור לכם לעשות פחות טעויות, ויפנה אתכם לעשות את מה שאתם באמת אוהבים וטובים בו – לנהל ולפתח את העסק." // Changed
               },
               {
-                question: "האם אני צריך ידע טכני כדי להטמיע אוטומציה?",
-                answer: "לא! זה בדיוק העניין. אני מטפל בכל ההיבטים הטכניים עבורך. אתה רק צריך לספר לי מה הצרכים שלך ואיך העסק שלך עובד, ואני אדאג להקים מערכת שתעבוד בצורה חלקה."
+                question: "אני צריך לדעת משהו במחשבים?", // Changed
+                answer: "ממש לא! כל הקטע הוא שאני עושה את כל העבודה הטכנית בשבילכם. אתם רק צריכים להסביר לי מה הצרכים שלכם ואיך העסק שלכם עובד." // Changed
               },
               {
-                question: "כמה זמן לוקח להטמיע אוטומציה בעסק?",
-                answer: "תלוי במורכבות הפתרון, אבל בדרך כלל מדובר בתהליך של מספר שבועות. אנחנו מתחילים עם פתרונות מהירים שמביאים ערך מיידי, ולאט לאט מרחיבים לתחומים נוספים."
+                question: "כמה זמן לוקח עד שזה עובד?", // Changed
+                answer: "בדרך כלל, תוך מספר שבועות אפשר כבר להרגיש את השינוי. אנחנו מתחילים עם הדברים שהכי יקלו עליכם ומרחיבים משם לפי הצורך." // Changed
               },
               {
-                question: "האם האוטומציה תחליף עובדים?",
-                answer: "המטרה של אוטומציה היא לא להחליף עובדים, אלא לשחרר אותם ממשימות חוזרות ושגרתיות כדי שיוכלו להתמקד במשימות בעלות ערך גבוה יותר שדורשות מגע אנושי, יצירתיות וחשיבה ביקורתית."
+                question: "זה יחליף לי עובדים?", // Changed
+                answer: "המטרה היא ממש לא לפטר אף אחד. להפך, המטרה היא לשחרר אתכם ואת העובדים שלכם (אם יש) מהעבודה השחורה והמשעממת, כדי שתוכלו להתפנות לדברים יותר חשובים ויצירתיים שבאמת מקדמים את העסק." // Changed
               },
               {
-                question: "האם אוטומציה מתאימה גם לעסקים קטנים?",
-                answer: "בהחלט! למעשה, עסקים קטנים לעתים מרוויחים יותר מאוטומציה כי המשאבים שלהם מוגבלים יותר. פתרונות אוטומציה מודרניים הם גמישים ונגישים גם לעסקים קטנים ובתקציבים סבירים."
+                question: "זה מתאים גם לעסק קטן כמו שלי?", // Changed
+                answer: "בהחלט! לפעמים דווקא לעסקים קטנים זה עוזר הכי הרבה, כי כל שעה שמתפנה היא קריטית והפתרונות לא חייבים להיות יקרים." // Changed
               },
               {
-                question: "מה קורה אם משהו משתבש?",
-                answer: "חלק מהשירות שלי כולל תמיכה שוטפת ומעקב. אם מתעוררת בעיה, אני זמין לפתור אותה במהירות. בנוסף, אני תמיד מקפיד לבנות מערכות עם גיבויים ומנגנוני אבטחה מתאימים."
+                question: "ומה אם משהו משתבש או לא עובד?", // Changed
+                answer: "אני כאן בשבילכם. חלק מהשירות שלי זה ליווי ותמיכה. אם יש בעיה, אני זמין לפתור אותה במהירות." // Changed
               }
             ].map((faq, index) => (
-              <div 
+              <div
                 key={index}
                 className="border border-gray-200 rounded-lg shadow-sm bg-white overflow-hidden"
               >
@@ -443,15 +454,17 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-br from-[#1E5FA8] to-[#13386B] text-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            מוכנים לשחרר את העסק (ואת עצמכם)?
+            {/* Changed */}
+            מוכנים להפסיק לרדוף אחרי הזנב ולהתחיל לנהל את העסק בקלות?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            הצעד הראשון להפוך את העסק שלך ליעיל יותר הוא לדבר איתי. בוא נבדוק יחד אילו תהליכים ניתן לאטמץ כדי לחסוך לך זמן וכסף.
+            {/* Changed */}
+            הצעד הראשון להפוך את העסק שלכם למקום שנעים וקל יותר לעבוד בו, הוא פשוט לדבר איתי. בואו נבדוק ביחד איפה מסתתר הזמן האבוד שלכם ואיך אפשר להחזיר אותו אליכם.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Button
@@ -459,7 +472,8 @@ export default function Home() {
               size="lg"
               className="bg-[#FF9900] hover:bg-[#E68A00] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
-              רוצה לשחרר לעצמך זמן? בוא נדבר
+              {/* Changed */}
+              רוצים לשחרר זמן? דברו איתי
             </Button>
             <Button
               variant="outline"
@@ -467,7 +481,8 @@ export default function Home() {
               className="bg-transparent border-white text-white hover:bg-white hover:text-[#1E5FA8] text-lg px-8 py-6 rounded-xl transition-colors"
               onClick={() => window.location.href = `https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER || '972526485138'}`}
             >
-              פנה אליי בוואטסאפ
+              {/* Changed */}
+              אפשר פשוט לשלוח לי הודעה בוואטסאפ
             </Button>
           </div>
         </div>

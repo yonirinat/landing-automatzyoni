@@ -108,7 +108,7 @@ export default function Blog() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             הבלוג: תוכן, טיפים וכלים לאוטומציה עסקית
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
             תוכן מקצועי שיעזור לך לשפר את העסק, לחסוך זמן ולהתייעל
           </p>
         </div>
@@ -134,8 +134,9 @@ export default function Blog() {
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={post.image}
-                      alt={post.title}
+                      alt={`תמונה למאמר: ${post.title}`}
                       className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                     <div className="absolute top-0 right-0 bg-[#1E5FA8] text-white py-1 px-3 text-sm font-medium">
                       {post.category}
@@ -170,7 +171,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="order-2 lg:order-1 lg:col-span-1">
-            <div className="sticky top-6 space-y-8">
+            <div className="sticky top-6 space-y-8" role="complementary" aria-label="סרגל צד">
               <Card className="border-none shadow-md">
                 <CardHeader>
                   <CardTitle>קטגוריות</CardTitle>
@@ -253,8 +254,9 @@ export default function Blog() {
                   <div className="relative h-40 overflow-hidden">
                     <img
                       src={post.image}
-                      alt={post.title}
+                      alt={`תמונה למאמר: ${post.title}`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                     <div className="absolute top-0 right-0 bg-[#1E5FA8] text-white py-1 px-3 text-sm font-medium">
                       {post.category}
@@ -298,21 +300,21 @@ export default function Blog() {
             )}
             
             {filteredPosts.length > 0 && filteredPosts.length > 6 && (
-              <div className="flex justify-center mt-8">
+              <nav aria-label="ניווט בין עמודים" className="flex justify-center mt-8">
                 <div className="flex gap-2">
-                  <Button variant="outline" disabled>
-                    <ArrowRight className="w-4 h-4" />
+                  <Button variant="outline" disabled aria-label="לעמוד הקודם">
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
                     הקודם
                   </Button>
-                  <Button className="bg-[#1E5FA8]">1</Button>
-                  <Button variant="ghost">2</Button>
-                  <Button variant="ghost">3</Button>
-                  <Button variant="outline">
+                  <Button className="bg-[#1E5FA8]" aria-current="page">1</Button>
+                  <Button variant="ghost" aria-label="לעמוד 2">2</Button>
+                  <Button variant="ghost" aria-label="לעמוד 3">3</Button>
+                  <Button variant="outline" aria-label="לעמוד הבא">
                     הבא
-                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    <ArrowLeft className="w-4 h-4 mr-2" aria-hidden="true" />
                   </Button>
                 </div>
-              </div>
+              </nav>
             )}
           </div>
         </div>

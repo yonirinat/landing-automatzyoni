@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const chatbotFlow = {
@@ -32,7 +34,21 @@ const chatbotFlow = {
   },
   STEP_2_BUSINESS: {
     messages: [
-      "מעולה! קודם כל, ספר לי בקצרה על העסק שלך. באיזה תחום אתה עוסק ומה אתה מציע ללקוחות?"
+      "באיזה תחום העסק שלך פועל?"
+    ],
+    options: [
+      { text: "מסחר / חנות", value: "מסחר / חנות", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "שירותים מקצועיים", value: "שירותים מקצועיים", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "טיפולים / רפואה משלימה", value: "טיפולים / רפואה משלימה", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "מזון / הסעדה", value: "מזון / הסעדה", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "חינוך / הדרכה", value: "חינוך / הדרכה", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "טכנולוגיה / תוכנה", value: "טכנולוגיה / תוכנה", nextBlock: "STEP_2_BUSINESS_SUBTYPE" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_2_BUSINESS_OTHER" }
+    ]
+  },
+  STEP_2_BUSINESS_OTHER: {
+    messages: [
+      "ספר לי בקצרה על העסק שלך. באיזה תחום אתה עוסק ומה אתה מציע ללקוחות?"
     ],
     input: {
       type: "text",
@@ -40,9 +56,19 @@ const chatbotFlow = {
       nextBlock: "STEP_2_EMPLOYEES"
     }
   },
+  STEP_2_BUSINESS_SUBTYPE: {
+    messages: [
+      "ספר לי קצת יותר על העסק שלך - במה אתה מתמחה?"
+    ],
+    input: {
+      type: "text",
+      variable: "business_specialty",
+      nextBlock: "STEP_2_EMPLOYEES"
+    }
+  },
   STEP_2_EMPLOYEES: {
     messages: [
-      "תודה! וכמה אנשים עובדים בעסק (כולל אותך)? רק כדי לקבל מושג."
+      "כמה אנשים עובדים בעסק (כולל אותך)?"
     ],
     options: [
       { text: "אני לבד", value: "אני לבד", nextBlock: "STEP_3_PAIN" },
@@ -53,58 +79,324 @@ const chatbotFlow = {
   },
   STEP_3_PAIN: {
     messages: [
-      "מהו הדבר שגוזל לך הכי הרבה זמן או שגורם לך הכי הרבה כאב ראש בעסק היום?"
+      "מהו הדבר שגוזל לך הכי הרבה זמן בעסק?"
+    ],
+    checkboxes: {
+      options: [
+        { text: "שיווק ופרסום", value: "שיווק ופרסום" },
+        { text: "ניהול לקוחות", value: "ניהול לקוחות" },
+        { text: "הנהלת חשבונות", value: "הנהלת חשבונות" },
+        { text: "גביית תשלומים", value: "גביית תשלומים" },
+        { text: "ניהול מלאי", value: "ניהול מלאי" },
+        { text: "ניהול זמנים ותורים", value: "ניהול זמנים ותורים" },
+        { text: "תקשורת עם לקוחות", value: "תקשורת עם לקוחות" }
+      ],
+      variable: "main_pain_areas",
+      nextBlock: "STEP_4_CRM",
+      includeOther: true
+    }
+  },
+  STEP_3_PAIN_OTHER: {
+    messages: [
+      "ספר לי יותר על הדבר שגוזל לך הכי הרבה זמן או שגורם לך הכי הרבה כאב ראש בעסק היום"
     ],
     input: {
       type: "text",
       variable: "main_pain",
-      nextBlock: "STEP_4_TASKS"
+      nextBlock: "STEP_4_CRM"
     }
   },
-  STEP_4_TASKS: {
+  STEP_4_CRM: {
     messages: [
-      "אתה משתמש בתוכנות כלשהן היום? לדוגמה: תוכנה להוצאת חשבוניות, CRM, יומן גוגל וכד׳."
+      "איך אתה מנהל את הלקוחות שלך כיום?"
+    ],
+    options: [
+      { text: "בקובץ אקסל", value: "אקסל", nextBlock: "STEP_4_INVOICES" },
+      { text: "בתוכנת CRM ייעודית", value: "CRM", nextBlock: "STEP_4_CRM_TYPE" },
+      { text: "ברשימות ופתקים", value: "רשימות ופתקים", nextBlock: "STEP_4_INVOICES" },
+      { text: "בלקוחות קבועים בטלפון", value: "טלפון וקשר אישי", nextBlock: "STEP_4_INVOICES" },
+      { text: "וואטסאפ", value: "וואטסאפ", nextBlock: "STEP_4_INVOICES" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_CRM_OTHER" }
+    ]
+  },
+  STEP_4_CRM_OTHER: {
+    messages: [
+      "ספר לי איך אתה מנהל את הלקוחות שלך"
     ],
     input: {
       type: "text",
-      variable: "current_tools",
-      nextBlock: "STEP_5_TOOLS"
+      variable: "crm_method",
+      nextBlock: "STEP_4_INVOICES"
     }
   },
-  STEP_5_TOOLS: {
-  messages: [
-    "איפה אתה מרגיש שאתה מבזבז הכי הרבה זמן על משימות שחוזרות על עצמן? (אפשר לפרט בפורמט חופשי)"
-  ],
-  input: {
-    type: "text",
-    variable: "task_areas",
-    nextBlock: "STEP_5_VOLUME"
-  }
-},
+  STEP_4_CRM_TYPE: {
+    messages: [
+      "באיזו תוכנת CRM אתה משתמש?"
+    ],
+    options: [
+      { text: "Salesforce", value: "Salesforce", nextBlock: "STEP_4_INVOICES" },
+      { text: "HubSpot", value: "HubSpot", nextBlock: "STEP_4_INVOICES" },
+      { text: "Monday", value: "Monday", nextBlock: "STEP_4_INVOICES" },
+      { text: "ActiveTrail", value: "ActiveTrail", nextBlock: "STEP_4_INVOICES" },
+      { text: "Priority", value: "Priority", nextBlock: "STEP_4_INVOICES" },
+      { text: "Zoho CRM", value: "Zoho CRM", nextBlock: "STEP_4_INVOICES" },
+      { text: "Fireberry", value: "Fireberry", nextBlock: "STEP_4_INVOICES" },
+      { text: "Powerlink CRM", value: "Powerlink CRM", nextBlock: "STEP_4_INVOICES" },
+      { text: "Pipedrive", value: "Pipedrive", nextBlock: "STEP_4_INVOICES" },
+      { text: "ZenDesk", value: "ZenDesk", nextBlock: "STEP_4_INVOICES" },
+      { text: "Origami", value: "Origami", nextBlock: "STEP_4_INVOICES" },
+      { text: "SAP Business One", value: "SAP Business One", nextBlock: "STEP_4_INVOICES" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_CRM_TYPE_OTHER" }
+    ]
+  },
+  STEP_4_CRM_TYPE_OTHER: {
+    messages: [
+      "באיזו תוכנת CRM אתה משתמש?"
+    ],
+    input: {
+      type: "text",
+      variable: "crm_software",
+      nextBlock: "STEP_4_INVOICES"
+    }
+  },
+  STEP_4_INVOICES: {
+    messages: [
+      "באיזו תוכנה אתה מוציא חשבוניות?"
+    ],
+    options: [
+      { text: "חשבשבת", value: "חשבשבת", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "חשבונית ירוקה", value: "חשבונית ירוקה", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "EZCount", value: "EZCount", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "Invoice4U", value: "Invoice4U", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "iCount", value: "iCount", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "ריווחית", value: "ריווחית", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "פריוריטי זום", value: "פריוריטי זום", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "חשבונית אונליין", value: "חשבונית אונליין", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "רואה חשבון מטפל בזה", value: "רואה חשבון", nextBlock: "STEP_4_SCHEDULING" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_INVOICES_OTHER" }
+    ]
+  },
+  STEP_4_INVOICES_OTHER: {
+    messages: [
+      "באיזו תוכנה אתה מוציא חשבוניות?"
+    ],
+    input: {
+      type: "text",
+      variable: "invoice_software",
+      nextBlock: "STEP_4_SCHEDULING"
+    }
+  },
+  STEP_4_SCHEDULING: {
+    messages: [
+      "איך אתה מנהל את לוח הזמנים והפגישות שלך?"
+    ],
+    options: [
+      { text: "יומן גוגל", value: "יומן גוגל", nextBlock: "STEP_4_MARKETING" },
+      { text: "אאוטלוק / יומן מיקרוסופט", value: "אאוטלוק", nextBlock: "STEP_4_MARKETING" },
+      { text: "מערכת תורים ייעודית", value: "מערכת תורים", nextBlock: "STEP_4_SCHEDULING_SYSTEM" },
+      { text: "יומן פיזי / מחברת", value: "יומן פיזי", nextBlock: "STEP_4_MARKETING" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_SCHEDULING_OTHER" }
+    ]
+  },
+  STEP_4_SCHEDULING_SYSTEM: {
+    messages: [
+      "באיזו מערכת תורים אתה משתמש?"
+    ],
+    options: [
+      { text: "Calendly", value: "Calendly", nextBlock: "STEP_4_MARKETING" },
+      { text: "Setmore", value: "Setmore", nextBlock: "STEP_4_MARKETING" },
+      { text: "Simply Book", value: "Simply Book", nextBlock: "STEP_4_MARKETING" },
+      { text: "10bis / רסטי", value: "10bis / רסטי", nextBlock: "STEP_4_MARKETING" },
+      { text: "SpotOn", value: "SpotOn", nextBlock: "STEP_4_MARKETING" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_SCHEDULING_SYSTEM_OTHER" }
+    ]
+  },
+  STEP_4_SCHEDULING_SYSTEM_OTHER: {
+    messages: [
+      "באיזו מערכת תורים אתה משתמש?"
+    ],
+    input: {
+      type: "text",
+      variable: "scheduling_system",
+      nextBlock: "STEP_4_MARKETING"
+    }
+  },
+  STEP_4_SCHEDULING_OTHER: {
+    messages: [
+      "איך אתה מנהל את לוח הזמנים והפגישות שלך?"
+    ],
+    input: {
+      type: "text",
+      variable: "scheduling_method",
+      nextBlock: "STEP_4_MARKETING"
+    }
+  },
+  STEP_4_MARKETING: {
+    messages: [
+      "באילו פלטפורמות אתה מפרסם את העסק?"
+    ],
+    checkboxes: {
+      options: [
+        { text: "פייסבוק", value: "פייסבוק" },
+        { text: "אינסטגרם", value: "אינסטגרם" },
+        { text: "גוגל (קידום אורגני/ממומן)", value: "גוגל" },
+        { text: "לינקדאין", value: "לינקדאין" },
+        { text: "טיקטוק", value: "טיקטוק" },
+        { text: "דיוור במייל", value: "דיוור במייל" },
+        { text: "וואטסאפ", value: "וואטסאפ" },
+        { text: "אתר אינטרנט", value: "אתר אינטרנט" }
+      ],
+      variable: "marketing_platforms",
+      nextBlock: "STEP_4_MARKETING_OTHER",
+      includeOther: true
+    }
+  },
+  STEP_4_MARKETING_OTHER: {
+    messages: [
+      "האם יש פלטפורמות פרסום נוספות שאתה משתמש בהן?"
+    ],
+    input: {
+      type: "text",
+      variable: "marketing_platforms_other",
+      nextBlock: "STEP_4_WEBSITE"
+    }
+  },
+  STEP_4_WEBSITE: {
+    messages: [
+      "האם יש לך אתר אינטרנט?"
+    ],
+    options: [
+      { text: "כן", value: "כן", nextBlock: "STEP_4_WEBSITE_PLATFORM" },
+      { text: "לא", value: "לא", nextBlock: "STEP_5_TASKS" }
+    ]
+  },
+  STEP_4_WEBSITE_PLATFORM: {
+    messages: [
+      "באיזו פלטפורמה האתר שלך נבנה?"
+    ],
+    options: [
+      { text: "WordPress", value: "WordPress", nextBlock: "STEP_4_WEBSITE_URL" },
+      { text: "Wix", value: "Wix", nextBlock: "STEP_4_WEBSITE_URL" },
+      { text: "רב מסר", value: "רב מסר", nextBlock: "STEP_4_WEBSITE_URL" },
+      { text: "Shopify", value: "Shopify", nextBlock: "STEP_4_WEBSITE_URL" },
+      { text: "אחר", value: "אחר", nextBlock: "STEP_4_WEBSITE_PLATFORM_OTHER" }
+    ]
+  },
+  STEP_4_WEBSITE_PLATFORM_OTHER: {
+    messages: [
+      "באיזו פלטפורמה האתר שלך נבנה?"
+    ],
+    input: {
+      type: "text",
+      variable: "website_platform",
+      nextBlock: "STEP_4_WEBSITE_URL"
+    }
+  },
+  STEP_4_WEBSITE_URL: {
+    messages: [
+      "מה כתובת האתר שלך? (אם אינך רוצה לשתף כרגע, ניתן לכתוב 'לא עכשיו')"
+    ],
+    input: {
+      type: "text",
+      variable: "website_url",
+      nextBlock: "STEP_5_TASKS"
+    }
+  },
+  STEP_5_TASKS: {
+    messages: [
+      "באילו תחומים אתה מרגיש שאתה מבזבז הכי הרבה זמן על משימות שחוזרות על עצמן?"
+    ],
+    checkboxes: {
+      options: [
+        { text: "מענה ללקוחות", value: "מענה ללקוחות" },
+        { text: "תזכורות ומעקב", value: "תזכורות ומעקב" },
+        { text: "הוצאת הצעות מחיר", value: "הוצאת הצעות מחיר" },
+        { text: "הוצאת חשבוניות", value: "הוצאת חשבוניות" },
+        { text: "קביעת פגישות", value: "קביעת פגישות" },
+        { text: "עדכון מלאי", value: "עדכון מלאי" },
+        { text: "דיווחים וסטטיסטיקות", value: "דיווחים וסטטיסטיקות" },
+        { text: "הזנת נתונים", value: "הזנת נתונים" }
+      ],
+      variable: "repetitive_tasks",
+      nextBlock: "STEP_5_TASKS_OTHER",
+      includeOther: true
+    }
+  },
+  STEP_5_TASKS_OTHER: {
+    messages: [
+      "האם יש תחומים נוספים שגוזלים ממך זמן רב?"
+    ],
+    input: {
+      type: "text",
+      variable: "repetitive_tasks_other",
+      nextBlock: "STEP_5_VOLUME"
+    }
+  },
   STEP_5_VOLUME: {
     messages: [
-      "כמה אירועים כאלה קורים בחודש? תן הערכה גסה."
+      "כמה פעולות חוזרות כאלה אתה מבצע בחודש בערך?"
     ],
     options: [
       { text: "פחות מ-10", value: "Less than 10", nextBlock: "STEP_6_RESULTS" },
       { text: "10-50", value: "10-50", nextBlock: "STEP_6_RESULTS" },
       { text: "50-100", value: "50-100", nextBlock: "STEP_6_RESULTS" },
-      { text: "יותר מ-100", value: "More than 100", nextBlock: "STEP_6_RESULTS" }
+      { text: "100-500", value: "100-500", nextBlock: "STEP_6_RESULTS" },
+      { text: "יותר מ-500", value: "More than 500", nextBlock: "STEP_6_RESULTS" }
     ]
   },
   STEP_6_RESULTS: {
     messages: [
-      "מה הדבר הכי חשוב שהחיסכון בזמן יאפשר לך לעשות? מה החלום שלך כשהעסק ירוץ חלק יותר?"
+      "מה הכי חשוב לך להשיג באמצעות שיפור התהליכים והאוטומציה?"
+    ],
+    checkboxes: {
+      options: [
+        { text: "לחסוך זמן", value: "לחסוך זמן" },
+        { text: "להגדיל הכנסות", value: "להגדיל הכנסות" },
+        { text: "לשפר את השירות ללקוחות", value: "לשפר את השירות ללקוחות" },
+        { text: "להקטין טעויות אנוש", value: "להקטין טעויות אנוש" },
+        { text: "לשפר את המעקב והבקרה", value: "לשפר את המעקב והבקרה" },
+        { text: "להתפנות לדברים אחרים", value: "להתפנות לדברים אחרים" }
+      ],
+      variable: "desired_outcomes",
+      nextBlock: "STEP_6_DESIRED_OUTCOME",
+      includeOther: true
+    }
+  },
+  STEP_6_DESIRED_OUTCOME_OTHER: {
+    messages: [
+      "ספר לי מה הכי חשוב לך להשיג"
     ],
     input: {
       type: "text",
       variable: "desired_outcome",
-      nextBlock: "STEP_7_CONTACT"
+      nextBlock: "STEP_6_DESIRED_OUTCOME"
     }
+  },
+  STEP_6_DESIRED_OUTCOME: {
+    messages: [
+      "מה החזון שלך לעסק כשהכל ירוץ באופן חלק יותר?"
+    ],
+    input: {
+      type: "text",
+      variable: "business_vision",
+      nextBlock: "STEP_7_BUDGET"
+    }
+  },
+  STEP_7_BUDGET: {
+    messages: [
+      "מה התקציב שאתה מוכן להשקיע בשיפור התהליכים בעסק?"
+    ],
+    options: [
+      { text: "עד 1,000 ₪", value: "עד 1,000 ₪", nextBlock: "STEP_7_CONTACT" },
+      { text: "1,000-5,000 ₪", value: "1,000-5,000 ₪", nextBlock: "STEP_7_CONTACT" },
+      { text: "5,000-15,000 ₪", value: "5,000-15,000 ₪", nextBlock: "STEP_7_CONTACT" },
+      { text: "יותר מ-15,000 ₪", value: "יותר מ-15,000 ₪", nextBlock: "STEP_7_CONTACT" },
+      { text: "תלוי בהצעה", value: "תלוי בהצעה", nextBlock: "STEP_7_CONTACT" }
+    ]
   },
   STEP_7_CONTACT: {
     messages: [
-      "מצוין! מה השם המלא שלך?"
+      "מה השם המלא שלך?"
     ],
     input: {
       type: "text",
@@ -118,7 +410,7 @@ const chatbotFlow = {
   },
   STEP_7_PHONE: {
     messages: [
-      "מה מספר הטלפון שלך?"
+      "כדי שנוכל לחזור אליך עם הצעה שתסדר לך את העסק, נשמח לקבל את המספר הטלפון שלך"
     ],
     input: {
       type: "text",
@@ -166,7 +458,7 @@ const chatbotFlow = {
   STEP_7_END: {
     messages: [
       "תודה רבה על הזמן והמידע! יונתן יעבור על הפרטים שלך ויחזור אליך בהקדם האפשרי כדי לדבר על איך אוטומציה יכולה לעזור לעסק שלך לצמוח ולחסוך לך זמן.",
-      "בינתיים, אתה מוזמן לקרוא עוד תוכן מעניין בבלוג שלנו או להתנסות בכלים החינמיים שלנו באתר."
+      "בינתיים, אתה מוזמן לקרוא עוד תוכן מעניין בבלוג שלנו או להתנסות בכלים החינמיים שלנו באתר [link]לבדיקת העסק(/tools)[/link]."
     ]
   }
 };
@@ -201,6 +493,59 @@ const MessageBubble = ({ message, isBot, delay = 0, onAnimationComplete }) => {
   }, [message, isBot, delay]);
   
   if (!visible) return null;
+
+  // בדיקה אם ההודעה מכילה [link] syntax
+  const hasLink = message.includes('[link]') && message.includes('[/link]');
+  
+  const renderTextWithLinks = () => {
+    if (!hasLink) return displayedText;
+
+    // פיצול הטקסט וייצור אלמנטים עם לינקים
+    const parts = [];
+    let currentText = displayedText;
+    let linkStartIndex, linkEndIndex, urlStartIndex, urlEndIndex;
+
+    while (
+      (linkStartIndex = currentText.indexOf('[link]')) !== -1 &&
+      (linkEndIndex = currentText.indexOf('[/link]')) !== -1 &&
+      (urlStartIndex = currentText.indexOf('(')) !== -1 &&
+      (urlEndIndex = currentText.indexOf(')')) !== -1 &&
+      urlStartIndex < urlEndIndex &&
+      linkStartIndex < urlStartIndex &&
+      urlEndIndex < linkEndIndex
+    ) {
+      // טקסט לפני הלינק
+      if (linkStartIndex > 0) {
+        parts.push(currentText.substring(0, linkStartIndex));
+      }
+
+      const linkText = currentText.substring(linkStartIndex + 6, urlStartIndex);
+      const url = currentText.substring(urlStartIndex + 1, urlEndIndex);
+
+      // הוספת הלינק עצמו
+      parts.push(
+        <a 
+          key={parts.length} 
+          href={url} 
+          className="text-[#1E5FA8] hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {linkText}
+        </a>
+      );
+
+      // המשך לחלק הבא של הטקסט
+      currentText = currentText.substring(linkEndIndex + 7);
+    }
+
+    // הוספת שארית הטקסט אם קיימת
+    if (currentText) {
+      parts.push(currentText);
+    }
+
+    return parts;
+  };
   
   return (
     <motion.div
@@ -215,7 +560,9 @@ const MessageBubble = ({ message, isBot, delay = 0, onAnimationComplete }) => {
       }`}
     >
       <div>
-        {isBot && typing ? displayedText + '|' : displayedText}
+        {isBot && typing ? displayedText + '|' : (
+          hasLink ? renderTextWithLinks() : displayedText
+        )}
         {isBot && typing && <span className="animate-pulse">|</span>}
       </div>
     </motion.div>
@@ -234,6 +581,100 @@ MessageBubble.defaultProps = {
   onAnimationComplete: () => {}
 };
 
+const CheckboxGroup = ({ options, onSubmit, includeOther = false }) => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [otherValue, setOtherValue] = useState('');
+  const [otherSelected, setOtherSelected] = useState(false);
+
+  const handleCheckboxChange = (value) => {
+    if (value === 'other') {
+      setOtherSelected(!otherSelected);
+      return;
+    }
+
+    setSelectedOptions(prev => {
+      if (prev.includes(value)) {
+        return prev.filter(opt => opt !== value);
+      } else {
+        return [...prev, value];
+      }
+    });
+  };
+
+  const handleSubmit = () => {
+    const results = [...selectedOptions];
+    if (otherSelected && otherValue.trim()) {
+      results.push(otherValue.trim());
+    }
+    onSubmit(results);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-2">
+        {options.map((option, index) => (
+          <div key={index} className="flex items-center space-x-2 rtl:space-x-reverse">
+            <Checkbox 
+              id={`checkbox-${index}`} 
+              checked={selectedOptions.includes(option.value)}
+              onCheckedChange={() => handleCheckboxChange(option.value)}
+              className="h-5 w-5"
+            />
+            <Label htmlFor={`checkbox-${index}`} className="text-gray-800">
+              {option.text}
+            </Label>
+          </div>
+        ))}
+        
+        {includeOther && (
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+              <Checkbox 
+                id="checkbox-other" 
+                checked={otherSelected}
+                onCheckedChange={() => handleCheckboxChange('other')}
+                className="h-5 w-5"
+              />
+              <Label htmlFor="checkbox-other" className="text-gray-800">
+                אחר
+              </Label>
+            </div>
+            
+            {otherSelected && (
+              <input
+                type="text"
+                value={otherValue}
+                onChange={(e) => setOtherValue(e.target.value)}
+                placeholder="נא לפרט..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            )}
+          </div>
+        )}
+      </div>
+      
+      <Button 
+        onClick={handleSubmit}
+        disabled={selectedOptions.length === 0 && !otherSelected}
+        className="w-full bg-[#1E5FA8]"
+      >
+        שלח
+      </Button>
+    </div>
+  );
+};
+
+CheckboxGroup.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  includeOther: PropTypes.bool
+};
+
 export default function Chatbot({ isOpen, onClose }) {
   const [currentBlock, setCurrentBlock] = useState('WELCOME');
   const [conversation, setConversation] = useState([]);
@@ -245,10 +686,11 @@ export default function Chatbot({ isOpen, onClose }) {
   const textareaRef = useRef(null);
   const [isUserScrolledUp, setIsUserScrolledUp] = useState(false);
   const [webhookSent, setWebhookSent] = useState(false);
-
+  
   const currentBlockInfo = chatbotFlow[currentBlock];
   const hasOptions = currentBlockInfo && currentBlockInfo.options;
   const hasInput = currentBlockInfo && currentBlockInfo.input;
+  const hasCheckboxes = currentBlockInfo && currentBlockInfo.checkboxes;
   const isEndBlock = currentBlock === 'STEP_7_END' || currentBlock === 'EXIT';
 
   const sendToMakeWebhook = async () => {
@@ -416,6 +858,15 @@ export default function Chatbot({ isOpen, onClose }) {
     setTimeout(() => setCurrentBlock(blockInfo.input.nextBlock), 500);
   };
 
+  const handleCheckboxSubmit = (selected) => {
+    const blockInfo = chatbotFlow[currentBlock];
+    const displayText = selected.join(', ');
+    
+    setConversation(prev => [...prev, { text: displayText, isBot: false }]);
+    setResponses(prev => ({ ...prev, [blockInfo.checkboxes.variable]: selected }));
+    setTimeout(() => setCurrentBlock(blockInfo.checkboxes.nextBlock), 500);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -514,6 +965,14 @@ export default function Chatbot({ isOpen, onClose }) {
                 </motion.div>
               )}
             </form>
+          )}
+
+          {hasCheckboxes && (
+            <CheckboxGroup 
+              options={currentBlockInfo.checkboxes.options}
+              onSubmit={handleCheckboxSubmit}
+              includeOther={currentBlockInfo.checkboxes.includeOther}
+            />
           )}
 
           {isEndBlock && (

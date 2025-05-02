@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Settings, PlusCircle, MinusCircle, Sun, Moon, Type, Zap, MousePointer, Monitor, Underline } from 'lucide-react';
 
 const AccessibilityWidget = () => {
@@ -49,13 +49,33 @@ const AccessibilityWidget = () => {
     // גודל טקסט
     document.documentElement.style.fontSize = `${accessibilitySettings.fontSize}%`;
     
-    // ניגודיות
-    document.body.classList.remove('high-contrast', 'inverted-colors');
-    if (accessibilitySettings.contrast === 'high') {
-      document.body.classList.add('high-contrast');
-    } else if (accessibilitySettings.contrast === 'inverted') {
-      document.body.classList.add('inverted-colors');
-    }
+// ניגודיות
+document.body.classList.remove('high-contrast', 'inverted-colors');
+// שמור את המיקום המקורי של הוידג'ט לפני שינוי מצב הניגודיות
+const widgetContainer = document.querySelector('.accessibility-widget-container');
+const rect = widgetContainer?.getBoundingClientRect();
+const originalPosition = {
+  bottom: window.innerHeight - rect?.bottom,
+  right: window.innerWidth - rect?.right
+};
+
+if (accessibilitySettings.contrast === 'high') {
+  document.body.classList.add('high-contrast');
+} else if (accessibilitySettings.contrast === 'inverted') {
+  document.body.classList.add('inverted-colors');
+  // אל תוסיף preserve-in-inverted כאן
+} else {
+  // אל תסיר preserve-in-inverted כאן
+}
+
+// השתמש ב-setTimeout כדי לתת לדפדפן להחיל את השינויים בסגנון
+// ואז להחזיר את האלמנט למיקום המקורי שלו
+setTimeout(() => {
+  if (widgetContainer) {
+    widgetContainer.style.bottom = `${originalPosition.bottom}px`;
+    widgetContainer.style.right = `${originalPosition.right}px`;
+  }
+}, 0);
     
     // אנימציות
     if (!accessibilitySettings.animations) {
@@ -392,15 +412,17 @@ const AccessibilityWidget = () => {
       
       {/* סגנונות CSS לוידג'ט ולהגדרות שהוא מחיל */}
       <style>{`
-        /* מיקום הוידג'ט */
-        .accessibility-widget-container {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          z-index: 9999;
-          font-family: Arial, sans-serif;
-          direction: rtl;
-        }
+/* מיקום הוידג'ט */
+.accessibility-widget-container {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999 !important;
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  /* הוסף את השורה הבאה כדי להבטיח שהסגנונות יישארו קבועים */
+  transform: translate3d(0, 0, 0);
+}
         
         /* כפתור פתיחה */
         .accessibility-toggle-button {
@@ -618,18 +640,18 @@ const AccessibilityWidget = () => {
           color: black !important;
         }
         
-        .high-contrast * {
+        .high-contrast *:not(.accessibility-widget-container):not(.accessibility-widget-container *) {
           background-color: white !important;
           color: black !important;
           border-color: black !important;
         }
         
-        .high-contrast a {
+        .high-contrast a:not(.accessibility-toggle-button) {
           color: #0000EE !important;
           font-weight: bold !important;
         }
         
-        .high-contrast button {
+        .high-contrast button:not(.accessibility-toggle-button):not(.close-button):not(.option-button):not(.reset-button) {
           background-color: black !important;
           color: white !important;
           border: 2px solid white !important;
@@ -638,6 +660,13 @@ const AccessibilityWidget = () => {
         
         .inverted-colors {
           filter: invert(100%) hue-rotate(180deg);
+        }
+        
+.inverted-colors .accessibility-widget-container {
+  filter: invert(100%) hue-rotate(180deg); /* מבטל את ההיפוך לתוסף הנגישות */
+  /* הסר וודא שאין שינוי במיקום */
+  transform: translate3d(0, 0, 0);
+        
         }
         
         .reduce-motion * {

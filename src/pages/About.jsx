@@ -43,6 +43,7 @@ export default function About() {
                     src="/src/images/headshot.avif"
                     alt="יונתן רינת – צילום תדמית"
                     className="w-72 h-72 rounded-3xl object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -81,29 +82,29 @@ export default function About() {
       </section>
 
       {/* ===== VALUES ===== */}
-      <section className="py-16 bg-[#F8FAFC] rtl">
+      <section className="py-16 bg-[#F8FAFC] rtl" aria-labelledby="values-title">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-12 text-center">איך אני עובד?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 id="values-title" className="text-2xl font-bold mb-12 text-center">איך אני עובד?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8" role="list">
             {[
               {
-                icon: <Clock className="w-10 h-10 text-[#1E5FA8]" />,
+                icon: <Clock className="w-10 h-10 text-[#1E5FA8]" aria-hidden="true" />,
                 title: "חיסכון בזמן",
                 description: "מזהים משימות שחוזרות על עצמן ומעבירים אותן לטייס‑אוטומטי."
               },
               {
-                icon: <CheckCircle className="w-10 h-10 text-[#1E5FA8]" />,
+                icon: <CheckCircle className="w-10 h-10 text-[#1E5FA8]" aria-hidden="true" />,
                 title: "תוצאה ברורה",
                 description: "מודדים שעות שנחסכו והכנסות שגדלו—שקופים ושמים מספרים על השולחן."
               },
               {
-                icon: <Users className="w-10 h-10 text-[#1E5FA8]" />,
+                icon: <Users className="w-10 h-10 text-[#1E5FA8]" aria-hidden="true" />,
                 title: "שירות אישי",
                 description: "ליווי צמוד בשפה פשוטה, בלי מילים מסובכות ובלי תלות בי בעתיד."
               }
             ].map((card, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-sm p-6 text-right hover:shadow-md transition-shadow">
-                <div className="mb-4">{card.icon}</div>
+              <div key={i} className="bg-white rounded-xl shadow-sm p-6 text-right hover:shadow-md transition-shadow" role="listitem">
+                <div className="mb-4" aria-hidden="true">{card.icon}</div>
                 <h3 className="text-xl font-bold mb-2">{card.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{card.description}</p>
               </div>
@@ -113,10 +114,10 @@ export default function About() {
       </section>
 
       {/* ===== EXPERTISE ===== */}
-      <section className="py-16 bg-white rtl">
+      <section className="py-16 bg-white rtl" aria-labelledby="expertise-title">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-12 text-center">איך אני יכול לעזור לך?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h2 id="expertise-title" className="text-2xl font-bold mb-12 text-center">איך אני יכול לעזור לך?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" role="list">
             {[
               {
                 title: "סדר בתהליכים",
@@ -151,12 +152,12 @@ export default function About() {
                 ]
               }
             ].map((area, idx) => (
-              <div key={idx} className="bg-[#F8FAFC] rounded-xl p-6 text-right">
+              <div key={idx} className="bg-[#F8FAFC] rounded-xl p-6 text-right" role="listitem">
                 <h3 className="text-xl font-bold mb-4">{area.title}</h3>
                 <ul className="space-y-2">
                   {area.items.map((item, j) => (
                     <li key={j} className="flex items-start gap-2">
-                      <Heart className="w-5 h-5 text-[#1E5FA8] mt-0.5 flex-shrink-0" />
+                      <Heart className="w-5 h-5 text-[#1E5FA8] mt-0.5 flex-shrink-0" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}

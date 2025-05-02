@@ -142,6 +142,7 @@ export default function BlogPost() {
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover"
+                  loading="eager"
                 />
                 <div className="absolute top-4 right-4 bg-[#1E5FA8] text-white py-1 px-4 rounded-full text-sm font-medium">
                   {post.category}
@@ -162,8 +163,9 @@ export default function BlogPost() {
                     <div className="w-10 h-10 rounded-full overflow-hidden ml-3">
                       <img
                         src={post.authorImage}
-                        alt={post.author}
+                        alt={`תמונת פרופיל של ${post.author}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                     <div>
@@ -214,7 +216,7 @@ export default function BlogPost() {
                 )}
                 
                 {/* Share */}
-                <div className="mt-8 pt-6 border-t">
+                <nav aria-label="שיתוף ברשתות חברתיות" className="mt-8 pt-6 border-t">
                   <h3 className="text-lg font-bold mb-4">שתף את המאמר</h3>
                   <div className="flex gap-2">
                     <Button 
@@ -222,8 +224,9 @@ export default function BlogPost() {
                       size="sm"
                       onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
                       className="flex items-center"
+                      aria-label="שתף בפייסבוק"
                     >
-                      <Facebook className="w-4 h-4 ml-2" />
+                      <Facebook className="w-4 h-4 ml-2" aria-hidden="true" />
                       פייסבוק
                     </Button>
                     <Button 
@@ -231,8 +234,9 @@ export default function BlogPost() {
                       size="sm"
                       onClick={() => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`, '_blank')}
                       className="flex items-center"
+                      aria-label="שתף בטוויטר"
                     >
-                      <Twitter className="w-4 h-4 ml-2" />
+                      <Twitter className="w-4 h-4 ml-2" aria-hidden="true" />
                       טוויטר
                     </Button>
                     <Button 
@@ -240,8 +244,9 @@ export default function BlogPost() {
                       size="sm"
                       onClick={() => window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post.title)}`, '_blank')}
                       className="flex items-center"
+                      aria-label="שתף בלינקדאין"
                     >
-                      <Linkedin className="w-4 h-4 ml-2" />
+                      <Linkedin className="w-4 h-4 ml-2" aria-hidden="true" />
                       לינקדאין
                     </Button>
                     <Button 
@@ -249,12 +254,13 @@ export default function BlogPost() {
                       size="sm"
                       onClick={copyLinkToClipboard}
                       className="flex items-center"
+                      aria-label="העתק קישור"
                     >
-                      <Copy className="w-4 h-4 ml-2" />
+                      <Copy className="w-4 h-4 ml-2" aria-hidden="true" />
                       העתק קישור
                     </Button>
                   </div>
-                </div>
+                </nav>
                 
                 {/* CTA */}
                 <div className="mt-12 bg-gradient-to-r from-[#1E5FA8] to-[#13386B] text-white p-8 rounded-xl">
@@ -301,8 +307,9 @@ export default function BlogPost() {
                         <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                           <img 
                             src={relatedPost.image}
-                            alt="תמונת מאמר"
+                            alt={`תמונה למאמר: ${relatedPost.title}`}
                             className="w-full h-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                         <div>

@@ -63,3 +63,7 @@ coverage
 .turbo
 .yalc
 yalc.lock
+
+# קבצי sitemap ורובוטים שנוצרים אוטומטית
+/public/sitemap-*.xml
+/public/robots.txt

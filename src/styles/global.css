@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&display=swap');
+
+html, body {
+  direction: rtl;
+  text-align: right;
+}
+
+:root {
+  --primary: #1E5FA8;
+  --secondary: #FF9900;
+  --background: #f8f9fc;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+}
+
+p {
+  text-align: justify;
+  direction: rtl;
+  margin-bottom: 1em;
+}
+
+p + p {
+  margin-top: 1em;
+} 

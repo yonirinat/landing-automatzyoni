@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,17 +9,13 @@ import { useChatbot } from "@/context/ChatbotContext";
 import { 
   Clock, 
   Calendar, 
-  CreditCard, 
   Mail, 
   Settings, 
   LineChart, 
   BarChart2, 
-  ArrowRight, 
   ArrowLeft,
   Calculator,
   Search,
-  Layers,
-  Scale,
   CheckCircle2,
   XCircle,
   Zap,
@@ -33,10 +29,10 @@ import {
 
 export default function Tools() {
   const { openChat } = useChatbot();
-  const [activeTab, setActiveTab] = React.useState("automation-checker");
+  const [activeTab, setActiveTab] = useState("automation-checker");
   
-  const [automationScore, setAutomationScore] = React.useState(null);
-  const [questions, setQuestions] = React.useState({
+  const [automationScore, setAutomationScore] = useState(null);
+  const [questions, setQuestions] = useState({
     q1: null,
     q2: null,
     q3: null,
@@ -44,7 +40,7 @@ export default function Tools() {
     q5: null,
   });
   
-  const [timeSaved, setTimeSaved] = React.useState({
+  const [timeSaved, setTimeSaved] = useState({
     adminHours: 10,
     repetitiveHours: 5,
     communicationHours: 7,
@@ -78,7 +74,7 @@ export default function Tools() {
   };
   
   // Custom styles for RTL support
-  React.useEffect(() => {
+  useEffect(() => {
     // Add custom styles to improve RTL support
     const style = document.createElement('style');
     style.textContent = `
@@ -263,26 +259,27 @@ export default function Tools() {
           onValueChange={setActiveTab}
           className="w-full space-y-8"
           orientation="horizontal"
+          dir="rtl"
         >
           <div className="flex justify-center w-full">
-            <TabsList className="flex flex-row min-w-[250px] gap-2">
+            <TabsList className="flex flex-row min-w-[250px] gap-2" aria-label="כלי אוטומציה">
               <TabsTrigger value="automation-checker" className="w-full text-md p-3 flex justify-center items-center gap-2 data-[state=active]:bg-[#1E5FA8] data-[state=active]:text-white">
-                <Calculator className="w-5 h-5" />
+                <Calculator className="w-5 h-5" aria-hidden="true" />
                 <span className="text-xs lg:text-lg">בודק אוטומציה</span>
               </TabsTrigger>
               <TabsTrigger value="time-calculator" className="w-full text-md p-3 flex justify-center items-center gap-2 data-[state=active]:bg-[#1E5FA8] data-[state=active]:text-white">
-                <Clock className="w-5 h-5" />
+                <Clock className="w-5 h-5" aria-hidden="true" />
                 <span className="text-xs lg:text-lg">מחשבון חיסכון בזמן</span>
               </TabsTrigger>
               <TabsTrigger value="bottlenecks" className="w-full text-md p-3 flex justify-center items-center gap-2 data-[state=active]:bg-[#1E5FA8] data-[state=active]:text-white">
-                <Search className="w-5 h-5" />
+                <Search className="w-5 h-5" aria-hidden="true" />
                 <span className="text-xs lg:text-lg">בוחן צווארי בקבוק</span>
               </TabsTrigger>
             </TabsList>
           </div>
           
           {/* Automation Checker Tab */}
-          <TabsContent value="automation-checker" className="space-y-8 rtl-tab-content">
+          <TabsContent value="automation-checker" className="space-y-8 rtl-tab-content" role="tabpanel">
             <div className="max-w-4xl mx-auto">
               <Card className="shadow-md border-none rtl-card-highlight">
                 <CardHeader className="border-b border-gray-100 bg-gradient-to-l from-blue-50 to-transparent p-6">
@@ -506,7 +503,7 @@ export default function Tools() {
           </TabsContent>
           
           {/* Time Calculator Tab */}
-          <TabsContent value="time-calculator" className="space-y-8">
+          <TabsContent value="time-calculator" className="space-y-8" role="tabpanel">
             <div className="max-w-4xl mx-auto">
               <Card className="shadow-md border-none rtl-card-highlight">
                 <CardHeader className="border-b border-gray-100 bg-gradient-to-l from-green-50 to-transparent p-6">
@@ -701,7 +698,7 @@ export default function Tools() {
           </TabsContent>
           
           {/* Bottlenecks Tab */}
-          <TabsContent value="bottlenecks" className="space-y-8 rtl-tab-content">
+          <TabsContent value="bottlenecks" className="space-y-8 rtl-tab-content" role="tabpanel">
             <div className="max-w-4xl mx-auto">
               <Card className="shadow-md border-none rtl-card-highlight">
                 <CardHeader className="border-b border-gray-100 bg-gradient-to-l from-purple-50 to-transparent p-6">
