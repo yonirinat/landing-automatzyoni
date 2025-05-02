@@ -840,6 +840,13 @@ export default function Chatbot({ isOpen, onClose }) {
     return regex.test(input);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleInputSubmit(e);
+    }
+  };
+
   const handleInputSubmit = (e) => {
     e.preventDefault();
     if (!userInput.trim()) return;
@@ -942,6 +949,7 @@ export default function Chatbot({ isOpen, onClose }) {
                   rows={1}
                   value={userInput}
                   onChange={e => setUserInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   placeholder="הקלד את תשובתך כאן..."
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1E5FA8] resize-none overflow-y-auto min-h-8 max-h-32"
                   disabled={loading}

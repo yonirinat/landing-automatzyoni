@@ -48,7 +48,7 @@ export default function Layout({ children }) {
       `}</style>
 
       {/* Header */}
-      <header className="bg-white shadow-sm py-4 px-6 relative z-50 sticky top-0" role="banner">
+      <header className="bg-white shadow-sm py-4 px-6 z-50 sticky top-0" role="banner">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link 
             to={createPageUrl("Home")} 
