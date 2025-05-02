@@ -717,50 +717,27 @@ export default function Chatbot({ isOpen, onClose }) {
       
       console.log('נתונים שנשלחים:', payload);
       
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      
-      console.log('תגובה מה-Webhook:', response);
-      
-      if (response.ok) {
-        console.log('נתוני השיחה נשלחו בהצלחה ל-Webhook');
-        setWebhookSent(true);
-      } else {
-        console.log('שגיאה בשליחה:', await response.text());
-        sendWithXMLHttpRequest(webhookUrl, payload);
-      }
+      // שימוש ישיר ב-XMLHttpRequest במקום fetch
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', webhookUrl, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          console.log('תגובה מה-Webhook:', xhr.status, xhr.responseText);
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log('שליחה הצליחה!');
+            setWebhookSent(true);
+          } else {
+            console.log('שגיאה בשליחה:', xhr.responseText);
+          }
+        }
+      };
+      xhr.send(JSON.stringify(payload));
     } catch (error) {
       console.error('שגיאה בשליחת נתוני השיחה:', error);
-      sendWithXMLHttpRequest('https://automatzyoni.app.n8n.cloud/webhook/a0193da1-8ffa-414e-a634-3d6293568b99', {
-        data: JSON.stringify(responses),
-        conversation: JSON.stringify(conversation)
-      });
     } finally {
       setLoading(false);
     }
-  };
-  
-  const sendWithXMLHttpRequest = (url, data) => {
-    console.log('מנסה לשלוח עם XMLHttpRequest...');
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        console.log('תגובה מ-XMLHttpRequest:', xhr.status, xhr.responseText);
-        if (xhr.status >= 200 && xhr.status < 300) {
-          console.log('שליחה הצליחה!');
-          setWebhookSent(true);
-        }
-      }
-    };
-    xhr.send(JSON.stringify(data));
   };
 
   const scrollToBottom = (force = false) => {
