@@ -254,7 +254,7 @@ export default function Home() {
               אז מה בעצם ה&apos;עוזר האוטומטי&apos; הזה יכול לעשות? {/* Kept */}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
-              הנה רק חלק מהפעולות שאפשר לבצע באופן אוטומטי {/* Kept */}
+              הנה חלק מהפעולות שאפשר לבצע באופן אוטומטי {/* Kept */}
             </p>
           </div>
 
