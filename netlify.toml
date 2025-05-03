@@ -6,3 +6,11 @@
   from = "/*"
   to = "/index.html"
   status = 200 
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/capi"
+  to   = "/.netlify/functions/capi"
+  status = 200

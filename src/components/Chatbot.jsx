@@ -696,17 +696,26 @@ export default function Chatbot({ isOpen, onClose }) {
       setLoading(true);
       const webhookUrl = 'https://automatzyoni.app.n8n.cloud/webhook/a0193da1-8ffa-414e-a634-3d6293568b99';
       
+      // מיפוי הכלים שבשימוש העסק
+      const toolsMapping = {
+        crm: responses.STEP_4_CRM_TYPE || responses.crm_software || responses.crm_method,
+        invoices: responses.STEP_4_INVOICES || responses.invoice_software,
+        scheduling: responses.STEP_4_SCHEDULING || responses.scheduling_system || responses.scheduling_method,
+        marketing: responses.marketing_platforms,
+        website: responses.website_platform
+      };
+      
       const payload = {
         name: responses.full_name || 'לא צוין',
         phone: responses.phone || 'לא צוין',
         email: responses.email || 'לא צוין',
-        business_description: responses.business_description || 'לא צוין',
+        business_description: responses.business_specialty || responses.business_description || 'לא צוין',
         employees: responses.STEP_2_EMPLOYEES || 'לא צוין',
-        main_pain: responses.main_pain || 'לא צוין',
-        task_areas: responses.task_areas || 'לא צוין',
-        current_tools: responses.current_tools || 'לא צוין',
+        main_pain: responses.main_pain_areas || responses.main_pain || 'לא צוין',
+        task_areas: responses.repetitive_tasks || responses.repetitive_tasks_other || 'לא צוין',
+        current_tools: JSON.stringify(toolsMapping) || 'לא צוין',
         volume: responses.STEP_5_VOLUME || 'לא צוין',
-        desired_outcome: responses.desired_outcome || 'לא צוין',
+        desired_outcome: responses.desired_outcomes || responses.business_vision || responses.desired_outcome || 'לא צוין',
         want_summary: responses.STEP_7_SUMMARY || 'לא',
         final_note: responses.final_note || '',
         full_conversation: JSON.stringify(conversation)
