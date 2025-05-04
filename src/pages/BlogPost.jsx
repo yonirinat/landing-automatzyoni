@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { createPageUrl } from "@/utils";
+import { Link, useNavigate, useSearchParams, useParams } from "react-router-dom";
+import { createPageUrl, toSeoFriendlySlug } from "@/utils";
 import Markdown from 'markdown-to-jsx';
+import { Helmet } from 'react-helmet-async';
 
 import { useChatbot } from "@/context/ChatbotContext";
 import { 
@@ -10,7 +11,7 @@ import {
   Clock,
   User,
   Tag as TagIcon,
-  ArrowRight,
+  ArrowLeft,
   MessageCircle,
   Facebook,
   Linkedin,
@@ -27,12 +28,25 @@ export default function BlogPost() {
   const navigate = useNavigate();
   const { openChat } = useChatbot();
   const [searchParams] = useSearchParams();
-  const postId = searchParams.get('id');
+  const { slug } = useParams();
+  const postId = slug || searchParams.get('id');
   
   const [post, setPost] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [canonicalUrl, setCanonicalUrl] = useState("");
+  
+  // יצירת הקישור הקנוני לכתבה (בפורמט SEO-friendly)
+  useEffect(() => {
+    if (post) {
+      // יצירת סלאג באנגלית מתוך כותרת הכתבה או מזהה הכתבה
+      const slug = toSeoFriendlySlug(post.title) || post.id;
+      // ייצור URL קנוני בפורמט ידידותי ל-SEO
+      const canonical = `${window.location.origin}/blog/${slug}`;
+      setCanonicalUrl(canonical);
+    }
+  }, [post]);
   
   useEffect(() => {
     const loadPostData = async () => {
@@ -117,6 +131,49 @@ export default function BlogPost() {
   
   return (
     <div className="min-h-screen bg-[#F8FAFC] py-12">
+      <Helmet>
+        <title>{post.title} - מאמרים</title>
+        <meta name="description" content={post.description} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:image" content={post.image} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.description} />
+        <meta name="twitter:image" content={post.image} />
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* סכמת JSON-LD לפי Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            },
+            "headline": post.title,
+            "description": post.description,
+            "image": post.image,
+            "author": {
+              "@type": "Person",
+              "name": post.author || "יונתן רינת"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "יונתן רינת - אוטומציה לעסקים",
+              "logo": {
+                "@type": "ImageObject",
+                "url": `${window.location.origin}/src/images/logo.webp`
+              }
+            },
+            "datePublished": post.date,
+            "dateModified": post.date
+          })}
+        </script>
+      </Helmet>
       <div className="max-w-7xl mx-auto px-6">
         {/* Breadcrumbs */}
         <div className="mb-8">
@@ -263,7 +320,7 @@ export default function BlogPost() {
                   {relatedPosts.map(relatedPost => (
                     <Link 
                       key={relatedPost.id}
-                      to={createPageUrl(`BlogPost?id=${relatedPost.id}`)}
+                      to={`/blog/${relatedPost.id}`}
                       className="block group"
                     >
                       <div className="bg-white rounded-xl shadow-md overflow-hidden h-full transition-all group-hover:shadow-lg group-hover:-translate-y-1">
@@ -282,15 +339,9 @@ export default function BlogPost() {
                           <p className="text-gray-600 text-sm mb-3 line-clamp-3">
                             {relatedPost.description}
                           </p>
-                          <div className="flex justify-between text-sm text-gray-500">
-                            <span className="flex items-center">
-                              <Calendar className="w-3 h-3 ml-1" />
-                              {new Date(relatedPost.date).toLocaleDateString('he-IL')}
-                            </span>
-                            <span className="flex items-center text-[#1E5FA8] font-medium">
-                              קרא עוד
-                              <ArrowRight className="w-3 h-3 mr-1" />
-                            </span>
+                          <div className="text-[#1E5FA8] text-sm font-medium flex items-center">
+                            קרא עוד
+                            <ArrowLeft className="w-4 h-4 mr-1" />
                           </div>
                         </div>
                       </div>
