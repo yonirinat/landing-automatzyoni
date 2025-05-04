@@ -190,7 +190,7 @@ export default function About() {
               variant="outline"
               size="lg"
               className="bg-transparent border-white text-white hover:bg-white hover:text-[#1E5FA8] text-lg"
-              onClick={() => (window.location.href = "mailto:yonirinat@gmail.com")}
+              onClick={() => (window.location.href = "mailto:yonatan@automatzyoni.co.il")}
             >
               או שלחו לי אימייל
             </Button>

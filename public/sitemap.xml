@@ -4,36 +4,54 @@
     <loc>https://automatzyoni.co.il/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-04</lastmod>
   </url>
   <url>
     <loc>https://automatzyoni.co.il/home</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-04</lastmod>
   </url>
   <url>
     <loc>https://automatzyoni.co.il/tools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-04</lastmod>
   </url>
   <url>
     <loc>https://automatzyoni.co.il/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-04</lastmod>
   </url>
   <url>
     <loc>https://automatzyoni.co.il/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-04</lastmod>
   </url>
   <url>
-    <loc>https://automatzyoni.co.il/blogpost</loc>
+    <loc>https://automatzyoni.co.il/blogpost?id=אוטומציה-בוואטסאפ-עוצמה-תקשורתית-לעסקים</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2025-05-02</lastmod>
+    <lastmod>2025-05-03</lastmod>
   </url>
-</urlset> 
+  <url>
+    <loc>https://automatzyoni.co.il/blogpost?id=אוטומציה-עסקית-–-המדריך-המלא-לשנת-2025</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2025-05-04</lastmod>
+  </url>
+  <url>
+    <loc>https://automatzyoni.co.il/blogpost?id=בינה-מלאכותית-בעסקים-קטנים-בישראל-המגמות-המובילות-והיתרונות-העסקיים-ב-2025</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2025-05-01</lastmod>
+  </url>
+  <url>
+    <loc>https://automatzyoni.co.il/blogpost?id=כיצד-לשפר-את-הקשר-עם-הלקוחות-ולצמוח-ב-2025-מה-זה-בכלל-crm</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2025-05-04</lastmod>
+  </url>
+</urlset>
