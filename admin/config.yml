@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main # סניף ברירת‑המחדל שלך ב‑Git
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "articles"
+    label: "כתבות"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "כותרת", widget: "string" }
+      - {
+          name: "date",
+          label: "תאריך",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+        }
+      - { name: "cover", label: "תמונת שער", widget: "image" }
+      - { name: "excerpt", label: "תקציר", widget: "text" }
+      - { name: "body", label: "תוכן", widget: "markdown" }

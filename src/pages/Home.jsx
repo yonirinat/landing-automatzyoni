@@ -51,7 +51,7 @@ export default function Home() {
                   className="bg-[#FF9900] hover:bg-[#E68A00] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
                   {/* Changed */}
-דברו עם העוזר שלי, הוא יסדר לכם את העסק               </Button>
+בדקו את העסק שלכם              </Button>
               </div>
             </div>
 
