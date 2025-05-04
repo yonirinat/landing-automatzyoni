@@ -148,7 +148,7 @@ export default function Home() {
               <div className="relative">
                 <img
                   src={coPilot}
-                  alt="ה'עוזר האוטומטי' בפעולה" // Changed alt text
+                  alt="העוזר האוטומטי בפעולה" // Changed alt text
                   className="rounded-xl shadow-lg"
                   loading="lazy"
                 />
