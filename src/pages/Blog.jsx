@@ -154,7 +154,7 @@ export default function Blog() {
                       <Clock className="w-4 h-4 ml-1" />
                       {post.readTime} דקות קריאה
                     </div>
-                    <Link to={`/blog/${post.id}`}>
+                    <Link to={createPageUrl(`BlogPost?id=${post.id}`)}>
                       <Button variant="ghost" className="text-[#1E5FA8]">
                         קרא עוד
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -268,13 +268,10 @@ export default function Blog() {
                   </CardHeader>
                   <CardFooter className="flex justify-between">
                     <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="w-4 h-4 ml-1" />
-                      {new Date(post.date).toLocaleDateString('he-IL')}
-                      <span className="mx-2">•</span>
                       <Clock className="w-4 h-4 ml-1" />
                       {post.readTime} דקות קריאה
                     </div>
-                    <Link to={`/blog/${post.id}`}>
+                    <Link to={createPageUrl(`BlogPost?id=${post.id}`)}>
                       <Button variant="ghost" className="text-[#1E5FA8]">
                         קרא עוד
                         <ArrowLeft className="w-4 h-4 mr-2" />

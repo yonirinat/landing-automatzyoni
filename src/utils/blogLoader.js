@@ -44,7 +44,7 @@ function parseMarkdownPost(filePath, content) {
 export async function getAllBlogPosts() {
   try {
     // נטען את רשימת כל קבצי ה-Markdown מהתיקייה
-    const blogFiles = import.meta.glob('/src/content/articles/*.md', { as: 'raw' });
+    const blogFiles = import.meta.glob('/src/content/articles/*.md', { query: '?raw', import: 'default' });
     
     // מערך שיכיל את כל הפוסטים
     const allPosts = [];

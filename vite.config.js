@@ -4,18 +4,17 @@ import path from 'path'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { fileURLToPath } from 'url'
 
+// התמודדות עם __dirname בסביבת ESM
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     nodePolyfills({
-      // Whether to polyfill `node:` protocol imports.
-      protocolImports: true,
-      globals: {
-        Buffer: true,
-        global: true,
-        process: true,
-      },
+      // האם לכלול את הפוליפילים של node.js הסטנדרטיים
+      include: ['buffer', 'process', 'util', 'stream'],
     }),
   ],
   server: {
@@ -23,7 +22,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(path.dirname(fileURLToPath(import.meta.url)), './src'),
+      '@': path.resolve(__dirname, './src'),
     },
     extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json']
   },
@@ -31,10 +30,6 @@ export default defineConfig({
     esbuildOptions: {
       loader: {
         '.js': 'jsx',
-      },
-      // Node.js global to browser globalThis
-      define: {
-        global: 'globalThis',
       },
     },
   },
