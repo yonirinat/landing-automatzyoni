@@ -328,7 +328,7 @@ export default function BlogPost() {
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                     <img
-                      src={post.authorImage || "https://automatzyoni.co.il/images/yoni-pic-sm.webp"}
+                      src={post.authorImage || "/images/headshot.avif"}
                       alt={`${post.author || "יונתן רינת"}`}
                       className="w-full h-full object-cover"
                       loading="lazy"
