@@ -1,4 +1,41 @@
-// blogLoader.js - טוען את כל פוסטי הבלוג מתיקיית data/blog
+// blogLoader.js - טוען את כל פוסטי הבלוג מתיקיית src/content/articles
+
+import matter from 'gray-matter';
+
+/**
+ * פונקציה להמרת קובץ מרקדאון ל-JavaScript object
+ * @param {string} filePath נתיב הקובץ
+ * @param {string} content תוכן הקובץ
+ * @returns {Object} אובייקט הפוסט
+ */
+function parseMarkdownPost(filePath, content) {
+  try {
+    // משתמשים ב-gray-matter להפרדת הפרונטמאטר מתוכן המרקדאון
+    const { data, content: markdownContent } = matter(content);
+    
+    // מחלצים את ה-id מנתיב הקובץ
+    const filename = filePath.split('/').pop().replace(/\.md$/, '');
+    const id = filename;
+    
+    // בונים את אובייקט הפוסט
+    return {
+      id,
+      title: data.title,
+      date: data.date.toString(),
+      image: data.cover,
+      description: data.excerpt,
+      content: markdownContent,
+      category: "אוטומציה עסקית", // קטגוריה דיפולטיבית אם לא מוגדרת
+      readTime: Math.ceil(markdownContent.length / 2000), // אומדן זמן קריאה בדקות
+      tags: ["אוטומציה", "עסקים"], // תגיות דיפולטיביות אם לא מוגדרות
+      featured: false, // דיפולטיבי - אפשר לשנות לפי לוגיקה מסוימת
+      ...data // מוסיף את כל שאר השדות מה-frontmatter
+    };
+  } catch (error) {
+    console.error(`שגיאה בעיבוד קובץ ${filePath}:`, error);
+    return null;
+  }
+}
 
 /**
  * פונקציה שטוענת את כל פוסטי הבלוג
@@ -6,28 +43,28 @@
  */
 export async function getAllBlogPosts() {
   try {
-    // נטען את רשימת כל קבצי ה-JSON מהתיקייה
-    const blogFiles = import.meta.glob('/src/data/blog/*.json');
+    // נטען את רשימת כל קבצי ה-Markdown מהתיקייה
+    const blogFiles = import.meta.glob('/src/content/articles/*.md', { as: 'raw' });
     
     // מערך שיכיל את כל הפוסטים
     const allPosts = [];
     
     // מבצעים import לכל קובץ
-    const imports = await Promise.all(
-      Object.keys(blogFiles).map(async (path) => {
-        // טוען את הקובץ
-        const module = await blogFiles[path]();
-        // מחזיר את תוכן הפוסט
-        return module.default;
-      })
-    );
-    
-    // מוסיפים כל פוסט למערך
-    imports.forEach(post => {
-      if (post) {
-        allPosts.push(post);
+    for (const path in blogFiles) {
+      try {
+        // טוען את תוכן הקובץ כטקסט
+        const content = await blogFiles[path]();
+        
+        // מעבד את הקובץ ומחלץ את המידע
+        const post = parseMarkdownPost(path, content);
+        
+        if (post) {
+          allPosts.push(post);
+        }
+      } catch (error) {
+        console.error(`שגיאה בטעינת קובץ ${path}:`, error);
       }
-    });
+    }
     
     // ממיינים לפי תאריך (מהחדש לישן)
     return allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -59,7 +96,12 @@ export async function getBlogPostById(id) {
 export async function getFeaturedPosts() {
   try {
     const posts = await getAllBlogPosts();
-    return posts.filter(post => post.featured);
+    // בוחר את שלושת הפוסטים העדכניים ביותר כמובחרים אם אין הגדרה אחרת
+    const featured = posts.filter(post => post.featured);
+    if (featured.length === 0) {
+      return posts.slice(0, 3);
+    }
+    return featured;
   } catch (error) {
     console.error('שגיאה בטעינת פוסטים מובחרים:', error);
     return [];

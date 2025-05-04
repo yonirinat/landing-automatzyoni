@@ -1,22 +1,155 @@
-.article-content p       { margin-block: .75rem; line-height: 1.6; }
-.article-content ul      { list-style: disc; padding-inline-start: 1.25rem; }
-.article-content ol      { list-style: decimal; padding-inline-start: 1.25rem; }
-li + li                  { margin-top: .25rem; } 
+/* עיצוב בסיסי לתוכן של הכתבה */
+.article-content {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Heebo', 'Segoe UI', Arial, sans-serif;
+  line-height: 1.8;
+  color: #333;
+}
 
+/* כותרות */
+.article-content h1, 
+.article-content h2, 
+.article-content h3, 
+.article-content h4, 
+.article-content h5, 
+.article-content h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: #1a202c;
+}
+
+.article-content h1 { font-size: 2rem; }
+.article-content h2 { font-size: 1.75rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.25rem; }
+.article-content h3 { font-size: 1.5rem; }
+.article-content h4 { font-size: 1.25rem; }
+.article-content h5 { font-size: 1.125rem; }
+.article-content h6 { font-size: 1rem; }
+
+/* פסקאות ורווחים */
+.article-content p       { margin-block: 1rem; line-height: 1.8; font-size: 1.05rem; }
+.article-content blockquote { 
+  border-right: 4px solid #1E5FA8; 
+  margin-right: 0; 
+  padding: 0.5rem 1rem; 
+  background-color: #f8fafc;
+  margin-block: 1.5rem;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+/* רשימות */
+.article-content ul      { list-style: disc; padding-inline-start: 1.25rem; margin-block: 1rem; }
+.article-content ol      { list-style: decimal; padding-inline-start: 1.25rem; margin-block: 1rem; }
+.article-content li + li { margin-top: .5rem; } 
 
 /* רשימות רמה 1 */
 .article-content ul,
-.article-content ol      { padding-inline-start: 2.5rem; }
+.article-content ol      { padding-inline-end: 0; padding-inline-start: 2.5rem; }
 
 /* תתי-רשימות – הזחה נוספת + סגנון בוליט/מספור אחר */
-.article-content ul ul   { list-style-type: circle;   padding-inline-start: 1.5rem; }
-.article-content ul ul ul{ list-style-type: square;   padding-inline-start: 1.5rem; }
+.article-content ul ul   { list-style-type: circle;   padding-inline-start: 1.5rem; margin-top: 0.5rem; }
+.article-content ul ul ul{ list-style-type: square;   padding-inline-start: 1.5rem; margin-top: 0.5rem; }
 
-.article-content ol ol   { list-style-type: lower-alpha; padding-inline-start: 1.5rem; }
-.article-content ol ol ol{ list-style-type: lower-roman; padding-inline-start: 1.5rem; }
+.article-content ol ol   { list-style-type: lower-alpha; padding-inline-start: 1.5rem; margin-top: 0.5rem; }
+.article-content ol ol ol{ list-style-type: lower-roman; padding-inline-start: 1.5rem; margin-top: 0.5rem; }
 
-/* ריווח בין פריטי רשימה */
-.article-content li + li { margin-top: .25rem; }
+/* קישורים */
+.article-content a {
+  color: #1E5FA8;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.article-content a:hover {
+  color: #0D4A8F;
+}
+
+/* תמונות */
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+/* טבלאות */
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  display: block;
+}
+
+.article-content table th,
+.article-content table td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  text-align: right;
+}
+
+.article-content table th {
+  background-color: #f8fafc;
+  font-weight: bold;
+}
+
+.article-content table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* קוד ותחביר */
+.article-content code {
+  background-color: #f1f5f9;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  direction: ltr;
+  display: inline-block;
+}
+
+.article-content pre {
+  background-color: #f1f5f9;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  direction: ltr;
+  text-align: left;
+}
+
+.article-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+}
+
+/* מרקר והדגשה */
+.article-content mark {
+  background-color: #fef08a;
+  padding: 0.2em;
+}
+
+.article-content strong {
+  font-weight: 700;
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+/* מדיה קוורי לרספונסיביות */
+@media (max-width: 768px) {
+  .article-content h1 { font-size: 1.75rem; }
+  .article-content h2 { font-size: 1.5rem; }
+  .article-content h3 { font-size: 1.25rem; }
+  .article-content p { font-size: 1rem; }
+}
 
 /* סגנון לקישורים פשוטים לכתבות קשורות */
 .simple-related-posts {

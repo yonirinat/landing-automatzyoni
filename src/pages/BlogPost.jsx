@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import Markdown from 'markdown-to-jsx';
 
 import { useChatbot } from "@/context/ChatbotContext";
 import { 
@@ -160,20 +161,8 @@ export default function BlogPost() {
                 
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full overflow-hidden ml-3">
-                      <img
-                        src={post.authorImage}
-                        alt={`תמונת פרופיל של ${post.author}`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 text-gray-400 ml-1" />
-                        <span className="text-gray-700">{post.author}</span>
-                      </div>
-                    </div>
+                    <User className="w-4 h-4 text-gray-400 ml-2" />
+                    <span className="text-gray-700">{post.author || "יונתן רינת"}</span>
                   </div>
                   
                   <div className="flex items-center gap-4">
@@ -194,10 +183,12 @@ export default function BlogPost() {
                 </div>
               </div>
               
-              {/* Article Content */}
+              {/* Article Content - הטמעת Markdown */}
               <div className="p-6 md:p-8">
-                <div className="prose prose-lg max-w-none text-right article-content">
-                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="prose prose-lg max-w-none article-content">
+                  <Markdown>
+                    {post.content}
+                  </Markdown>
                 </div>
                 
                 {/* Tags */}
@@ -261,88 +252,108 @@ export default function BlogPost() {
                     </Button>
                   </div>
                 </nav>
-                
-                {/* CTA */}
-                <div className="mt-12 bg-gradient-to-r from-[#1E5FA8] to-[#13386B] text-white p-8 rounded-xl">
-                  <h3 className="text-2xl font-bold mb-4">
-                    רוצה לדעת איך אוטומציה יכולה לעזור לעסק שלך?
-                  </h3>
-                  <p className="mb-6">
-                    בוא נדבר על התהליכים הספציפיים בעסק שלך שאפשר לאטמץ ולחסוך לך זמן וכסף.
-                  </p>
-                  <Button
-                    onClick={openChat}
-                    size="lg"
-                    className="bg-white text-[#1E5FA8] hover:bg-gray-100"
-                  >
-                    <MessageCircle className="w-5 h-5 ml-2" />
-                    בוא נדבר
-                  </Button>
-                </div>
               </div>
             </article>
             
-            {/* Back to Blog */}
-            <div className="mt-6">
-              <Link to={createPageUrl("Blog")}>
-                <Button variant="ghost" className="flex items-center">
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                  חזרה לבלוג
-                </Button>
-              </Link>
-            </div>
-          </div>
-          
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6 space-y-6">
-              {relatedPosts.length > 0 && (
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-lg font-bold mb-4">
-                    מאמרים קשורים
-                  </h3>
-                  <div className="space-y-4">
-                    {relatedPosts.map((relatedPost) => (
-                      <div key={relatedPost.id} className="flex gap-3">
-                        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                          <img 
+            {/* Related Articles */}
+            {relatedPosts.length > 0 && (
+              <div className="mt-8">
+                <h2 className="text-2xl font-bold mb-6">מאמרים נוספים שיעניינו אותך</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {relatedPosts.map(relatedPost => (
+                    <Link 
+                      key={relatedPost.id}
+                      to={createPageUrl(`BlogPost?id=${relatedPost.id}`)}
+                      className="block group"
+                    >
+                      <div className="bg-white rounded-xl shadow-md overflow-hidden h-full transition-all group-hover:shadow-lg group-hover:-translate-y-1">
+                        <div className="h-48 overflow-hidden">
+                          <img
                             src={relatedPost.image}
-                            alt={`תמונה למאמר: ${relatedPost.title}`}
-                            className="w-full h-full object-cover"
+                            alt={relatedPost.title}
+                            className="w-full h-full object-cover transition-transform group-hover:scale-105"
                             loading="lazy"
                           />
                         </div>
-                        <div>
-                          <h4 className="font-medium mb-1 line-clamp-2">
-                            <Link to={createPageUrl(`BlogPost?id=${relatedPost.id}`)} className="hover:text-[#1E5FA8]">
-                              {relatedPost.title}
-                            </Link>
-                          </h4>
-                          <div className="flex items-center text-xs text-gray-500">
-                            <Clock className="w-3 h-3 ml-1" />
-                            {relatedPost.readTime} דקות קריאה
+                        <div className="p-4">
+                          <h3 className="text-lg font-bold mb-2 line-clamp-2">
+                            {relatedPost.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm mb-3 line-clamp-3">
+                            {relatedPost.description}
+                          </p>
+                          <div className="flex justify-between text-sm text-gray-500">
+                            <span className="flex items-center">
+                              <Calendar className="w-3 h-3 ml-1" />
+                              {new Date(relatedPost.date).toLocaleDateString('he-IL')}
+                            </span>
+                            <span className="flex items-center text-[#1E5FA8] font-medium">
+                              קרא עוד
+                              <ArrowRight className="w-3 h-3 mr-1" />
+                            </span>
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </Link>
+                  ))}
                 </div>
-              )}
-              
-              <div className="bg-[#1E5FA8] text-white p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-4">
-                  צריך עזרה אישית?
+              </div>
+            )}
+          </div>
+          
+          {/* Sidebar */}
+          <div className="order-last">
+            <div className="sticky top-6 space-y-6">
+              {/* Call to Action */}
+              <div className="bg-[#1E5FA8] text-white rounded-xl p-6 shadow-md">
+                <h3 className="text-xl font-bold mb-3">
+                  איך אוטומציה יכולה לסייע לעסק שלך?
                 </h3>
                 <p className="mb-4">
-                  אני יכול לעזור לך לזהות את התהליכים בעסק שלך שכדאי לאטמץ ראשונים.
+                  אני כאן לעזור לך למצוא את הדרך הטובה ביותר להגדיל יעילות, לחסוך זמן ולהגדיל רווחים.
                 </p>
-                <Button
+                <Button 
                   onClick={openChat}
+                  variant="secondary"
                   className="w-full bg-white text-[#1E5FA8] hover:bg-gray-100"
                 >
                   <MessageCircle className="w-4 h-4 ml-2" />
-                  קבע שיחת ייעוץ
+                  בוא נדבר
                 </Button>
+              </div>
+              
+              {/* Author */}
+              <div className="bg-white rounded-xl p-6 shadow-md">
+                <h3 className="text-xl font-bold mb-4">על הכותב</h3>
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                    <img
+                      src={post.authorImage || "https://automatzyoni.co.il/images/yoni-pic-sm.webp"}
+                      alt={`${post.author || "יונתן רינת"}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg">{post.author || "יונתן רינת"}</h4>
+                    <p className="text-gray-600 text-sm">
+                      יונתן הוא מומחה אוטומציה עסקית, מפתח תהליכים ויועץ אופטימיזציה. מסייע לעסקים קטנים ובינוניים להגדיל רווחים באמצעות אוטומציה חכמה.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Newsletter */}
+              <div className="bg-white rounded-xl p-6 shadow-md">
+                <h3 className="text-xl font-bold mb-3">רוצה לקבל טיפים וכלים ישירות למייל?</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  הרשם לניוזלטר השבועי וקבל עדכונים וטיפים שימושיים לשיפור העסק.
+                </p>
+                <Link to={createPageUrl("Newsletter")}>
+                  <Button className="w-full">
+                    להרשמה לניוזלטר
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
