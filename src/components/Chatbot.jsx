@@ -711,17 +711,18 @@ export default function Chatbot({ isOpen, onClose }) {
         email: responses.email || 'לא צוין',
         business_description: responses.business_specialty || responses.business_description || 'לא צוין',
         employees: responses.STEP_2_EMPLOYEES || 'לא צוין',
-        main_pain: responses.main_pain_areas || responses.main_pain || 'לא צוין',
-        task_areas: responses.repetitive_tasks || responses.repetitive_tasks_other || 'לא צוין',
+        main_pain: Array.isArray(responses.main_pain_areas) ? responses.main_pain_areas.join(', ') : responses.main_pain || 'לא צוין',
+        task_areas: Array.isArray(responses.repetitive_tasks) ? responses.repetitive_tasks.join(', ') : responses.repetitive_tasks_other || 'לא צוין',
         current_tools: JSON.stringify(toolsMapping) || 'לא צוין',
         volume: responses.STEP_5_VOLUME || 'לא צוין',
-        desired_outcome: responses.desired_outcomes || responses.business_vision || responses.desired_outcome || 'לא צוין',
+        desired_outcome: Array.isArray(responses.desired_outcomes) ? responses.desired_outcomes.join(', ') : (responses.desired_outcome || responses.business_vision || 'לא צוין'),
         want_summary: responses.STEP_7_SUMMARY || 'לא',
         final_note: responses.final_note || '',
         full_conversation: JSON.stringify(conversation)
       };
       
       console.log('נתונים שנשלחים:', payload);
+      console.log('כל הנתונים שנאספו ב-responses:', JSON.stringify(responses, null, 2));
       
       // שימוש ישיר ב-XMLHttpRequest במקום fetch
       const xhr = new XMLHttpRequest();
