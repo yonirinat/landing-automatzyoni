@@ -479,6 +479,7 @@ export default function Home() {
             </Button>
             <Button
               variant="outline"
+              aria-label="שלח הודעה בוואטסאפ"
               size="lg"
               className="bg-transparent border-white text-white hover:bg-white hover:text-[#1E5FA8] text-lg px-8 py-6 rounded-xl transition-colors"
               onClick={() => window.location.href = `https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER || '972526485138'}`}
