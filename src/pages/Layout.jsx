@@ -9,6 +9,7 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Chatbot from "@/components/Chatbot";
 import { useChatbot } from "@/context/ChatbotContext";
+import NewsletterForm from "@/components/NewsletterForm";
 
 import AccessibilityWidget from "@/components/ui/negish";
 
@@ -192,7 +193,7 @@ export default function Layout({ children }) {
               </li>
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">נושאי מפתח</h3>
             <ul className="space-y-2">
               <li>
@@ -208,20 +209,11 @@ export default function Layout({ children }) {
                 <a href="#" className="text-blue-100 hover:text-white transition-colors">אוטומציה שיווקית</a>
               </li>
             </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">צור קשר</h3>
-            <p className="text-blue-100">השאר פרטים ונחזור אליך בהקדם.</p>
-            <form className="mt-4 space-y-3">
-              <input 
-                type="email" 
-                placeholder="מייל" 
-                className="px-3 py-2 w-full text-sm rounded-md text-gray-900 bg-white" 
-              />
-              <Button type="submit" className="w-full bg-[#FF9900] hover:bg-[#E68A00]">
-                הרשמה לעדכונים
-              </Button>
-            </form>
+          </div> */}
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            <h3 className="text-xl font-bold mb-4 text-gray-800">רוצה לקבל טיפים וכלים ישירות למייל?</h3>
+            <p className="text-gray-600 mb-4 text-sm">הרשם לניוזלטר השבועי וקבל עדכונים וטיפים שימושיים לשיפור העסק.</p>
+            <NewsletterForm />
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-blue-400 text-sm text-blue-200">

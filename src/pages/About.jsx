@@ -40,7 +40,7 @@ export default function About() {
               <div className="bg-[#1E5FA8] rounded-3xl p-1 relative">
                 <div className="bg-white rounded-3xl p-1">
                   <img
-                    src="/src/images/headshot.avif"
+                    src="/images/headshot.avif"
                     alt="יונתן רינת – צילום תדמית"
                     className="w-72 h-72 rounded-3xl object-cover"
                     loading="eager"

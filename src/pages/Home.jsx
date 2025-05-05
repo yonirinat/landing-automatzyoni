@@ -273,36 +273,25 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16 bg-[#173c68]">
+        <div className="max-w-7xl mx-auto px-6 text-white">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="flex justify-center">
-              <div className="bg-[#1E5FA8] rounded-3xl p-1 inline-block mb-8">
-                <div className="bg-white rounded-3xl p-1">
-                  <img
-                    src={headshot}
-                    alt="יונתן רינת - מומחה לאוטומציה עסקית" // Kept
-                    className="w-72 h-72 rounded-3xl object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
+            
 
             <div className="text-center lg:text-right">
               <h2 className="text-3xl font-bold mb-6">
                 {/* Changed */}
-                נעים מאוד, אני יונתן רינת – המומחה שלכם ל&apos;עוזר האוטומטי&apos;
+                קצת עליי
               </h2>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg mb-4">
                 {/* Changed */}
                 היי, אני יונתן. אני מתמחה בלמצוא פתרונות פשוטים וחכמים לעסקים קטנים ובינוניים שרוצים לעבוד בצורה יעילה יותר ולפנות זמן יקר לבעלים ולצוות.
               </p>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg mb-4">
                 {/* Changed */}
                 במשך יותר מעשר שנים עבדתי עם מאות בעלי עסקים כמוכם. גיליתי שרובם נאבקים באותם קשיים: עומס מטורף של משימות, הרים של ניירת, ותחושה מתמדת שהם רודפים אחרי הזנב של עצמם והעסק מנהל אותם.
               </p>
-              <p className="text-lg text-gray-700 mb-6">
+              <p className="text-lg mb-6">
                 {/* Changed */}
                 הגישה שלי היא מעשית ופשוטה. אני לא מאמין בפתרונות מסובכים שידרשו מכם ללמוד דברים חדשים או להוציא הון. אני מתמקד במה שכואב לכם *עכשיו* ובונה פתרונות שעובדים מהר ומביאים תוצאות שאפשר להרגיש מיד ביומיום. אני פה כדי להוריד מכם את כאב הראש הטכנולוגי.
               </p>
@@ -313,6 +302,19 @@ export default function Home() {
                 {/* Changed */}
                 רוצים לדבר איתי על איך אני יכול לעזור לעסק שלכם?
               </Button>
+            </div>
+
+            <div className="flex justify-center">
+              <div className="bg-[#173c68] rounded-3xl p-1 inline-block mb-8">
+                <div className="bg-white rounded-3xl p-1">
+                  <img
+                    src={headshot}
+                    alt="יונתן רינת - מומחה לאוטומציה עסקית" // Kept
+                    className="w-72 h-72 rounded-3xl object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

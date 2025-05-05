@@ -19,6 +19,7 @@ import {
   Loader2
 } from "lucide-react";
 import { getBlogPostById, getAllBlogPosts } from "@/utils/blogLoader";
+import NewsletterForm from "@/components/NewsletterForm";
 
 // CSS עבור תוכן המאמר
 import "./BlogPost.css";
@@ -349,11 +350,7 @@ export default function BlogPost() {
                 <p className="text-gray-600 mb-4 text-sm">
                   הרשם לניוזלטר השבועי וקבל עדכונים וטיפים שימושיים לשיפור העסק.
                 </p>
-                <Link to={createPageUrl("Newsletter")}>
-                  <Button className="w-full">
-                    להרשמה לניוזלטר
-                  </Button>
-                </Link>
+                <NewsletterForm />
               </div>
             </div>
           </div>
