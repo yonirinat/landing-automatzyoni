@@ -694,7 +694,7 @@ export default function Chatbot({ isOpen, onClose }) {
     try {
       console.log('מתחיל שליחה ל-Webhook...');
       setLoading(true);
-      const webhookUrl = 'https://automatzyoni.app.n8n.cloud/webhook/a0193da1-8ffa-414e-a634-3d6293568b99';
+      const webhookUrl = 'https://hook.eu2.make.com/s7fj31yj9oteuhwuj3r4j42cc1lr40lc';
       
       // מיפוי הכלים שבשימוש העסק
       const toolsMapping = {
