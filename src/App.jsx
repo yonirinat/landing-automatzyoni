@@ -10,8 +10,8 @@ import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
+    <Router>
     <ChatbotProvider>
-      <Router>
         <ScrollToTop />
         <Layout>
           <Routes>
@@ -23,8 +23,8 @@ function App() {
             <Route path="/blogpost" element={<BlogPost />} />
           </Routes>
         </Layout>
-      </Router>
     </ChatbotProvider>
+    </Router>
   );
 }
 

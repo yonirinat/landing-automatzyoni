@@ -1,37 +1,41 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, {
+  createContext, useState, useContext, useCallback
+} from 'react';
+import { useLocation } from 'react-router-dom';   // ★
 
-// יצירת הקונטקסט
-const ChatbotContext = createContext();
+const ChatbotContext = createContext(null);
 
-// קומפוננטת Provider שתספק את הקונטקסט לכל האפליקציה
 export function ChatbotProvider({ children }) {
   const [chatOpen, setChatOpen] = useState(false);
+  const location   = useLocation();              // נתיב נוכחי באפליקציית SPA
 
-  // פונקציה לפתיחת הצ'אט
-  const openChat = () => setChatOpen(true);
-  
-  // פונקציה לסגירת הצ'אט
-  const closeChat = () => setChatOpen(false);
+  /** פתיחת צ'אט — דוחפת אירוע GTM עם פרטי הדף הנוכחי */
+  const openChat = useCallback(() => {
+    setChatOpen(true);
 
-  // הערכים שנספק לכל הקומפוננטות
-  const value = {
-    chatOpen,
-    openChat,
-    closeChat
-  };
+    const pagePath  = `${location.pathname}${location.search || ''}`;
+    const pageTitle = document.title || '';
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event:        'chat_open',
+      chat_page:    pagePath,   // /hometoolsblogpost?id=…
+      chat_title:   pageTitle,  // כותרת הדף (SEO‑title)
+      timestamp:    Date.now()
+    });
+  }, [location]);
+
+  const closeChat = useCallback(() => setChatOpen(false), []);
 
   return (
-    <ChatbotContext.Provider value={value}>
+    <ChatbotContext.Provider value={{ chatOpen, openChat, closeChat }}>
       {children}
     </ChatbotContext.Provider>
   );
 }
 
-// הוק מותאם לשימוש בקונטקסט
 export function useChatbot() {
-  const context = useContext(ChatbotContext);
-  if (context === undefined) {
-    throw new Error('useChatbot must be used within a ChatbotProvider');
-  }
-  return context;
-} 
+  const ctx = useContext(ChatbotContext);
+  if (!ctx) throw new Error('useChatbot must be used within ChatbotProvider');
+  return ctx;
+}
