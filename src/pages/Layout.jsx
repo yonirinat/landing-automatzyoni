@@ -191,6 +191,9 @@ export default function Layout({ children }) {
               <li>
                 <Link to={createPageUrl("About")} className="text-blue-100 hover:text-white transition-colors">אודות</Link>
               </li>
+              <li>
+                <Link to="/privacy-policy" className="text-blue-100 hover:text-white transition-colors">מדיניות פרטיות</Link>
+              </li>
             </ul>
           </div>
           {/* <div>
@@ -210,7 +213,7 @@ export default function Layout({ children }) {
               </li>
             </ul>
           </div> */}
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+          <div className="col-span-2 bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
             <h3 className="text-xl font-bold mb-4 text-gray-800">רוצה לקבל טיפים וכלים ישירות למייל?</h3>
             <p className="text-gray-600 mb-4 text-sm">הרשם לניוזלטר השבועי וקבל עדכונים וטיפים שימושיים לשיפור העסק.</p>
             <NewsletterForm />

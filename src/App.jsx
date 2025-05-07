@@ -7,6 +7,7 @@ import About from './pages/About';
 import BlogPost from './pages/BlogPost';
 import { ChatbotProvider } from './context/ChatbotContext';
 import ScrollToTop from './components/ScrollToTop';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/blogpost" element={<BlogPost />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </Layout>
     </ChatbotProvider>
