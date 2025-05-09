@@ -234,7 +234,8 @@ export default function Layout({ children }) {
           <MessageCircle size={24} aria-hidden="true" />
         </button>
       )}
-      
+
+
       <Chatbot isOpen={chatOpen} onClose={closeChat} />
       <AccessibilityWidget />
 

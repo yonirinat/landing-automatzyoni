@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Settings, PlusCircle, MinusCircle, Sun, Moon, Type, Zap, MousePointer, Monitor, Underline } from 'lucide-react';
+import { PlusCircle, MinusCircle, Sun, Moon, Type, Zap, MousePointer, Monitor, Underline, Accessibility } from 'lucide-react';
 
 const AccessibilityWidget = () => {
   // מצב פתיחת הוידג'ט
@@ -197,8 +197,7 @@ setTimeout(() => {
         aria-controls="accessibility-panel"
         aria-label="פתח אפשרויות נגישות"
       >
-        <Settings size={24} />
-        <span className="accessibility-button-text">נגישות</span>
+        <Accessibility size={28} />
       </button>
       
       {/* פאנל הגדרות נגישות */}
@@ -415,12 +414,11 @@ setTimeout(() => {
 /* מיקום הוידג'ט */
 .accessibility-widget-container {
   position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
+  top: 60vh !important;
+  right: 0px !important;
   z-index: 9999 !important;
   font-family: Arial, sans-serif;
   direction: rtl;
-  /* הוסף את השורה הבאה כדי להבטיח שהסגנונות יישארו קבועים */
   transform: translate3d(0, 0, 0);
 }
         
@@ -429,16 +427,19 @@ setTimeout(() => {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          background-color: #2563eb;
+          background-color: #60a5fa;
           color: white;
-          border: none;
-          border-radius: 50px;
-          padding: 10px 16px;
+          border: 1px solid black;
+          width: 24px;
+          height: 48px;
           cursor: pointer;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
           transition: background-color 0.2s;
           font-weight: bold;
+          padding: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
         }
         
         .accessibility-toggle-button:hover {
@@ -451,14 +452,14 @@ setTimeout(() => {
         }
         
         .accessibility-button-text {
-          white-space: nowrap;
+          display: none;
         }
         
         /* פאנל ההגדרות */
         .accessibility-panel {
           position: absolute;
-          bottom: 60px;
-          right: 0;
+          top: 0;
+          right: 60px;
           width: 320px;
           background-color: white;
           border-radius: 12px;
@@ -710,25 +711,17 @@ setTimeout(() => {
         /* תמיכה במסכים קטנים */
         @media (max-width: 480px) {
           .accessibility-widget-container {
-            bottom: 10px;
+            top: 10vh;
             right: 10px;
           }
-          
-          .accessibility-button-text {
-            display: none;
-          }
-          
           .accessibility-toggle-button {
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            padding: 0;
+            width: 20px;
+            height: 44px;
           }
-          
           .accessibility-panel {
-            width: calc(100vw - 20px);
+            width: calc(100vw - 70px);
             max-height: 80vh;
-            right: 0;
+            right: 54px;
           }
         }
       `}</style>
