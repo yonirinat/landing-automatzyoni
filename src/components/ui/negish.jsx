@@ -419,7 +419,6 @@ setTimeout(() => {
   z-index: 9999 !important;
   font-family: Arial, sans-serif;
   direction: rtl;
-  transform: translate3d(0, 0, 0);
 }
         
         /* כפתור פתיחה */
@@ -457,15 +456,16 @@ setTimeout(() => {
         
         /* פאנל ההגדרות */
         .accessibility-panel {
-          position: absolute;
+          position: fixed;
           top: 0;
-          right: 60px;
+          right: 0;
           width: 320px;
           background-color: white;
           border-radius: 12px;
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
           overflow: hidden;
           border: 1px solid #e5e7eb;
+          z-index: 10000;
         }
         
         /* כותרת הפאנל */
