@@ -694,8 +694,10 @@ export default function Chatbot({ isOpen, onClose }) {
     try {
       console.log('מתחיל שליחה ל-Webhook...');
       setLoading(true);
-      const webhookUrl = 'https://hook.eu2.make.com/s7fj31yj9oteuhwuj3r4j42cc1lr40lc';
-      
+      const webhookUrl = 'https://n8n.agenteam.app/webhook/automatzyoni-form-webhook';
+     
+//https://hook.eu2.make.com/s7fj31yj9oteuhwuj3r4j42cc1lr40lc
+
       // מיפוי הכלים שבשימוש העסק
       const toolsMapping = {
         crm: responses.STEP_4_CRM_TYPE || responses.crm_software || responses.crm_method,
